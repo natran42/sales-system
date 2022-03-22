@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <body>
-        Hello World.
-        Just testing 
+        <h1>Footer</h1>
     </body>
 </html>
