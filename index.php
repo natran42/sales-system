@@ -1,4 +1,4 @@
 
-<?php echo file_get_contents("html/header.html"); ?> 
-<?php echo file_get_contents("html/body.html"); ?> 
-<?php echo file_get_contents("html/footer.html"); ?>
+<?php include("php/main/header.php"); ?>
+<?php include("php/main/body.php"); ?> 
+<?php include("php/main/footer.php"); ?>
