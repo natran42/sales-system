@@ -98,6 +98,7 @@ function selectEmployeeTransactions($start, $end) {
     }
 
     function toggleTable() {
+        console.log('TOGGLED');
         document.getElementById('customertable').style.display = 'block';
     }
 </script>
@@ -158,7 +159,7 @@ if(array_key_exists('customerQuery', $_POST)) {
             break;
     }
     echo $startDate.'~'.$endDate;
-    selectCustomer($startDate, date('Y-m-d', strtotime($endDate)+60*60*24));
+    selectCustomer($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
 }
 
 ?>
@@ -215,7 +216,7 @@ if(array_key_exists('employeeSales', $_POST)) {
             break;
     }
     echo $startDate.'~'.$endDate;
-    selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24));
+    selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
 }
 
 ?>
