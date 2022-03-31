@@ -1,5 +1,5 @@
 <?php 
-require '../../vendor/autoload.php';
+/*require '../../vendor/autoload.php';
 
 session_start();
 if(isset($_SESSION['login']) && $_SESSION['login']) {
@@ -16,7 +16,7 @@ if(array_key_exists('customerQuery', $_POST)) {
         echo 'Success!';
     }
 }
-
+*/
 ?>
 
 <h1>Login</h1>

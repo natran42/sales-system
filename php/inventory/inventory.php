@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
 </style>
 </head>
 <body>
-<!--examples: Delete later-->
+examples: Delete later
 <table id="items">
   <tr>
     <th>Item</th>
@@ -57,6 +58,9 @@
 
 </body>
 </html>
+
+-->
+
 
 
 

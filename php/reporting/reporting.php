@@ -1,10 +1,10 @@
 <?php
 
-session_start();
+/*session_start();
 if(!isset($_SESSION['login']) || $_SESSION['login']!=True){
     header('location: ../login/login.php');
 }
-
+*/
 // Opens up a connection to the DB
 function openConnection() {
     $serverName = 'sevenseas.database.windows.net';

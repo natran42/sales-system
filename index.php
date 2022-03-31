@@ -1,6 +1,6 @@
 
 <?php include("php/main/home.php"); ?>
-<?php include("php/main/connect.php"); ?> 
+<?php //include("php/main/connect.php"); ?> 
 
 <!-- user form  -->
 <!-- user form  
@@ -11,7 +11,8 @@
 </form>
 -->
 
-<?php include("php/main/header.php"); ?>
+<?php //include("php/main/header.php"); ?>
 <?php include("php/login/login.php"); ?>
-<?php include("php/main/body.php"); ?> 
-<?php include("php/main/footer.php"); ?>
+<?php  phpinfo(); ?>
+<?php //include("php/main/connect.php") ?>
+
