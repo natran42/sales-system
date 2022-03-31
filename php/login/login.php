@@ -3,15 +3,16 @@
 session_start();
 if(isset($_SESSION['login']) && $_SESSION['login']) {
     header('location: home.php');
-    echo 'Logged in';
 }
 
 if(array_key_exists('entry', $_POST)) {
     $hash = getUserCredentials($_POST['username']);
     if(!empty($hash)) {
-        if(password_verify($_POST['pwd'], $hash)) {
+        //Checks whether or not the login details match and allows entry to the app if matching
+        if(password_verify($_POST['pwd'], $hash))
             header('location: php/main/home.php');
-        }
+        else
+            echo "Invalid login credentials";
     }
 }
 
@@ -24,6 +25,7 @@ function openConnection() {
     return $connection;
 }
 
+// Gets hashed password from the database corresponding to the username
 function getUserCredentials($username) {
     try {
         $connection = openConnection();
