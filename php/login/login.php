@@ -1,4 +1,6 @@
+
 <?php 
+/*
 require '../../vendor/autoload.php';
 
 session_start();
@@ -16,6 +18,7 @@ if(array_key_exists('customerQuery', $_POST)) {
         echo 'Success!';
     }
 }
+*/
 
 ?>
 

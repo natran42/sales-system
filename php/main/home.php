@@ -43,6 +43,8 @@ body {
   <a href="php/cashRegister/cashRegister.php">Cash Register</a>
   <a href="php/inventory/inventory.php">Inventory</a>
   <a href = "php/reporting/reporting.php">Reporting</a>
+  <a href = "php/transactions/transactions.php">Transactions</a>
+
 </div>
 
 <div style="padding-left:16px">
