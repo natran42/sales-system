@@ -1,3 +1,4 @@
+
 <?php 
 
 session_start();
@@ -46,7 +47,9 @@ function getUserCredentials($username) {
     }
 }
 
+
 ?>
+
 
 <h1>Login</h1>
 <form method='post'>
