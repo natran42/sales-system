@@ -1,11 +1,11 @@
 <?php 
-/*require '../../vendor/autoload.php';
+  
 
-session_start();
-if(isset($_SESSION['login']) && $_SESSION['login']) {
-    //header('location: body.php');
-    echo 'Logged in';
-}
+  session_start();
+  if(isset($_SESSION['login']) && $_SESSION['login']) {
+      //header('location: body.php');
+      echo 'Logged in';
+  }
 
 $passConfig = new PHPassLib\Application\Context;
 $passConfig->addConfig('bcrypt');
@@ -16,8 +16,9 @@ if(array_key_exists('customerQuery', $_POST)) {
         echo 'Success!';
     }
 }
-*/
+
 ?>
+
 
 <h1>Login</h1>
 <form method='post'>

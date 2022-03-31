@@ -64,6 +64,7 @@ examples: Delete later
 
 
 
+<?php include 'inventory.html'?>
 
 <?php
 // Opens up a connection to the DB
@@ -78,7 +79,6 @@ function openConnection() {
 
 ?>
 
-
 <!doctype html>
 <html lang="en">
 
@@ -92,6 +92,7 @@ function openConnection() {
 
     <title>Inventory</title>
     <style>
+        
         .modal-header {
             background: #F7941E;
             color: #fff;
@@ -100,7 +101,9 @@ function openConnection() {
         .required:after {
             content: "*";
             color: red;
+        
         }
+        
     </style>
 </head>
 
