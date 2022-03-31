@@ -26,8 +26,8 @@
 }
 </style>
 </head>
-<body>
-<!--examples: Delete later-->
+<!--<body>
+<!--examples: Delete later
 <table id="items">
   <tr>
     <th>Item</th>
@@ -55,7 +55,7 @@
   </tr>
 </table>
 
-</body>
+</body>-->
 </html>
 
 

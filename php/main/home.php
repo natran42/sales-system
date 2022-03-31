@@ -39,14 +39,14 @@ body {
 <body>
 
 <div class="topnav">
-  <a class="active" href="#home">Login</a>
-  <a href="php/cashRegister/cashRegister.php">Cash Register</a>
-  <a href="php/inventory/inventory.php">Inventory</a>
-  <a href = "php/reporting/reporting.php">Reporting</a>
+  <a class="active" href="#home">Home</a>
+  <a href="../cashRegister/cashRegister.php">Cash Register</a>
+  <a href="../inventory/inventory.php">Inventory</a>
+  <a href="../reporting/reporting.php">Reporting</a>
 </div>
 
 <div style="padding-left:16px">
-  <h2>Login ....</h2>
+  <h2>Home Page</h2>
   <p></p>
 </div>
 
