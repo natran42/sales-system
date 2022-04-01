@@ -1,4 +1,5 @@
-<?php include 'cash.html'?>
+<?php include(__dir__.'/../main/nav.php'); ?>
+<?php include('cash.html') ?>
 <?php
     function openConnection() {
         $serverName = 'sevenseas.database.windows.net';
@@ -18,7 +19,7 @@
 
         try {
             $connection = openConnection();
-            $selectQuery = 'SELECT PRICE, Name FROM Inventory WHERE Name == \''.$inputName.'\'';
+            $selectQuery = 'SELECT PRICE, Name FROM Inventory WHERE Name = \''.$inputName.'\'';
             $getItems = sqlsrv_query($connection, $selectQuery);
             if(!$getItems)
                 die(print_r(sqlsrv_errors(), true));
@@ -50,6 +51,7 @@
 
 <?php
     if(isset($_POST['submit'])){
+        echo 'SUBMITTED';
         $userItem = $_POST['item'];
         selectInventory($userItem);
     }

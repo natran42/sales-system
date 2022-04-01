@@ -58,13 +58,7 @@ examples: Delete later
 
 </body>-->
 </html>
-
--->
-
-
-
-
-<?php include 'inventory.html'?>
+<?php include(__dir__.'/../main/nav.php'); ?>
 
 <?php
 // Opens up a connection to the DB
