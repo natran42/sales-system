@@ -58,13 +58,7 @@ examples: Delete later
 
 </body>
 </html>
-
--->
-
-
-
-
-<?php include 'inventory.html'?>
+<?php include(__dir__.'/../main/nav.php'); ?>
 
 <?php
 // Opens up a connection to the DB
@@ -77,7 +71,80 @@ function openConnection() {
     return $connection;
 }
 
+function getInventory() {
+    try {
+      $connection = openConnection();
+      $selectQuery = 'SELECT INV.UPC, INV.Name, CTG.CtgName, INV.Size, INV.Price, INV.StockQty
+                      FROM Inventory INV
+                      INNER JOIN Categories CTG ON CTG.CtgID = INV.Category
+                      ORDER BY UPC ASC';
+      $getItems = sqlsrv_query($connection, $selectQuery);
+      if(!$getItems)
+          die(print_r(sqlsrv_errors(), true));
+      
+      // Prints out headers for table
+      echo "<table border = '1' class='table table-hover'>
+      <tr>
+      <th>#</th>
+      <th>UPC</th>
+      <th>Item Name</th>
+      <th>Category</th>
+      <th>Size</th>
+      <th>Price</th>
+      <th>Quantity in Stock</th>
+      <th>Action</th>
+      </tr>";
+      $itemCount = 1;
+
+      // Prints out each item as a row
+      while($row = sqlsrv_fetch_array($getItems, SQLSRV_FETCH_ASSOC)) {
+          echo '<tr>';
+          echo '<td>'.$itemCount++.'</td>';
+          echo '<td>'.$row['UPC'].'</td>';
+          echo '<td>'.$row['Name'].'</td>';
+          echo '<td>'.$row['CtgName'].'</td>';
+          echo '<td>'.$row['Size'].'</td>';
+          echo '<td>$'.number_format($row['Price'], 2).'</td>';
+          echo '<td>'.$row['StockQty'].'</td>';
+          echo '<td>
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#updateInventory">Update</button>
+                <button class="btn btn-danger" type="button"><a href=\'form.php?delete=<?php echo $row[\'UPC\']; ?>\'>Delete</a></button>
+                </td>';
+          echo '</tr>';
+      }
+    }
+    catch(Exception $e) {
+      echo 'Error';
+    }
+}
+
+function deleteItem($upc) {
+  try {
+    $connection = openConnection();
+    $selectQuery = 'DELETE FROM Inventory
+                    WHERE UPC = '.$upc;
+    $deleteEntry = sqlsrv_query($connection, $selectQuery);
+    if(!$deleteEntry)
+        die(print_r(sqlsrv_errors(), true));
+  }
+  catch(Exception $e) {
+    echo 'Error';
+  }
+}
+
+getInventory();
+
+
+// Add something like JavaScript to make table refresh on deletion
+// Something like https://stackoverflow.com/questions/15938543/php-refresh-button-onclick but try to just refresh the table
+if(isset($_GET['delete'])) {
+  $upcToDelete = validate($_GET['delete']);
+  deleteItem($upcToDelete);
+}
+
 ?>
+
+
 
 <!doctype html>
 <html lang="en">
