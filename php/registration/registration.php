@@ -6,7 +6,7 @@
 <!-- dont forget to do do form validation -->
 
 <head>
-<style>    
+<style>
 *{
     font-family: sans-serif;
     box-sizing: border-box;
@@ -97,6 +97,7 @@ button:hover:after {
 button:active{
    background-color: #808080;
 }
+
 </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -118,14 +119,14 @@ button:active{
        required maxlength="12"><br>
 
         <script>
-        
+
             let itemInput = document.querySelector('input[type=tel]') ;
             itemInput.addEventListener('keypress', phone);
 
             let flag = false;
             function phone(){
                 let p = this.value;
-                if((p.length + 1) % 4 == 0 && p.length < 9 && flag == true)  
+                if((p.length + 1) % 4 == 0 && p.length < 9 && flag == true)
                     this.value = p + "-";
                 flag = true;
             }
@@ -150,3 +151,41 @@ button:active{
 </body>
 
 </html>
+
+<?php
+
+// Opens up a connection to the DB
+function openConnection() {
+    $serverName = 'sevenseas.database.windows.net';
+    $connectionOptions = array('Database'=>'SalesSystemDB', 'UID'=>'admin7', 'PWD'=>'TeamSeven7');
+    $connection = sqlsrv_connect($serverName, $connectionOptions);
+    if(!$connection)
+        die(print_r(sqlsrv_errors(), true));
+    return $connection;
+}
+
+?>
+
+<!--- this code will be used to add user to the customer table from user input-->
+<?php
+if(isset($_POST['first'])) {
+    $first = $_POST['first'];
+    $last = $_POST['last'];
+    $number = $_POST['number'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    //$city = $_POST['city'];
+    $state = $_POST['state'];
+    $zip = $_POST['zip'];
+
+    $connection = openConnection();
+
+    $sql = "INSERT INTO Customers (FirstName, LastName, PhoneNumber, Email, Address, AddressState, AddressZip) VALUES ('$first', '$last', '$number', '$email', '$address', '$state', '$zip')";
+    $result = sqlsrv_query($connection, $sql);
+    if($result === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+    else {
+        echo "Successfully added customer";
+    }
+}
