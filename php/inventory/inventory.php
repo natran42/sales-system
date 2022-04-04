@@ -121,8 +121,9 @@ function getInventory() {
 function deleteItem($upc) {
   try {
     $connection = openConnection();
-    $selectQuery = 'DELETE FROM Inventory
-                    WHERE UPC = '.$upc;
+    $selectQuery = 'UPDATE Inventory
+                    WHERE UPC = '.$upc.'
+                    SET IsActive = 0';
     $deleteEntry = sqlsrv_query($connection, $selectQuery);
     if(!$deleteEntry)
         die(print_r(sqlsrv_errors(), true));
