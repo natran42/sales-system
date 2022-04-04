@@ -1,5 +1,4 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +12,6 @@
 }
 body {
     background: #1690A7;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -150,3 +148,42 @@ button:active{
 </body>
 
 </html>
+
+
+<?php
+// Opens up a connection to the DB
+function openConnection() {
+    $serverName = 'sevenseas.database.windows.net';
+    $connectionOptions = array('Database'=>'SalesSystemDB', 'UID'=>'admin7', 'PWD'=>'TeamSeven7');
+    $connection = sqlsrv_connect($serverName, $connectionOptions);
+    if(!$connection)
+        die(print_r(sqlsrv_errors(), true));
+    return $connection;
+}
+
+?>
+
+<!--- this code will be used to add user to the customer table from user input-->
+<?php
+if(isset($_POST['first'])) {
+    $first = $_POST['first'];
+    $last = $_POST['last'];
+    $number = $_POST['number'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    //$city = $_POST['city'];
+    $state = $_POST['state'];
+    $zip = $_POST['zip'];
+
+    $connection = openConnection();
+
+    $sql = "INSERT INTO Customers (FirstName, LastName, PhoneNumber, Email, Address, AddressState, AddressZip) VALUES ('$first', '$last', '$number', '$email', '$address', '$state', '$zip')";
+    $result = sqlsrv_query($connection, $sql);
+    if($result === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+    else {
+        echo "Successfully added customer";
+    }
+}
+
