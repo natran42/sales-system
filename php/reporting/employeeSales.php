@@ -18,6 +18,15 @@
             </form>
 <?php
 
+function openConnection() {
+    $serverName = 'sevenseas.database.windows.net';
+    $connectionOptions = array('Database'=>'SalesSystemDB', 'UID'=>'admin7', 'PWD'=>'TeamSeven7');
+    $connection = sqlsrv_connect($serverName, $connectionOptions);
+    if(!$connection)
+        die(print_r(sqlsrv_errors(), true));
+    return $connection;
+}
+
 // Selects Employees and sums up the total amount of transactions they have processed
 function selectEmployeeTransactions($start, $end) {
     try {

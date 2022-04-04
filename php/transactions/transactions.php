@@ -28,7 +28,7 @@ function fetchTransactions($userTransaction) {
             die(print-r(sqlsrv_errors(), true));
             
 
-        echo "<table border = '1'>
+        echo "<table border = '1' class='table'>
         <tr>
         <th>Transaction ID</th>
         <th>Ordered By</th>
@@ -49,7 +49,7 @@ function fetchTransactions($userTransaction) {
 
     
        
-        echo "<table border = '1'>
+        echo "<table border = '1' class='table'>
         <tr>
         <th>Item ID</th>
         <th>Quantities</th>
