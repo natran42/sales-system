@@ -57,3 +57,4 @@ function getUserCredentials($username) {
     <label>Password: </label><input type='password' name='pwd' /><br/>
     <input type='submit' name='entry' value='Login'/>
 </form>
+
