@@ -13,7 +13,6 @@
 }
 body {
     background: #1690A7;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -174,13 +173,13 @@ if(isset($_POST['first'])) {
     $number = $_POST['number'];
     $email = $_POST['email'];
     $address = $_POST['address'];
-    //$city = $_POST['city'];
+    $city = $_POST['city'];
     $state = $_POST['state'];
     $zip = $_POST['zip'];
 
     $connection = openConnection();
 
-    $sql = "INSERT INTO Customers (FirstName, LastName, PhoneNumber, Email, Address, AddressState, AddressZip) VALUES ('$first', '$last', '$number', '$email', '$address', '$state', '$zip')";
+    $sql = "INSERT INTO Customers (FirstName, LastName, PhoneNumber, Email, Address, AddressState, AddressZip, AddressCity, Start_DtTm, IsActive) VALUES ('$first', '$last', '$number', '$email', '$address', '$state', '$zip', '$city', GETDATE(), 1)";
     $result = sqlsrv_query($connection, $sql);
     if($result === false) {
         die(print_r(sqlsrv_errors(), true));

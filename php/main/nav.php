@@ -22,6 +22,9 @@
             <a class="nav-link" href="/php/inventory/inventory.php"><i class="fa fa-fw fa-paperclip"></i>Inventory</a>
             </li>
             <li class="nav-item">
+            <a class="nav-link" href="/php/transactions/transactions.php"><i class="fa fa-fw fa-book"></i>Transactions</a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="/php/registration/registration.php"><i class="fa fa-fw fa-pencil"></i>Registration</a>
             </li>
             <li class="nav-item dropdown">
