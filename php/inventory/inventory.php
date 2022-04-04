@@ -35,7 +35,7 @@ function insertInventory()
       $params1 = array($quantity, $sold, $minquantity, $name, $description, $price, $category, $size);
       $result = sqlsrv_query($conn, $tsql, $params1);
       if ($result) {
-        echo "Data inserted";
+        //echo "Data inserted";
       } else {
         die(print_r(sqlsrv_errors(), true));
       }
