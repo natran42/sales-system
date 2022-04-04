@@ -6,8 +6,7 @@ if(array_key_exists('entry', $_POST)) {
     if(!empty($hash)) {
         //Checks whether or not the login details match and allows entry to the app if matching
         if(password_verify($_POST['pwd'], $hash)) {
-            $targetLink = __dir__.'/../cashRegister/cashRegister.php';
-            header($targetLink);
+            header('location: php/cashRegister/cashregister.php', true, 301);
         }    
         else
             echo "Invalid login credentials";
@@ -47,8 +46,6 @@ function getUserCredentials($username) {
 
 ?>
 
-
-
 <form method='post'>
     <label>Username: </label><input type='text' name='username' /><br/>
     <label>Password: </label><input type='password' name='pwd' /><br/>
@@ -62,6 +59,7 @@ function getUserCredentials($username) {
     font-family: sans-serif;
     box-sizing: border-box;
 }
+
 body {
     background: #1690A7;
     display: flex;
