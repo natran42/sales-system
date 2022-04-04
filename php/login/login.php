@@ -1,4 +1,3 @@
-<?php include(__dir__.'/../main/nav.php'); ?>
 <?php 
 
 if(array_key_exists('entry', $_POST)) {
@@ -6,10 +5,10 @@ if(array_key_exists('entry', $_POST)) {
     if(!empty($hash)) {
         //Checks whether or not the login details match and allows entry to the app if matching
         if(password_verify($_POST['pwd'], $hash)) {
-            header('location: https://sevensales.azurewebsites.net/php/cashRegister/cashRegister.php');
+            header('location: php/cashRegister/cashregister.php');
         }    
-        else
-            echo "Invalid login credentials";
+        // else
+        //     echo "Invalid login credentials";
     }
 }
 
