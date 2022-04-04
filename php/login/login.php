@@ -1,12 +1,14 @@
-
+<?php include(__dir__.'/../main/nav.php'); ?>
 <?php 
 
 if(array_key_exists('entry', $_POST)) {
     $hash = getUserCredentials($_POST['username']);
     if(!empty($hash)) {
         //Checks whether or not the login details match and allows entry to the app if matching
-        if(password_verify($_POST['pwd'], $hash))
-            header('location: php/cashRegister/cashRegister.php');
+        if(password_verify($_POST['pwd'], $hash)) {
+            $targetLink = __dir__.'/../cashRegister/cashRegister.php';
+            header($targetLink);
+        }    
         else
             echo "Invalid login credentials";
     }
