@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+	
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: beige;
+  text-align: left;
+}
+
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<form method = 'post'>
+    Enter Item  <input type="text" name="item" required="required" /> <br/>
+    <input type='submit' name='getItems' id='getItems' value='Submit'/>
+    <body>
+        <div class="container-fluid">
+            <div class="row row-cols-4">
+                <div class="col heading">  Items</div>
+                <div class="col heading">Unit price</div>
+                <div class="col heading">Qt</div>
+                <div class="col heading">Price</div>
+            </div>
+            <div class="row row-cols-4">
+                <div class="col">
+                    <input type="text" name="item1" id="item1">
+                </div>
+                <div class="col">
+                    <input type="text" name="unit_price" id="unit_price1">
+                </div>
+                <div class="col">
+                    <input type="text" name="qt" id="qt1">
+                </div>
+                <div class="col">
+                    <input type="text" name="price" id="price1">
+                </div>
+                
+            </div>
+            <div style = "position:fixed; right:395px; bottom:140px;" class="row row-cols-4">
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                    Subtotal
+                </div>
+                <div class="col">
+                    <input type="text" name="sub_total" id="sub_total">
+                </div>
+            </div>
+
+            <div style = "position:fixed; right:400px; bottom:100px;"class="row row-cols-4">
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                    Taxes
+                </div>
+                <div class="col">
+                    <input type="text" name="total_taxes" id="total_taxes"><br>
+                </div>
+            </div>
+            <div style = "position:fixed; right:400px; bottom:60px;" class="row row-cols-4">
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                    Total
+                </div>
+                <div class="col">
+                    <input type="text" name="total" id="total"><br>
+                </div>
+            </div>
+            <div style = "position:fixed; right:100px; bottom:20px;" class="row row-cols-4">
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                    <button id="reset" class="btn btn-primary reset">Reset</button>
+                </div>
+                <div class="col">
+                    <button id="calculate" class="btn btn-primary calculate">Calculate</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    <script src="index.js"></script>
+
+    <style>
+        input[type=text] {
+          border-radius: 10px;
+          background-color: Gainsboro;
+        }
+        input[type=text]:focus {
+            background-color: lightblue;
+        }
+    </style>  
+<html>
+</form>
