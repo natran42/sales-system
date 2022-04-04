@@ -103,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<br>Total: $".number_format($total, 2);
 }
 
-
 ?>
 
 

@@ -1,17 +1,12 @@
 
 <?php 
 
-session_start();
-if(isset($_SESSION['login']) && $_SESSION['login']) {
-    header('location: home.php');
-}
-
 if(array_key_exists('entry', $_POST)) {
     $hash = getUserCredentials($_POST['username']);
     if(!empty($hash)) {
         //Checks whether or not the login details match and allows entry to the app if matching
         if(password_verify($_POST['pwd'], $hash))
-            header('location: php/main/home.php');
+            header('location: php/cashRegister/cashRegister.php');
         else
             echo "Invalid login credentials";
     }
