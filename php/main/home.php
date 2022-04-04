@@ -39,16 +39,16 @@ body {
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="topnav">
+<!-- <div class="topnav">
   <a class="active" href="../main/home.php"><i class="fa fa-fw fa-home"></i>Home</a>
   <a href="../login/login.php"><i class="fa fa-fw fa-user"></i>Login</a>
   <a href="../cashRegister/cashRegister.php"><i class="fa fa-fw fa-money"></i>Cash Register</a>
   <a href="../inventory/inventory.php"><i class="fa fa-fw fa-paperclip"></i>Inventory</a>
   <a href = "../reporting/reporting.php"><i class="fa fa-fw fa-file"></i>Reporting</a>
   <a href =  "../registration/registration.php"><i class="fa fa-fw fa-pencil"></i>Registration </a>
-  <a href =  "../transactions/transactions.php"><i class="fa fa-fw fa-book"></i>Transactions </a>
-</div>
+</div> -->
 
+<?php include(__dir__.'/../main/nav.php'); ?>
 
 <div style="padding-center:16px">
   <h2>Welcome</h2>

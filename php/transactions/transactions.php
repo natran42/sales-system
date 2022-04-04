@@ -1,3 +1,4 @@
+<?php include(__dir__.'/../main/nav.php'); ?>
 <?php
 
 function openConnection() {
