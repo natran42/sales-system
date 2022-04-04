@@ -184,7 +184,7 @@ if(isset($_POST['first'])) {
     if($result === false) {
         die(print_r(sqlsrv_errors(), true));
     }
-    else {
-        echo "Successfully added customer";
-    }
+    // else {
+    //     echo "Successfully added customer";
+    // }
 }

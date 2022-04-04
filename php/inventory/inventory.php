@@ -31,11 +31,11 @@ function insertInventory()
       $minquantity = $_POST['minquantity'];
       $size = $_POST['size'];
       $sold = $_POST['sold'];
-      $tsql = 'INSERT dbo.Inventory (StockQty,SoldQty,MinQty,Name,Description,Price,Category,Size) VALUES(?,?,?,?,?,?,?,?)';
-      $params1 = array($quantity, $sold, $minquantity, $name, $description, $price, $category, $size);
+      $tsql = 'INSERT dbo.Inventory (StockQty,SoldQty,MinQty,Name,Description,Price,Category,Size,IsActive) VALUES(?,?,?,?,?,?,?,?)';
+      $params1 = array($quantity, $sold, $minquantity, $name, $description, $price, $category, $size, 1);
       $result = sqlsrv_query($conn, $tsql, $params1);
       if ($result) {
-        echo "Data inserted";
+        //echo "Data inserted";
       } else {
         die(print_r(sqlsrv_errors(), true));
       }
@@ -53,13 +53,14 @@ function getInventory()
     $selectQuery = 'SELECT INV.UPC, INV.Name, CTG.CtgName, INV.Size, INV.Price, INV.StockQty
                       FROM Inventory INV
                       INNER JOIN Categories CTG ON CTG.CtgID = INV.Category
+                      WHERE IsActive=1
                       ORDER BY UPC ASC';
     $getItems = sqlsrv_query($connection, $selectQuery);
     if (!$getItems)
       die(print_r(sqlsrv_errors(), true));
 
     // Prints out headers for table
-    echo "<table border = '1' class='table table-success table-striped'>
+    echo "<table border = '1' class='table table-success table-striped table-hover'>
       <tr>
       <th>#</th>
       <th>UPC</th>
