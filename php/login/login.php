@@ -6,7 +6,7 @@ if(array_key_exists('entry', $_POST)) {
     if(!empty($hash)) {
         //Checks whether or not the login details match and allows entry to the app if matching
         if(password_verify($_POST['pwd'], $hash)) {
-            header('location: php/cashRegister/cashregister.php', true, 301);
+            header('location: https://sevensales.azurewebsites.net/php/cashRegister/cashRegister.php');
         }    
         else
             echo "Invalid login credentials";
@@ -151,5 +151,5 @@ button:active{
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="php/registration/registration_style.css">
 
-    <title>Member Registration</title>
+    <title>Login</title>
 </head>
