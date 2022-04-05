@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'sevensales'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_67C51E158F4F43AC9664B7657A79C954 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BD6450ED668A4F28B08B6102836F9B47 }}
           package: .
