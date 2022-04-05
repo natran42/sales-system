@@ -14,7 +14,6 @@
         $sqlquery = "UPDATE Inventory
                     SET IsActive = 0
                     WHERE UPC =".$upc;
-        echo $sqlquery;
         $result = sqlsrv_query($connection, $sqlquery);
         if($result){
             header('location:inventory.php');
