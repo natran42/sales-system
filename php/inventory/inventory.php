@@ -41,7 +41,7 @@ function insertInventory()
       }
     }
   } catch (Exception $e) {
-    echo ("Error!");
+    //echo ("Error!");
   }
 }
 
@@ -75,7 +75,7 @@ function getInventory()
 
     // Prints out each item as a row
     while ($row = sqlsrv_fetch_array($getItems, SQLSRV_FETCH_ASSOC)) {
-      $upc=$row['UPC'];
+      $upc = $row['UPC'];
       echo '<tr>';
       echo '<td>' . $itemCount++ . '</td>';
       echo '<td>' . $row['UPC'] . '</td>';
@@ -85,8 +85,8 @@ function getInventory()
       echo '<td>$' . number_format($row['Price'], 2) . '</td>';
       echo '<td>' . $row['StockQty'] . '</td>';
       echo '<td>
-                <button class="btn btn-primary" type="button"><a href="update.php?updateupc='.$upc.'" class="text-light" ">Update</a></button>
-                <button class="btn btn-danger" type="button"><a href="delete.php?deleteupc='.$upc.'">Delete</a></button>
+                <button class="btn btn-primary" type="button"><a href="update.php?updateupc=' . $upc . '" class="text-light" ">Update</a></button>
+                <button class="btn btn-danger" type="button"><a href="delete.php?deleteupc=' . $upc . '">Delete</a></button>
                 </td>';
       echo '</tr>';
     }
@@ -201,106 +201,126 @@ getInventory();
   -->
   <!--MODAL ADD-->
   <div class="modal" id="addInventory">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Inventory</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post">
-                            <div class="mb-3">
-                                <label class="form-label required">Item Name</label>
-                                <input type="text" name="name" placeholder="Item Name" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Description</label>
-                                <input type="text" name="description" placeholder="Item Description" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Category</label>
-                                <input type="number" name="category" placeholder="Item Category" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Price</label>
-                                <input type="number" step="0.01" name="price" placeholder="Item Price" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Quantity</label>
-                                <input type="number" name="quantity" placeholder="Item Quantity" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Min Quantity</label>
-                                <input type="number" name="minquantity" placeholder="Item Min Quantity" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Sold Quantity</label>
-                                <input type="number" name="sold" placeholder="Sold Quantity" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Size</label>
-                                <input type="text" name="size" placeholder="Size" class="form-control">
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                        </form>
-                    </div>
-      
-                </div>
-            </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Inventory</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+        <div class="modal-body">
+          <form method="post">
+            <div class="mb-3">
+              <label class="form-label required">Item Name</label>
+              <input type="text" name="name" placeholder="Item Name" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Description</label>
+              <input type="text" name="description" placeholder="Item Description" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Category</label>
+              <!--<input type="number" name="category" placeholder="Item Category" class="form-control">-->
+              <select name="category" class="form-control">
+                <option value="">--Please choose an option--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Price</label>
+              <input type="number" step="0.01" name="price" placeholder="Item Price" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Quantity</label>
+              <input type="number" name="quantity" placeholder="Item Quantity" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Min Quantity</label>
+              <input type="number" name="minquantity" placeholder="Item Min Quantity" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Sold Quantity</label>
+              <input type="number" name="sold" placeholder="Sold Quantity" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Size</label>
+              <!--<input type="text" name="size" placeholder="Size" class="form-control">-->
+              <select name="size" class="form-control">
+                <option value="">--Please choose an option--</option>
+                <option value="XS">XXS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
   <!--MODAL UPDATE-->
-    <div class="modal" id="updateInventory">
+  <div class="modal" id="updateInventory">
     <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Update Inventory</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post">
-                            <div class="mb-3">
-                                <label class="form-label required">Item Name</label>
-                                <input type="text" name="name" placeholder="Item Name" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Description</label>
-                                <input type="text" name="description" placeholder="Item Description" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Category</label>
-                                <input type="number" name="category" placeholder="Item Category" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Price</label>
-                                <input type="number" step="0.01" name="price" placeholder="Item Price" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Quantity</label>
-                                <input type="number" name="quantity" placeholder="Item Quantity" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Item Min Quantity</label>
-                                <input type="number" name="minquantity" placeholder="Item Min Quantity" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Sold Quantity</label>
-                                <input type="number" name="sold" placeholder="Sold Quantity" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Size</label>
-                                <input type="text" name="size" placeholder="Size" class="form-control">
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary" name="update">Update</button>
-                        </form>
-                    </div>
-      
-                </div>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Inventory</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+        <div class="modal-body">
+          <form method="post">
+            <div class="mb-3">
+              <label class="form-label required">Item Name</label>
+              <input type="text" name="name" placeholder="Item Name" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Description</label>
+              <input type="text" name="description" placeholder="Item Description" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Category</label>
+              <input type="number" name="category" placeholder="Item Category" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Price</label>
+              <input type="number" step="0.01" name="price" placeholder="Item Price" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Quantity</label>
+              <input type="number" name="quantity" placeholder="Item Quantity" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Item Min Quantity</label>
+              <input type="number" name="minquantity" placeholder="Item Min Quantity" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Sold Quantity</label>
+              <input type="number" name="sold" placeholder="Sold Quantity" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Size</label>
+              <input type="text" name="size" placeholder="Size" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 
