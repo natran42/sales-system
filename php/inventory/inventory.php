@@ -31,7 +31,7 @@ function insertInventory()
       $minquantity = $_POST['minquantity'];
       $size = $_POST['size'];
       $sold = $_POST['sold'];
-      $tsql = 'INSERT dbo.Inventory (StockQty,SoldQty,MinQty,Name,Description,Price,Category,Size,IsActive) VALUES(?,?,?,?,?,?,?,?)';
+      $tsql = 'INSERT dbo.Inventory (StockQty,SoldQty,MinQty,Name,Description,Price,Category,Size,IsActive) VALUES(?,?,?,?,?,?,?,?,?)';
       $params1 = array($quantity, $sold, $minquantity, $name, $description, $price, $category, $size, 1);
       $result = sqlsrv_query($conn, $tsql, $params1);
       if ($result) {
