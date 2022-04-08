@@ -85,8 +85,8 @@ function getInventory()
       echo '<td>$' . number_format($row['Price'], 2) . '</td>';
       echo '<td>' . $row['StockQty'] . '</td>';
       echo '<td>
-                <button class="btn btn-primary" type="button"><a href="update.php?updateupc=' . $upc . '" class="text-light" ">Update</a></button>
-                <button class="btn btn-danger" type="button"><a href="delete.php?deleteupc=' . $upc . '">Delete</a></button>
+                <button class="btn btn-primary" type="button"><a href="update.php?updateupc=' . $upc . '" class="text-light" style="color:white; text-decoration:none;">Update</a></button>
+                <button class="btn btn-danger" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="delete.php?deleteupc=' . $upc . '">Delete</a></button>
                 </td>';
       echo '</tr>';
     }
