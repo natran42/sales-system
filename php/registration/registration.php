@@ -3,104 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- dont forget to do do form validation -->
-
+<!-- dont forget to do form validation -->
 <head>
-<style>
-*{
-    font-family: sans-serif;
-    box-sizing: border-box;
-}
-body {
-    background: #1690A7;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-form {
-    width: 500px;
-    border: 2px solid #ccc;
-    padding: 30px;
-    background: #fff;
-    border-radius: 15px;
-}
-
-input {
-    display: block;
-    border: 2px solid;
-    width: 100%;
-    padding: 10px;
-    margin: 10px auto;
-    border-radius: 5px;
-}
-
-.inline{
-    display: inline-block;
-    width: 49%;
-}
-
-#right{
-    float: right;
-}
-
-label{
-    color: #888;
-    font-size: 18px;
-    padding: 10px;
-}
-
-button{
-    background: #d6d6d6;
-    padding: 15px 15px;
-    color: black;
-    border-radius: 5px;
-    text-align: center;
-    width: 100%;
-    font-size: 16px;
-    cursor: pointer;
-    border-width: 1px;
-}
-
-button{
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-button:after {
-  content: '»';
-  opacity: 0;
-  top: 10;
-  right: -50px;
-  transition: 0.5s;
-
-  position: relative;
-}
-
-button:hover {
-  padding-right: 35px;
-}
-
-button:hover:after {
-  opacity: 1;
-  right: 0;
-}
-
-button:active{
-   background-color: #808080;
-}
-
-</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="php/registration/registration_style.css">
+    <link rel="stylesheet" href="../registration/registration_style.css">
 
     <title>Member Registration</title>
 </head>
@@ -131,6 +38,7 @@ button:active{
             }
 
         </script>
+
         <!-- <span id="helpBlock" class="help-block" >Format: 123-456-7890.</span><br><br> we can probably add this for if the user inputs wrong information to tell them how to format a correct input -->
 
         <label>Email</label>
@@ -143,12 +51,13 @@ button:active{
         <input type="text" name="zip" placeholder="Zip Code / Postal" class="inline">
         <br>
 
-
         <button type="submit"><span>Submit </span></button>
+    </form>
 
-        </form>
+    <div id=space>
+    </div>
+
 </body>
-
 </html>
 
 <?php
