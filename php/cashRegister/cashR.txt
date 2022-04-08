@@ -1,3 +1,6 @@
-a=White T-Shirt&b=s&c=1&d=10.00
-
-
+a=black t-shirt&b=L&c=1&d=10.00
+a=Black T-shirt&b=L&c=1&d=10.00
+a=Black T-shirt&b=L&c=1&d=10.00
+a=Black T-shirt&b=M&c=1&d=10.00
+a=Black T-shirt&b=M&c=1&d=10.00
+a=Pink Dress&b=S&c=1&d=15.00

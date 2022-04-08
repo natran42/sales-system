@@ -6,8 +6,6 @@
     if (!$connection)
         die(print_r(sqlsrv_errors(), true));
 
-
-
     if(isset($_GET['deleteupc'])){
         $upc=$_GET['deleteupc'];
     
