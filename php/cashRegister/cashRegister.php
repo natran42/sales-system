@@ -1,8 +1,10 @@
 <?php include(__dir__.'/../main/nav.php');?>
 
 <html>
-    <!--- Ask the user to input name and quanitity of the item they want to buy, this input will then retrieve data from inventory-->
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<title>Register</title>
+
+<!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <div class="form-group">
             <label for="itemName">Item Name</label>
             <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter Item Name">
@@ -34,10 +36,6 @@
         if(!$connection)
             die(print_r(sqlsrv_errors(), true));
         return $connection;
-    }
-
-    function __destruct(){
-        mysql_close($this->connection);
     }
 
     function printTable($itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
@@ -93,7 +91,7 @@
          }
     }
 
-    printTable();
+    //printTable();
 
     //retrieving form input from user
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -136,6 +134,7 @@
         echo "<br>Total: $". number_format($total, 2);
     }
     /* we could use action= to direct user to webpage confirming purchase after submitting */
+
 ?>
 
 

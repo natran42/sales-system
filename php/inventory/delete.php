@@ -9,7 +9,10 @@
     if(isset($_GET['deleteupc'])){
         $upc=$_GET['deleteupc'];
     
-        $sqlquery = "DELETE FROM Inventory WHERE UPC =$upc";
+        $sqlquery = "UPDATE Inventory
+                    SET IsActive = 0
+                    WHERE UPC =$upc";
+        
         $result = sqlsrv_query($connection, $sqlquery);
         if($result){
             header('location:inventory.php');
