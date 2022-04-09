@@ -91,6 +91,23 @@
          }
     }
 
+    // Returns next Transaction ID that should be used for the transaction
+    function getNextTransactionId() {
+        try {
+            $connection = openConnection();
+            $selectQuery = 'SELECT MAX(TransactionID) AS TID FROM Transactions';
+            $getTID = sqlsrv_query($connection, $selectQuery);
+            if(!$getTID)
+                die(print_r(sqlsrv_errors(), true));
+    
+            $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+            return $row['TID']+1;
+        }
+        catch(Exception $e) {
+            echo 'Error';
+        }
+    }
+
     //printTable();
 
     //retrieving form input from user

@@ -52,8 +52,6 @@ $minquantity1 = $row['MinQty'];
 $size1 = $row['Size'];
 $sold1 = $row['SoldQty'];
 
-
-
 ?>
 
 
@@ -80,7 +78,6 @@ $sold1 = $row['SoldQty'];
         .required:after {
             content: "*";
             color: red;
-
         }
     </style>
 </head>
