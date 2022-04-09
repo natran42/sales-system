@@ -1,14 +1,14 @@
-
 <?php 
 
 if(array_key_exists('entry', $_POST)) {
     $hash = getUserCredentials($_POST['username']);
     if(!empty($hash)) {
         //Checks whether or not the login details match and allows entry to the app if matching
-        if(password_verify($_POST['pwd'], $hash))
-            header('location: php/cashRegister/cashRegister.php', true, 301);
-        else
-            echo "Invalid login credentials";
+        if(password_verify($_POST['pwd'], $hash)) {
+            header('location: php/cashRegister/cashregister.php');
+        }    
+        // else
+        //     echo "Invalid login credentials";
     }
 }
 
@@ -45,8 +45,6 @@ function getUserCredentials($username) {
 
 ?>
 
-
-
 <form method='post'>
     <label>Username: </label><input type='text' name='username' /><br/>
     <label>Password: </label><input type='password' name='pwd' /><br/>
@@ -60,6 +58,7 @@ function getUserCredentials($username) {
     font-family: sans-serif;
     box-sizing: border-box;
 }
+
 body {
     background: #1690A7;
     display: flex;
@@ -151,5 +150,5 @@ button:active{
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="php/registration/registration_style.css">
 
-    <title>Member Registration</title>
+    <title>Login</title>
 </head>

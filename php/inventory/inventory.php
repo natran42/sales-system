@@ -85,8 +85,8 @@ function getInventory()
       echo '<td>$' . number_format($row['Price'], 2) . '</td>';
       echo '<td>' . $row['StockQty'] . '</td>';
       echo '<td>
-                <button class="btn btn-primary" type="button"><a href="update.php?updateupc=' . $upc . '" class="text-light" ">Update</a></button>
-                <button class="btn btn-danger" type="button"><a href="delete.php?deleteupc=' . $upc . '">Delete</a></button>
+                <button class="btn btn-primary" type="button"><a href="update.php?updateupc=' . $upc . '" class="text-light" style="color:white; text-decoration:none;">Update</a></button>
+                <button class="btn btn-danger" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="delete.php?deleteupc=' . $upc . '">Delete</a></button>
                 </td>';
       echo '</tr>';
     }
@@ -222,12 +222,12 @@ getInventory();
               <!--<input type="number" name="category" placeholder="Item Category" class="form-control">-->
               <select name="category" class="form-control">
                 <option value="">--Please choose an option--</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
+                <option value="1">Women</option>
+                <option value="2">Men</option>
+                <option value="3">Girl</option>
+                <option value="4">Boy</option>
+                <option value="5">Toddler/Baby</option>
+                <option value="6">Unisex</option>
               </select>
 
             </div>

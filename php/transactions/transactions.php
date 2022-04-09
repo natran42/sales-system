@@ -103,6 +103,7 @@ function fetchTransactions($userTransaction) {
 //Should we use UUID or Phone #?
 ?>
 
+<title>Transactions</title>
 <h1>Customer Transactions</h1>
 
 <form action = "transactions.php" method='post'>

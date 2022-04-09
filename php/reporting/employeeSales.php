@@ -1,4 +1,5 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+<title>Employee Report</title>
 <h3>Employee Sales</h3>
             <form method='post'>
                 <select id='filter' name='filter' onchange='toggleRange(this)'>

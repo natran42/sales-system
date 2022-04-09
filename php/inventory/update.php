@@ -11,6 +11,7 @@ if (!$connection)
     die(print_r(sqlsrv_errors(), true));
 
 
+$upc = $_GET['updateupc'];
 
 if (isset($_POST['submit'])) {
     $upc = $_GET['updateupc'];
@@ -36,11 +37,24 @@ if (isset($_POST['submit'])) {
     $result = sqlsrv_query($connection, $tsql);
     if ($result) {
         header('location:inventory.php');
-    } else {
-        die(print_r(sqlsrv_errors(), true));
     }
 }
 $upc = $_GET['updateupc'];
+$sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
+$sqlquery = sqlsrv_query($connection, $sql);
+$row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
+
+$name1 = $row['Name'];
+$description1 = $row['Description'];
+$category1 = $row['Category'];
+$price1 = $row['Price'];
+$quantity1 = $row['StockQty'];
+$minquantity1 = $row['MinQty'];
+$size1 = $row['Size'];
+$sold1 = $row['SoldQty'];
+
+
+
 $sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
 $sqlquery = sqlsrv_query($connection, $sql);
 $row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
@@ -109,12 +123,12 @@ $sold1 = $row['SoldQty'];
                             <!--<input type="number" name="category" placeholder="Item Category" class="form-control" value="<?php echo $category1; ?>">-->
                             <select name="category" class="form-control">
                                 <option value="<?php echo $category1; ?>">--Please choose an option--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                                <option value="1">Women</option>
+                                <option value="2">Men</option>
+                                <option value="3">Girl</option>
+                                <option value="4">Boy</option>
+                                <option value="5">Toddler/Baby</option>
+                                <option value="6">Unisex</option>
                             </select>
                         </div>
                         <div class="mb-3">

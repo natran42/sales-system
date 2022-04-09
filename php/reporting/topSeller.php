@@ -1,4 +1,5 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+<title>Top Sellers</title>
 <h3>Top 10 Sellers</h3>
 <?php
 // Opens up a connection to the DB
