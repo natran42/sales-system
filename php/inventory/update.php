@@ -12,8 +12,8 @@ if (!$connection)
 
 
 
-$upc = $_GET['updateupc'];
 if (isset($_POST['submit'])) {
+    $upc = $_GET['updateupc'];
     $name = $_POST['name'];
     $description = $_POST['description'];
     $category = $_POST['category'];
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
         die(print_r(sqlsrv_errors(), true));
     }
 }
-
+$upc = $_GET['updateupc'];
 $sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
 $sqlquery = sqlsrv_query($connection, $sql);
 $row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
