@@ -6,7 +6,7 @@ if(array_key_exists('entry', $_POST)) {
     if(!empty($hash)) {
         //Checks whether or not the login details match and allows entry to the app if matching
         if(password_verify($_POST['pwd'], $hash))
-            header('location: php/cashRegister/cashRegister.php');
+            header('location: php/cashRegister/cashRegister.php', true, 301);
         else
             echo "Invalid login credentials";
     }
