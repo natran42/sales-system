@@ -3,10 +3,6 @@
 session_start();
 session_unset();
 
-if(isset($_SESSION)) {
-    echo '<script>console.log(\'Hewwo\')</script>';
-}
-
 if(array_key_exists('entry', $_POST)) {
     $hash = getUserCredentials($_POST['username']);
     if(!empty($hash)) {
