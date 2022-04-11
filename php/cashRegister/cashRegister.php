@@ -28,6 +28,9 @@
 <!-- This is the php code that will retrieve the data from inventory if there is a match, if not display that there is out of stock-->
 <?php
 
+    echo 'Manager = '.$_SESSION['MGR'];
+    echo '<br>Employee = '.$_SESSION['EMP'];
+
     // Opens up a connection to the DB
     function openConnection() {
         $serverName = 'sevenseas.database.windows.net';
