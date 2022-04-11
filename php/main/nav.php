@@ -47,6 +47,7 @@
 
 <?php 
 
+    session_save_path(__dir__.'/../tmp');
     session_start();
 
     // Hides nav elements based on user
