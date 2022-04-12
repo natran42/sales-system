@@ -13,9 +13,10 @@
     </script>
 </head>
 
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Clothing POS</a>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,17 +46,86 @@
         </nav>
 </div>
 
+<style>
+ 
+
+.navbar {
+    background: linear-gradient(135deg, #d66d75 , #e29587);
+    width: 650px;
+    border-radius: 10px;
+    margin: auto;
+    
+}
+
+body {
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0); /*#91ac80    , (#a1c4fd , #c2e9fb) */
+}
+
+.nav-item:hover {
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    border-radius: 10px;
+}
+
+.dropdown-menu
+{
+    color: rgb(68, 65, 65);
+    background: linear-gradient(135deg, #d66d75 , #e29587);
+    border-radius: 10px;
+}
+.dropdown-item:hover
+{
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    border-radius: 10px;
+}
+
+</style>
 <?php 
+
+    function getAuth() {
+        try {
+            $connection = openConnection();
+            $sql = 'SELECT * FROM Sessions';
+            $getUser = sqlsrv_query($connection, $sql);;
+            if(!$getUser)
+                die(print_r(sqlsrv_errors(), true));
+    
+            $row = sqlsrv_fetch_array($getUser);
+            if(empty($row))
+                return 'CUST';
+
+            $mgr = $row['MGR'];
+            $emp = $row['EMP'];
+    
+            sqlsrv_free_stmt($getUser);
+            sqlsrv_close($connection);
+    
+            return $mgr === 1 ? 'MGR' : 'EMP';
+        }
+        catch(Exception $e) {
+            echo 'Error';
+        }
+    }
 
     session_start();
 
-    // Hides nav elements based on user
-    if(!isset($_SESSION['MGR'])) {
+    $accessLevel = getAuth();
+
+    if($accessLevel !== 'MGR') {
         echo '<script>hide(\'reports\');</script>';
     }
-    if(!isset($_SESSION['MGR']) && !isset($_SESSION['EMP'])) {
+    if($accessLevel !== 'MGR' && $accessLevel !== 'EMP') {
         echo '<script>hide(\'inventory\');</script>';
         echo '<script>hide(\'transactions\');</script>';
     }
+
+    // Hides nav elements based on user
+    // if(!isset($_SESSION['MGR'])) {
+    //     echo '<script>hide(\'reports\');</script>';
+    // }
+    // if(!isset($_SESSION['MGR']) && !isset($_SESSION['EMP'])) {
+    //     echo '<script>hide(\'inventory\');</script>';
+    //     echo '<script>hide(\'transactions\');</script>';
+    // }
+    
 
 ?>

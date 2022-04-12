@@ -8,7 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../registration/registration_style.css">
-
     <title>Member Registration</title>
 </head>
 
@@ -97,3 +96,4 @@ if(isset($_POST['first'])) {
     //     echo "Successfully added customer";
     // }
 }
+
