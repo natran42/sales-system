@@ -11,27 +11,27 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link" href="/php/cashRegister/cashRegister.php"><i class="fa fa-fw fa-money"></i>Cash Register</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/php/inventory/inventory.php"><i class="fa fa-fw fa-paperclip"></i>Inventory</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/php/transactions/transactions.php"><i class="fa fa-fw fa-book"></i>Transactions</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/php/registration/registration.php"><i class="fa fa-fw fa-pencil"></i>Registration</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-file"></i>Reports</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/php/reporting/customersJoined.php">Customer Report</a></li>
-            <li><a class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
-            <li><a class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/php/cashRegister/cashRegister.php"><i class="fa fa-fw fa-money"></i>Cash Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/php/inventory/inventory.php"><i class="fa fa-fw fa-paperclip"></i>Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/php/transactions/transactions.php"><i class="fa fa-fw fa-book"></i>Transactions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/php/registration/registration.php"><i class="fa fa-fw fa-pencil"></i>Registration</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-file"></i>Reports</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/php/reporting/customersJoined.php">Customer Report</a></li>
+                        <li><a class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
+                        <li><a class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
+                    </ul>
+                </li>
             </ul>
-        </li>
-        </ul>
-        </nav>
+</nav>
 </div>
