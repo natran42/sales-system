@@ -18,4 +18,13 @@
     }
         
 /* REMEMBER TO UPDATE INVENTORY IF REMOVED. ADD QUANTITY BACK TO DB */
+
+    $sql = "DELETE FROM Inventory WHERE ItemName = '$delName' AND Size = '$delSize'";
+    $stmt = sqlsrv_query($connection, $sql);
+    if($stmt === false)
+        die(print_r(sqlsrv_errors(), true));
+    sqlsrv_free_stmt($stmt);
+    $sql = "UPDATE Inventory SET Quantity = Quantity + $delQuantity WHERE ItemName = '$delName' AND Size = '$delSize'";
+
+    
 ?>

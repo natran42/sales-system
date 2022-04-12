@@ -1,4 +1,9 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+
+
+
+
+
 <?php
 
 function openConnection() {
@@ -9,7 +14,6 @@ if(!$connection)
 die(print_r(sqlsrv_errors(), true));
 return $connection;
 }
-
 
 //->Input customer transaction id
 //->Pull up previous transaction info from transaction id
@@ -41,9 +45,8 @@ function fetchTransactions($userTransaction) {
         $getTransactionItems = sqlsrv_query($connection, $selectSecondQuery);
         if(!$getTransactionItems)
             die(print-r(sqlsrv_errors(), true));
-            
-
-        echo "<h3>Transaction Information</h3>
+                
+        echo "<h3></h3>
         <table border = '1' class='table table-hover'>
         <tr>
         <th>Transaction ID</th>
@@ -55,6 +58,7 @@ function fetchTransactions($userTransaction) {
         <th>Tax</th>
         <th>Total</th>
         </tr>";   
+        
 
         while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
             echo '<tr>';
@@ -68,8 +72,6 @@ function fetchTransactions($userTransaction) {
             echo '<td>$'.$row['Total'].'</td>';
             echo '</tr>';
         }
-
-    
        
         echo "<table border = '1' class='table table-hover'>
         <tr>
@@ -80,8 +82,10 @@ function fetchTransactions($userTransaction) {
         <th>Item Total</th>
         </tr>";   
 
+        echo "<h3>Items Purchased:</h3>";
 
         while($row = sqlsrv_fetch_array($getTransactionItems, SQLSRV_FETCH_ASSOC)) {
+        
             echo '<tr>';
             echo '<td>'.$row['TransactionItemID'].'</td>';
             echo '<td>'.$row['Name'].'</td>';
@@ -104,9 +108,8 @@ function fetchTransactions($userTransaction) {
 ?>
 
 <title>Transactions</title>
-<h1>Customer Transactions</h1>
-
 <form action = "transactions.php" method='post'>
+    <h1>Customer Transactions</h1>
     Enter Transaction ID: <input type="number" name="transID"/> <br/>
     <input type='submit' name='submit' id='submit' value='Submit'/>
 </form>
@@ -118,5 +121,71 @@ if(!empty($_POST['submit'])){
     fetchTransactions(intval($userTransaction));
 }
 
-
 ?>
+
+
+<style>
+*{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+body {
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    justify-content: center;
+    height: 100vh;
+    color: white;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 35px;
+
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 35px;
+
+}
+form {
+    margin: auto;
+    margin-top: 70px;
+    width: 500px;
+    border: 2px solid #ccc;
+    padding: 30px; 
+    background: #fff;
+    border-radius: 15px;
+    color: rgb(68, 65, 65);
+   
+}
+
+input {
+    display: block;
+    border: 2px solid;
+    width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+#submit{
+   height: 8%;
+   width: 100%;
+   outline: none;
+   color: rgb(68, 65, 65);
+   border: none;
+   background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+}
+
+.table{
+    margin: auto;
+    width: auto;
+    border: 2px solid #ccc;
+    padding: 30px; 
+    background: #fff;
+    border-radius: 15px;
+    color: rgb(68, 65, 65);
+}
+
+
+</style>

@@ -16,13 +16,22 @@
         </div>
 
         <div class="form-group">
+                  <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
             <label for="itemSize">Item Size</label>
-            <input type="text" class="form-control" id="itemSize" name="itemSize" placeholder="Enter Item Size">
+            <select class="form-control" id="itemSize" name="itemSize">
+                <option>N/A</option>
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+            </select>
         </div>
-
         <div class="form-group">
             <label for="itemQuantity">Item Quantity</label>
             <input type="text" class="form-control" id="itemQuantity" name="itemQuantity" placeholder="Enter Item Quantity">
+
         </div>
 
         <button type="submit" class="btn btn-primary">Add To Cart</button>
@@ -30,6 +39,16 @@
     </form>
 </html>
 
+<!-- have the submit color as #8ee8d8a0 -->
+<style>
+
+    .btn-primary {
+        background-color: #8e8d8a;
+        border-color: #8e8d8a;
+        color: black;
+    }
+
+</style>
 
 <!-- This is the php code that will retrieve the data from inventory if there is a match, if not display that there is out of stock-->
 <?php
@@ -44,23 +63,34 @@
         return $connection;
     }
 
-    function cartTableHasData(){
-        $query = "SELECT * FROM Cart LIMIT 1";
-        $result = sqlsrv_query($connection, $query);
-        $row = mysqli_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        if(isset($row['UPC'])) 
-            return True;
-        else 
-           return False;
+    function getNextTransactionId() {
+        try {
+            $connection = openConnection();
+            $selectQuery = 'SELECT MAX(TransactionID) AS TID FROM Transactions'; //greatest number being the last transactionID
+            $getTID = sqlsrv_query($connection, $selectQuery);
+            if(!$getTID)
+                die(print_r(sqlsrv_errors(), true));
+    
+            $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+            return $row['TID']+1; //incrementing row by 1 -> that being our next transactionID
+        }
+        catch(Exception $e) {
+            echo 'Error';
+
+        }
+
+
     }
 
-    function printTable($connection, $itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0){
+    
+
+    function printTable($itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
         //Printing header row
         echo "<table border = '1' class='table'>
         <tr>
         <th>Item Name</th>
         <th>Size</th>
-        <th>Stock Qty</th>
+        <th>Qty</th>
         <th>Price</th>
         <th>Remove</th>
         </tr>";
@@ -162,4 +192,14 @@
         display: inline-block;
         margin-right: 10px;
     }
+    
+    .table{
+    margin: auto;
+    width: auto;
+    border: 2px solid #ccc;
+    padding: 30px; 
+    background: #fff;
+    border-radius: 15px;
+    color: rgb(68, 65, 65);
+}
 </style>

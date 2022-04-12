@@ -7,13 +7,11 @@
 $serverName = 'sevenseas.database.windows.net';
 $connectionOptions = array('Database' => 'SalesSystemDB', 'UID' => 'admin7', 'PWD' => 'TeamSeven7');
 $connection = sqlsrv_connect($serverName, $connectionOptions);
-if (!$connection)
-    die(print_r(sqlsrv_errors(), true));
-
-
-$upc = $_GET['updateupc'];
+//if (!$connection)
+ //   die(print_r(sqlsrv_errors(), true));
 
 if (isset($_POST['submit'])) {
+    $upc = $_GET['updateupc'];
     $name = $_POST['name'];
     $description = $_POST['description'];
     $category = $_POST['category'];
@@ -38,7 +36,7 @@ if (isset($_POST['submit'])) {
         header('location:inventory.php');
     }
 }
-
+$upc = $_GET['updateupc'];
 $sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
 $sqlquery = sqlsrv_query($connection, $sql);
 $row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
@@ -54,10 +52,22 @@ $sold1 = $row['SoldQty'];
 
 
 
+$sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
+$sqlquery = sqlsrv_query($connection, $sql);
+$row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
 ?>
 
 
 
+$name1 = $row['Name'];
+$description1 = $row['Description'];
+$category1 = $row['Category'];
+$price1 = $row['Price'];
+$quantity1 = $row['StockQty'];
+$minquantity1 = $row['MinQty'];
+$size1 = $row['Size'];
+$sold1 = $row['SoldQty'];
+?>
 
 <!doctype html>
 <html lang="en">
@@ -80,7 +90,6 @@ $sold1 = $row['SoldQty'];
         .required:after {
             content: "*";
             color: red;
-
         }
     </style>
 </head>
@@ -106,13 +115,13 @@ $sold1 = $row['SoldQty'];
                             <label class="form-label required">Item Category</label>
                             <!--<input type="number" name="category" placeholder="Item Category" class="form-control" value="<?php echo $category1; ?>">-->
                             <select name="category" class="form-control">
-                                <option value="<?php echo $category1; ?>">--Please choose an option--</option>
-                                <option value="1">Women</option>
-                                <option value="2">Men</option>
-                                <option value="3">Girl</option>
-                                <option value="4">Boy</option>
-                                <option value="5">Toddler/Baby</option>
-                                <option value="6">Unisex</option>
+                                <option >--Please choose an option--</option>
+                                <option <?php if($category1 == '1'){echo("selected");}?> value="1">Women</option>
+                                <option <?php if($category1 == '2'){echo("selected");}?> value="2">Men</option>
+                                <option <?php if($category1 == '3'){echo("selected");}?> value="3">Girl</option>
+                                <option <?php if($category1 == '4'){echo("selected");}?> value="4">Boy</option>
+                                <option <?php if($category1 == '5'){echo("selected");}?> value="5">Toddler/Baby</option>
+                                <option <?php if($category1 == '6'){echo("selected");}?> value="6">Unisex</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -136,12 +145,12 @@ $sold1 = $row['SoldQty'];
                             <!--<input type="text" name="size" placeholder="Size" class="form-control" value="<?php echo $size1; ?>">-->
                             <select name="size" class="form-control">
                                 <option value="">--Please choose an option--</option>
-                                <option value="XS">XXS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
+                                <option <?php if($size1 == 'XS'){echo("selected");}?> value="XS">XS</option>
+                                <option <?php if($size1 == 'S'){echo("selected");}?> value="S">S</option>
+                                <option <?php if($size1 == 'M'){echo("selected");}?> value="M">M</option>
+                                <option <?php if($size1 == 'L'){echo("selected");}?> value="L">L</option>
+                                <option <?php if($size1 == 'XL'){echo("selected");}?> value="XL">XL</option>
+                                <option <?php if($size1 == 'XXL'){echo("selected");}?> value="XXL">XXL</option>
                             </select>
                         </div>
 
