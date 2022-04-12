@@ -1,0 +1,44 @@
+*{
+    font-family: 'Poppins' , sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    justify-content: center;
+ 
+}
+form {
+    margin: auto;
+    margin-top: 70px;
+    width: 500px;
+    border: 2px solid #ccc;
+    padding: 30px; /* inside padding */
+    background: #fff;
+    border-radius: 15px; /* edges */
+   
+}
+input {
+    display: block;
+    border: 2px solid;
+    width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+.inline{
+    display: inline-block;
+    width: 49%;
+}
+
+
+
+label{
+    color: #888;
+    font-size: 18px;
+    padding: 10px;
+}
+
+

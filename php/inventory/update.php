@@ -55,6 +55,9 @@ $sold1 = $row['SoldQty'];
 $sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
 $sqlquery = sqlsrv_query($connection, $sql);
 $row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
+?>
+
+
 
 $name1 = $row['Name'];
 $description1 = $row['Description'];
@@ -87,7 +90,6 @@ $sold1 = $row['SoldQty'];
         .required:after {
             content: "*";
             color: red;
-
         }
     </style>
 </head>

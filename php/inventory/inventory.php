@@ -137,6 +137,8 @@ getInventory();
       color: red;
 
     }
+
+    
   </style>
 </head>
 

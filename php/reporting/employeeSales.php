@@ -1,7 +1,24 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../reporting/reportingstyle.css">
+</head>
+
 <title>Employee Report</title>
+
+<script>
+    function toggleRange(selected) {
+        if(selected.value == 'customRange')
+            document.getElementById('daterangepicker').style.display = 'block';
+        else
+            document.getElementById('daterangepicker').style.display = 'none';
+    }
+</script>
+
 <h3>Employee Sales</h3>
             <form method='post'>
+                <h3>Employee Sales</h3>
                 <select id='filter' name='filter' onchange='toggleRange(this)'>
                     <option value='currWeek'>This week</option>
                     <option value='currMonth'>This month</option>
@@ -15,7 +32,7 @@
                     <input type='date' id='enddaterange' name='enddaterange'>
                 </div>
                 <br><br>
-                <input type='submit' name='employeeSales' id='employeeSales' value='View Query' onsubmit='toggleTable()'>
+                <input type='submit' name='employeeSales' id='employeeSales' value='View Results'>
             </form>
 <?php
 
@@ -42,13 +59,14 @@ function selectEmployeeTransactions($start, $end) {
         if(!$getTransactions)
             die(print_r(sqlsrv_errors(), true));
         
-        echo "<table border = '1' class='table'>
+        echo "<table border = '1' class='table table-hover'>
         <tr>
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Total</th>
         </tr>";
+
 
         while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
             echo '<tr>';
@@ -58,6 +76,8 @@ function selectEmployeeTransactions($start, $end) {
             echo '<td>$'.number_format($row['TotalSold'], 2).'</td>';
             echo '</tr>';
         }
+
+
     }
     catch(Exception $e) {
         echo 'Error';
@@ -97,7 +117,7 @@ function selectEmployeeTransactions($start, $end) {
                     echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
                 }
                 else {
-                    echo $startDate.'~'.$endDate;
+                    echo '<h3>'.$startDate.' ~ '.$endDate.'</h3>';
                     selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
                 }
             }
