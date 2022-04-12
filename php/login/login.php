@@ -1,6 +1,5 @@
 <?php
 
-session_save_path('/');
 session_start();
 session_unset();
 
@@ -15,6 +14,7 @@ if(array_key_exists('entry', $_POST)) {
                 $_SESSION['EMP'] = getUserID($_POST['username']);
             // DOES NOT WORK FOR LOGIN LINK ON NAVBAR
             header('location: php/cashRegister/cashregister.php');
+            exit();
         }    
         // else
         //     echo "Invalid login credentials";
