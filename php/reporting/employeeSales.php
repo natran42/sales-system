@@ -1,7 +1,13 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../reporting/reportingstyle.css">
+</head>
+
 <title>Employee Report</title>
-<h3>Employee Sales</h3>
             <form method='post'>
+                <h3>Employee Sales</h3>
                 <select id='filter' name='filter' onchange='toggleRange(this)'>
                     <option value='currWeek'>This week</option>
                     <option value='currMonth'>This month</option>
@@ -50,6 +56,7 @@ function selectEmployeeTransactions($start, $end) {
         <th>Total</th>
         </tr>";
 
+
         while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
             echo '<tr>';
             echo '<td>'.$row['EID'].'</td>';
@@ -58,6 +65,8 @@ function selectEmployeeTransactions($start, $end) {
             echo '<td>$'.number_format($row['TotalSold'], 2).'</td>';
             echo '</tr>';
         }
+
+
     }
     catch(Exception $e) {
         echo 'Error';

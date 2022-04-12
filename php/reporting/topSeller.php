@@ -1,4 +1,10 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../reporting/reportingstyle.css">
+</head>
+
 <title>Top Sellers</title>
 <h3>Top 10 Sellers</h3>
 <?php
@@ -23,7 +29,7 @@ function selectTopSellers() {
         if(!$getTopSellers)
             die(print_r(sqlsrv_errors(), true));
         
-        echo "<table border = '1' class='table'>
+        echo "<table border = '1' class='table' >
         <tr>
         <th>Item Name</th>
         <th>Size</th>
@@ -48,3 +54,4 @@ function selectTopSellers() {
 selectTopSellers();
 
 ?>
+

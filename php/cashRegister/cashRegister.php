@@ -11,19 +11,38 @@
         </div>
 
         <div class="form-group">
+                  <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
             <label for="itemSize">Item Size</label>
-            <input type="text" class="form-control" id="itemSize" name="itemSize" placeholder="Enter Item Size">
+            <select class="form-control" id="itemSize" name="itemSize">
+                <option>N/A</option>
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+            </select>
         </div>
-
         <div class="form-group">
             <label for="itemQuantity">Item Quantity</label>
             <input type="text" class="form-control" id="itemQuantity" name="itemQuantity" placeholder="Enter Item Quantity">
+
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Add</button>
     </form>
 </html>
 
+<!-- have the submit color as #8ee8d8a0 -->
+<style>
+
+    .btn-primary {
+        background-color: #8e8d8a;
+        border-color: #8e8d8a;
+        color: black;
+    }
+
+</style>
 
 <!-- This is the php code that will retrieve the data from inventory if there is a match, if not display that there is out of stock-->
 <?php
@@ -38,60 +57,53 @@
         return $connection;
     }
 
+    function getNextTransactionId() {
+        try {
+            $connection = openConnection();
+            $selectQuery = 'SELECT MAX(TransactionID) AS TID FROM Transactions'; //greatest number being the last transactionID
+            $getTID = sqlsrv_query($connection, $selectQuery);
+            if(!$getTID)
+                die(print_r(sqlsrv_errors(), true));
+    
+            $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+            return $row['TID']+1; //incrementing row by 1 -> that being our next transactionID
+        }
+        catch(Exception $e) {
+            echo 'Error';
+
+        }
+
+
+    }
+
+    
+
     function printTable($itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
         //Printing header row
         echo "<table border = '1' class='table'>
         <tr>
         <th>Item Name</th>
         <th>Size</th>
-        <th>Stock Qty</th>
+        <th>Qty</th>
         <th>Price</th>
         <th>Remove</th>
         </tr>";
 
-         //string to mkaing pulling items from file easier
-         $str = "a=" . ucwords($itemName) ."&b=" . strtoupper($itemSize) ."&c=" . $itemQuantity . "&d=" . $price;
-
-         //don't add item if not in stock
-         if($inStock){
-             $file = fopen("cashR.txt", "a");
-             fwrite($file, $str . "\n");
-             fclose($file);
-         }
-         else
+        //Printing data rows
+        if($itemName != null && $itemSize != null && $itemQuantity != null){
+            echo "<tr>";
+            echo "<td>" . $itemName . "</td>";
+            echo "<td>" . $itemSize . "</td>";
+            echo "<td>" . $itemQuantity . "</td>";
+            echo "<td>" . $price . "</td>";
+            echo "<td><a href='remove.php?itemName=$itemName&itemSize=$itemSize&itemQuantity=$itemQuantity'>Remove</a></td>";
+            echo "</tr>";
+            
             $inStock = True;
-
-         //printing items to monitor
-         $item_array = [];
-         if ($file = fopen("cashR.txt", "a+")) {
-             while(!feof($file)) {
-                $line = fgets($file);
-                parse_str($line, $item_array);
-
-                //formatted this way to prevent warnings
-                $a = isset($item_array['a']) ? $item_array['a'] : null;
-                $b = isset($item_array['b']) ? $item_array['b'] : null;
-                $c = isset($item_array['c']) ? $item_array['c'] : null;
-                $d = isset($item_array['d']) ? $item_array['d'] : null;
-
-                //we might have to change this is some items will display null
-                if($a == null || $b == null || $c == null || $d == null)
-                    continue;
-
-                echo '<tr>';
-                echo '<td>'. $a .'</td>';
-                echo '<td>'. $b .'</td>';
-                echo '<td>'. $c .'</td>';
-                echo '<td>'. $d .'</td>';
-                echo '<td> <button class="btn btn-primary" type="button" remove.php><a href="remove.php? '. $str .'">Remove</button></td>';
-                //echo '<button class="btn btn-primary" type="button">Edit</a></button></td></td>'; //put this next to above button
-                echo '</tr>';
-                $total += $d;
-             }
-         }
+        }
     }
 
-    //printTable();
+   // printTable();
 
     //retrieving form input from user
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -120,6 +132,9 @@
                 $updateItem = sqlsrv_query($connection, $updateQuery);
                 if(!$updateItem)
                     die(print_r(sqlsrv_errors(), true));
+
+                $total = $itemQuantity * $row['Price'];
+                
             }
             else {
                 echo "Item is out of stock";
@@ -132,11 +147,11 @@
             echo 'Error';
         }
         echo "<br>Total: $". number_format($total, 2);
+
     }
     /* we could use action= to direct user to webpage confirming purchase after submitting */
 
 ?>
-
 
 <!-- style this page to make it look like a cash register -->
 <style>
@@ -144,4 +159,14 @@
         display: inline-block;
         margin-right: 10px;
     }
+    
+    .table{
+    margin: auto;
+    width: auto;
+    border: 2px solid #ccc;
+    padding: 30px; 
+    background: #fff;
+    border-radius: 15px;
+    color: rgb(68, 65, 65);
+}
 </style>

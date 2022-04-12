@@ -1,0 +1,74 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    justify-content: center;
+    height: 100vh;
+    color: black;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 35px;
+
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 35px;
+
+}
+
+form {
+    margin: auto;
+    margin-top: 70px;
+    width: 500px;
+    border: 2px solid #ccc;
+    padding: 30px; /* inside padding */
+    background: #fff;
+    border-radius: 15px; /* edges */
+    color:rgb(68, 65, 65)
+   
+}
+
+input {
+    display: block;
+    border: 2px solid;
+    width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+#employeeSales{
+    height: 8%;
+    width: 100%;
+    outline: none;
+    color: rgb(68, 68, 65);
+    border: none;
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+ }
+
+ #customerQuery{
+    height: 8%;
+    width: 100%;
+    outline: none;
+    color: rgb(68, 65, 65);
+    border: none;
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+ }
+
+ .table{
+    margin: auto;
+    width: auto;
+    border: 2px solid #ccc;
+    padding: 30px; 
+    background: #fff;
+    border-radius: 15px;
+    color: rgb(68, 65, 65);
+}
+ 

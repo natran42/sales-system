@@ -1,7 +1,15 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../reporting/reportingstyle.css">
+</head>
+
+
 <title>Customer Report</title>
-<h3>Customers registered</h3>
     <form method='post'>
+        <h3>Customers registered</h3>
         <select id='filter' name='filter' onchange='toggleRange(this)'>
             <option value='currWeek'>This week</option>
             <option value='currMonth'>This month</option>
@@ -15,7 +23,7 @@
             <input type='date' id='enddaterange' name='enddaterange'>
         </div>
         <br><br>
-        <input type='submit' name='customerQuery' id='customerQuery' value='View Query' onsubmit='toggleTable()'>
+        <input type='submit' name='customerQuery' id='customerQuery' value='View Query'  onsubmit='toggleTable()'>
     </form>
     <!--END-->
 

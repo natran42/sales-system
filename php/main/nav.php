@@ -4,9 +4,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Clothing POS</a>
+        <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,3 +36,37 @@
         </ul>
         </nav>
 </div>
+
+<style>
+ 
+
+.navbar {;
+    background: linear-gradient(135deg, #d66d75 , #e29587);
+    width: 650px;
+    border-radius: 10px;
+    margin: auto;
+    
+}
+
+body {
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0); /*#91ac80    , (#a1c4fd , #c2e9fb) */
+}
+
+.nav-item:hover {
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    border-radius: 10px;
+}
+
+.dropdown-menu
+{
+    color: rgb(68, 65, 65);
+    background: linear-gradient(135deg, #d66d75 , #e29587);
+    border-radius: 10px;
+}
+.dropdown-item:hover
+{
+    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    border-radius: 10px;
+}
+
+</style>
