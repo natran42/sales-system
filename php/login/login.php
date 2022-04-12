@@ -1,5 +1,6 @@
 <?php
 
+session_save_path(null);
 session_start();
 session_unset();
 
