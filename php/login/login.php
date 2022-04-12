@@ -15,6 +15,8 @@ if(array_key_exists('entry', $_POST)) {
                 $_SESSION['EMP'] = getUserID($_POST['username']);
             // DOES NOT WORK FOR LOGIN LINK ON NAVBAR
             header('location: php/cashRegister/cashregister.php');
+            session_regenerate_id(true);
+            session_write_close();
             exit();
         }    
         // else
