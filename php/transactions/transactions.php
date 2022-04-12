@@ -55,6 +55,7 @@ function fetchTransactions($userTransaction) {
         <th>Tax</th>
         <th>Total</th>
         </tr>";   
+        
 
         while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
             echo '<tr>';
@@ -80,8 +81,10 @@ function fetchTransactions($userTransaction) {
         <th>Item Total</th>
         </tr>";   
 
+        echo "<h3>Items Purchased:</h3>";
 
         while($row = sqlsrv_fetch_array($getTransactionItems, SQLSRV_FETCH_ASSOC)) {
+        
             echo '<tr>';
             echo '<td>'.$row['TransactionItemID'].'</td>';
             echo '<td>'.$row['Name'].'</td>';
