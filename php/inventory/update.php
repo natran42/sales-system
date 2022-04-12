@@ -50,24 +50,8 @@ $minquantity1 = $row['MinQty'];
 $size1 = $row['Size'];
 $sold1 = $row['SoldQty'];
 
-
-
-$sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
-$sqlquery = sqlsrv_query($connection, $sql);
-$row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
 ?>
 
-
-
-$name1 = $row['Name'];
-$description1 = $row['Description'];
-$category1 = $row['Category'];
-$price1 = $row['Price'];
-$quantity1 = $row['StockQty'];
-$minquantity1 = $row['MinQty'];
-$size1 = $row['Size'];
-$sold1 = $row['SoldQty'];
-?>
 
 <!doctype html>
 <html lang="en">
