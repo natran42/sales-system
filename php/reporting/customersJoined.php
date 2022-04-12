@@ -1,4 +1,14 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
+
+<script>
+    function toggleRange(selected) {
+        if(selected.value == 'customRange')
+            document.getElementById('daterangepicker').style.display = 'block';
+        else
+            document.getElementById('daterangepicker').style.display = 'none';
+    }
+</script>
+
 <title>Customer Report</title>
 <h3>Customers registered</h3>
     <form method='post'>
@@ -15,7 +25,7 @@
             <input type='date' id='enddaterange' name='enddaterange'>
         </div>
         <br><br>
-        <input type='submit' name='customerQuery' id='customerQuery' value='View Query' onsubmit='toggleTable()'>
+        <input type='submit' name='customerQuery' id='customerQuery' value='View Results'>
     </form>
     <!--END-->
 
@@ -39,7 +49,7 @@ function selectCustomer($start, $end) {
         if(!$getCustomers)
             die(print_r(sqlsrv_errors(), true));
 
-        echo "<table border = '1' class='table'>
+        echo "<table border = '1' class='table table-hover'>
         <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -100,7 +110,7 @@ function selectCustomer($start, $end) {
             echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
         }
         else {
-            echo $startDate.'~'.$endDate;
+            echo '<h3>'.$startDate.' ~ '.$endDate.'</h3>';
             selectCustomer($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
         }
     }
