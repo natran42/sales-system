@@ -28,6 +28,7 @@
 <!-- This is the php code that will retrieve the data from inventory if there is a match, if not display that there is out of stock-->
 <?php
 
+    phpinfo();
     echo 'Manager = '.$_SESSION['MGR'];
     echo '<br>Employee = '.$_SESSION['EMP'];
     echo '<br>ROOT: '.$_SERVER['DOCUMENT_ROOT'];
