@@ -31,6 +31,7 @@
     echo 'Manager = '.$_SESSION['MGR'];
     echo '<br>Employee = '.$_SESSION['EMP'];
     echo '<br>ROOT: '.$_SERVER['DOCUMENT_ROOT'];
+    echo '<br>SAVE: '.session_save_path();
 
     // Opens up a connection to the DB
     function openConnection() {
