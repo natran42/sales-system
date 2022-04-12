@@ -81,9 +81,18 @@ body {
 </style>
 <?php 
 
+    function openAuthConnection() {
+        $serverName = 'sevenseas.database.windows.net';
+        $connectionOptions = array('Database'=>'SalesSystemDB', 'UID'=>'admin7', 'PWD'=>'TeamSeven7');
+        $connection = sqlsrv_connect($serverName, $connectionOptions);
+        if(!$connection)
+            die(print_r(sqlsrv_errors(), true));
+        return $connection;
+    }
+
     function getAuth() {
         try {
-            $connection = openConnection();
+            $connection = openAuthConnection();
             $sql = 'SELECT * FROM Sessions';
             $getUser = sqlsrv_query($connection, $sql);;
             if(!$getUser)
