@@ -2,10 +2,7 @@
 
 session_start();
 session_unset();
-
-if(isset($_SESSION)) {
-    echo '<script>console.log(\'Hewwo\')</script>';
-}
+clearSession();
 
 if(array_key_exists('entry', $_POST)) {
     $hash = getUserCredentials($_POST['username']);
@@ -13,10 +10,11 @@ if(array_key_exists('entry', $_POST)) {
         //Checks whether or not the login details match and allows entry to the app if matching
         if(password_verify($_POST['pwd'], $hash)) {
             if(getUserAuthLevel($_POST['username']) === 6)
-                $_SESSION['MGR'] = getUserID($_POST['username']);
+                setSession($_POST['username'], 'MGR');
+                //$_SESSION['MGR'] = getUserID($_POST['username']);
             else
-                $_SESSION['EMP'] = getUserID($_POST['username']);
-            // DOES NOT WORK FOR LOGIN LINK ON NAVBAR
+                setSession($_POST['username'], 'EMP');
+                //$_SESSION['EMP'] = getUserID($_POST['username']);
             header('location: php/cashRegister/cashregister.php');
         }    
         // else
@@ -89,6 +87,42 @@ function getUserID($username) {
         sqlsrv_close($connection);
 
         return $result;
+    }
+    catch(Exception $e) {
+        echo 'Error';
+    }
+}
+
+function setSession($username, $auth) {
+    try {
+        $connection = openConnection();
+        $sql = $auth === 'MGR' ? 'INSERT INTO Sessions VALUES ('.getUserID($username).', 0, 1)' : 'INSERT INTO Sessions VALUES ('.getUserID($username).', 1, 0)';
+        $insertSession = sqlsrv_query($connection, $sql);
+        if(!$insertSession)
+            die(print_r(sqlsrv_errors(), true));
+
+        sqlsrv_free_stmt($insertSession);
+        sqlsrv_close($connection);
+
+        return true;
+    }
+    catch(Exception $e) {
+        echo 'Error';
+    }
+}
+
+function clearSession() {
+    try {
+        $connection = openConnection();
+        $sql = 'DELETE Sessions';
+        $clearSessions = sqlsrv_query($connection, $sql);
+        if(!$clearSessions)
+            die(print_r(sqlsrv_errors(), true));
+
+        sqlsrv_free_stmt($clearSessions);
+        sqlsrv_close($connection);
+
+        return true;
     }
     catch(Exception $e) {
         echo 'Error';
