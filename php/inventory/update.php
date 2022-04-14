@@ -129,6 +129,7 @@ $sold1 = $row['SoldQty'];
                             <!--<input type="text" name="size" placeholder="Size" class="form-control" value="<?php echo $size1; ?>">-->
                             <select name="size" class="form-control">
                                 <option value="">--Please choose an option--</option>
+                                <option <?php if($size1 == 'N/A'){echo("selected");}?> value="N/A">N/A</option>
                                 <option <?php if($size1 == 'XS'){echo("selected");}?> value="XS">XS</option>
                                 <option <?php if($size1 == 'S'){echo("selected");}?> value="S">S</option>
                                 <option <?php if($size1 == 'M'){echo("selected");}?> value="M">M</option>
