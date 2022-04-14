@@ -57,7 +57,6 @@
     background: linear-gradient(135deg, #d66d75 , #e29587);
     /*create a shadow around the navbar*/
     box-shadow: 0px 0px 10px #000000;
-    
     margin-bottom: 10px;
     padding: 0 15px;
    

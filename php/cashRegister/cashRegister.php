@@ -83,7 +83,7 @@
 
     }
 
-    function printTable($itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
+    function printTable($connection ,$itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
         //Printing header row
         echo "<table border = '1' class='table'>
         <tr>
@@ -185,6 +185,13 @@
 <html>
     <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true">Purchase</a></button>
 </html>
+
+<-
+
+
+
+
+
 
 <!-- style this page to make it look like a cash register -->
 <style>
