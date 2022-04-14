@@ -142,7 +142,7 @@
 
         try {
             $connection = openConnection();
-            $selectQuery = "SELECT * FROM Inventory WHERE Name = '$itemName' AND Size = '$itemSize'";
+            $selectQuery = "SELECT * FROM Inventory WHERE Name = '$itemName' AND Size = '$itemSize' AND IsActive = 1";
             $getItem = sqlsrv_query($connection, $selectQuery);
             if(!$getItem)
                 echo "Item not found.";
@@ -184,13 +184,33 @@
 ?>
 
 <html>
-    <form>
-        <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-       required maxlength="12"><br>
-       <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true&num=phone">Purchase</a></button>
 
-    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+       required maxlength="12"><br>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone">Confirm Purchase</a></button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
     
+
+    <button data-bs-target="#exampleModal" data-bs-toggle="modal" class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" >Purchase</a></button>
 </html>
 
 <script>
