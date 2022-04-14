@@ -1,9 +1,5 @@
 <?php include(__dir__.'/../main/nav.php'); ?>
 
-
-
-
-
 <?php
 
 function openConnection() {
@@ -82,6 +78,8 @@ function fetchTransactions($userTransaction) {
         <th>Item Total</th>
         </tr>";   
 
+        // using /
+        echo "/";
         echo "<h3>Items Purchased:</h3>";
 
         while($row = sqlsrv_fetch_array($getTransactionItems, SQLSRV_FETCH_ASSOC)) {

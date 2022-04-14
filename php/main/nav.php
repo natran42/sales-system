@@ -41,19 +41,25 @@
             <li><a class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
             <li><a class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
             </ul>
+            <li class="nav-item" id='logout'>
+            <a class="nav-link" href="/php/login/logout.php"></i>Log Out</a>
+            
+            </li> 
         </li>
         </ul>
         </nav>
 </div>
+
 
 <style>
  
 
 .navbar {
     background: linear-gradient(135deg, #d66d75 , #e29587);
-    width: 650px;
+    width: 700px;
     border-radius: 10px;
     margin: auto;
+    
     
 }
 
