@@ -123,14 +123,14 @@
             <td>$itemName</td>
             <td>$itemSize</td>
             <td>" . $row['Quantity'] . "</td>
-            <td>$price</td>
-            <td><a href='remove.php?deleteupc=$upc'>Remove</a></td>
+            <td>$".number_format($price, 2)."</td>
+            <td><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
             </tr>";
 
-            $total += $price;
+            $total += $price * $row['Quantity'];
         }
 
-        echo "<br>Total: $". number_format($total, 2);
+        echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total, 2)."</td></tr></table>";
     }
 
     //retrieving form input from user
@@ -162,12 +162,25 @@
                 $updateItem = sqlsrv_query($connection, $updateQuery);
                 if(!$updateItem)
                     die(print_r(sqlsrv_errors(), true));
-                    
-                //INSERT item into Cart table  (this is the code that will insert the item into the cart table) 
-                $insertQuery = "INSERT INTO Cart (ItemID, Quantity) VALUES ('$ID', '$itemQuantity')"; 
-                $insertItem = sqlsrv_query($connection, $insertQuery);  
+                
+                // Checks to see if the item already exists in the cart
+                $cartQuery = "SELECT * FROM Cart WHERE ItemID = ".$row['UPC'];
+                $checkCart = sqlsrv_query($connection, $cartQuery);
+                if(!$checkCart)
+                    die(print_r(sqlsrv_errors(), true));
+                // INSERT item into Cart table  (this is the code that will insert the item into the cart table) 
+                // INSERT item if it does not already exist in the cart, otherwise UPDATE the item with new quantity
+                $cartItem = sqlsrv_fetch_array($checkCart, SQLSRV_FETCH_ASSOC);
+                $cartOperation = empty($cartItem) ? "INSERT INTO Cart (ItemID, Quantity) VALUES ('$ID', '$itemQuantity')" : "UPDATE Cart
+                                                                                                                             SET Quantity = ".$cartItem['Quantity'] + $itemQuantity."
+                                                                                                                             WHERE ItemID = ".$cartItem['ItemID'];
+                $insertItem = sqlsrv_query($connection, $cartOperation);  
                 if(!$insertItem)
                     die(print_r(sqlsrv_errors(), true));
+
+                sqlsrv_free_stmt($updateItem);
+                sqlsrv_free_stmt($checkCart);
+                sqlsrv_free_stmt($insertItem);
             }
             else {
                 echo "Item is out of stock";
@@ -184,12 +197,6 @@
 ?>
 
 <html>
-    <form>
-        <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-       required maxlength="12"><br>
-       <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true&num=phone">Purchase</a></button>
-
-    </form>
     
 </html>
 
