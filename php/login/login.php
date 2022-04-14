@@ -104,14 +104,16 @@ function getUserID($username) {
             <form method='post'>
                 <label>Username: </label><input type='text' name='username' /><br/>
                 <label>Password: </label><input type='password' name='pwd' /><br/>
-                <input type='submit' name='entry' value='Login'/>
+                <input type='submit' name='entry' value='Login' />
             </form>
         </div>
         <div class='col-6'>
-            <a href='php/cashRegister/cashregister.php'><button>Self-Checkout</button></a>
+            <a href='php/cashRegister/cashregister.php' style="text-decoration: none";><button class = 'self'>Self-Checkout</button> </a>
         </div>
     </div>
 </div>
+
+
 
 <!-- This code will style the page like the registration theme-->
 <head>

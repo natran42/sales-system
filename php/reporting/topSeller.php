@@ -15,8 +15,9 @@
 </script>
 
 <title>Top Sellers</title>
-<h3>Top 10 Sellers</h3>
+
 <form method='post'>
+    <h3>Top 10 Sellers</h3>
     <select id='filter' name='filter' onchange='toggleRange(this)'>
         <option value='currWeek'>This week</option>
         <option value='currMonth'>This month</option>

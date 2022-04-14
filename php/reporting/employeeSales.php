@@ -16,7 +16,6 @@
     }
 </script>
 
-<h3>Employee Sales</h3>
             <form method='post'>
                 <h3>Employee Sales</h3>
                 <select id='filter' name='filter' onchange='toggleRange(this)'>

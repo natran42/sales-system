@@ -68,6 +68,7 @@
             $connection = openConnection();
             $selectQuery = 'SELECT MAX(TransactionID) AS TID FROM Transactions'; //greatest number being the last transactionID
             $getTID = sqlsrv_query($connection, $selectQuery);
+            $getTransactions = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
             if(!$getTID)
                 die(print_r(sqlsrv_errors(), true));
     
@@ -81,8 +82,6 @@
 
 
     }
-
-    
 
     function printTable($itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
         //Printing header row
@@ -170,6 +169,7 @@
             }
             else {
                 echo "Item is out of stock";
+                die(print_r(sqlsrv_errors(), true));
             }
             printTable($connection, $itemName, $itemSize, $itemQuantity, number_format($row['Price'], 2), $total);
 
