@@ -70,7 +70,7 @@
             $getTID = sqlsrv_query($connection, $selectQuery);
             if(!$getTID)
                 die(print_r(sqlsrv_errors(), true));
-    
+            $getTransactions = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
             $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
             return $row['TID']+1; //incrementing row by 1 -> that being our next transactionID
         }
@@ -84,7 +84,7 @@
 
     
 
-    function printTable($itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
+    function printTable($connection, $itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
         //Printing header row
         echo "<table border = '1' class='table'>
         <tr>
@@ -183,8 +183,29 @@
 ?>
 
 <html>
-    <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true">Purchase</a></button>
+    <form>
+        <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+       required maxlength="12"><br>
+       <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true&num=phone">Purchase</a></button>
+
+    </form>
+    
 </html>
+
+<script>
+
+    let itemInput = document.querySelector('input[type=tel]') ;
+    itemInput.addEventListener('keypress', phone);
+
+    let flag = false;
+    function phone(){
+        let p = this.value;
+        if((p.length + 1) % 4 == 0 && p.length < 9 && flag == true)
+            this.value = p + "-";
+        flag = true;
+    }
+
+</script>
 
 <!-- style this page to make it look like a cash register -->
 <style>
