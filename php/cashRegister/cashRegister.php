@@ -85,7 +85,7 @@
 
     function printTable($connection, $itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
         //Printing header row
-        echo "<table border = '1' class='table'>
+        echo "<table border = '1' class='table' style='width:40%;'>
         <tr>
         <th>Item Name</th>
         <th>Size</th>
@@ -129,20 +129,24 @@
 
             $total += $price * $row['Quantity'];
         }
-
-        echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total, 2)."</td></tr></table>";
+        $tax = $total * .0825;
+        echo "<tr><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr></table>";
     }
 
     //retrieving form input from user
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $itemName = $_POST["itemName"];
-        $itemSize = $_POST["itemSize"];
-        $itemQuantity = $_POST["itemQuantity"];
+        $itemName = trim($_POST["itemName"]);
+        $itemSize = trim($_POST["itemSize"]);
+        $itemQuantity = trim($_POST["itemQuantity"]);
         $total = 0;
 
         try {
             $connection = openConnection();
-            $selectQuery = "SELECT * FROM Inventory WHERE Name = '$itemName' AND Size = '$itemSize' AND IsActive = 1";
+            $selectQuery = "SELECT * FROM Inventory
+                            WHERE Name = '$itemName' AND Size = '$itemSize' AND IsActive = 1
+                            ORDER BY UPC ASC";
             $getItem = sqlsrv_query($connection, $selectQuery);
             if(!$getItem)
                 echo "Item not found.";
@@ -152,19 +156,13 @@
             //updating inventory once item placed into shopping cart
             if ($row['StockQty'] >= $itemQuantity) {
                 // This is the code that will update the inventory table with the new quantity
-                $updateQuery = "UPDATE Inventory SET StockQty = StockQty - $itemQuantity WHERE Name = '$itemName' AND Size = '$itemSize'";
-                $updateItem = sqlsrv_query($connection, $updateQuery);
-                if(!$updateItem)
-                    die(print_r(sqlsrv_errors(), true));
-
-                // This code will update the inventory table with the SoldQty
-                $updateQuery = "UPDATE Inventory SET SoldQty = SoldQty + $itemQuantity WHERE Name = '$itemName' AND Size = '$itemSize'";
+                $updateQuery = "UPDATE Inventory SET StockQty = StockQty - $itemQuantity WHERE UPC = $ID";
                 $updateItem = sqlsrv_query($connection, $updateQuery);
                 if(!$updateItem)
                     die(print_r(sqlsrv_errors(), true));
                 
                 // Checks to see if the item already exists in the cart
-                $cartQuery = "SELECT * FROM Cart WHERE ItemID = ".$row['UPC'];
+                $cartQuery = "SELECT * FROM Cart WHERE ItemID = ".$ID;
                 $checkCart = sqlsrv_query($connection, $cartQuery);
                 if(!$checkCart)
                     die(print_r(sqlsrv_errors(), true));
@@ -199,11 +197,11 @@
 <html>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmCheckout" tabindex="-1" aria-labelledby="confirmCheckoutLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="confirmCheckoutLabel">Modal title</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -214,7 +212,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone">Confirm Purchase</a></button>
+            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Confirm Purchase</a></button>
         </div>
         </div>
     </div>
@@ -223,7 +221,7 @@
 
     
 
-    <button data-bs-target="#exampleModal" data-bs-toggle="modal" class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" >Purchase</a></button>
+    <button data-bs-target="#confirmCheckout" data-bs-toggle="modal" class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" >Purchase</a></button>
 </html>
 
 <script>
