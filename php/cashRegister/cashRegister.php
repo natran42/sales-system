@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="cashRegister.css">
     </head>
 
-    <title>Register</title>
+    <title>Cash Register</title>
 
     <!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
@@ -78,8 +78,6 @@
             echo 'Error';
 
         }
-
-
     }
     
 
