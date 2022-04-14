@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="cashRegister.css">
     </head>
 
-    <title>Register</title>
+    <title>Cash Register</title>
 
     <!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
@@ -78,9 +78,8 @@
             echo 'Error';
 
         }
-
-
     }
+    
 
     
 
@@ -96,6 +95,8 @@
         </tr>";
             
         //print all rows in cart table
+        $connection = openConnection();
+
         $query = "SELECT * FROM Cart";
         $result = sqlsrv_query($connection, $query);
         if(!$result)
@@ -171,7 +172,7 @@
             else {
                 echo "Item is out of stock";
             }
-            printTable($connection, $itemName, $itemSize, $itemQuantity, number_format($row['Price'], 2), $total);
+            printTable($itemName, $itemSize, $itemQuantity, number_format($row['Price'], 2), $total);
 
         }
         catch(Exception $e) {

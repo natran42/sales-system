@@ -50,24 +50,8 @@ $minquantity1 = $row['MinQty'];
 $size1 = $row['Size'];
 $sold1 = $row['SoldQty'];
 
-
-
-$sql = "SELECT * FROM dbo.Inventory WHERE UPC='$upc'";
-$sqlquery = sqlsrv_query($connection, $sql);
-$row = sqlsrv_fetch_array($sqlquery, SQLSRV_FETCH_ASSOC);
 ?>
 
-
-
-$name1 = $row['Name'];
-$description1 = $row['Description'];
-$category1 = $row['Category'];
-$price1 = $row['Price'];
-$quantity1 = $row['StockQty'];
-$minquantity1 = $row['MinQty'];
-$size1 = $row['Size'];
-$sold1 = $row['SoldQty'];
-?>
 
 <!doctype html>
 <html lang="en">
@@ -145,6 +129,7 @@ $sold1 = $row['SoldQty'];
                             <!--<input type="text" name="size" placeholder="Size" class="form-control" value="<?php echo $size1; ?>">-->
                             <select name="size" class="form-control">
                                 <option value="">--Please choose an option--</option>
+                                <option <?php if($size1 == 'N/A'){echo("selected");}?> value="N/A">N/A</option>
                                 <option <?php if($size1 == 'XS'){echo("selected");}?> value="XS">XS</option>
                                 <option <?php if($size1 == 'S'){echo("selected");}?> value="S">S</option>
                                 <option <?php if($size1 == 'M'){echo("selected");}?> value="M">M</option>

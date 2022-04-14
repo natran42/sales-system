@@ -74,7 +74,9 @@
     }
 
     // if the delete button is clicked we will delete the whole cart
+    
     if(isset($_GET['flush']))
+        
         $sqlquery = "DELETE FROM Cart";
     $result = sqlsrv_query($connection, $sqlquery);
     if($result)
