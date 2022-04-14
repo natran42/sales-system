@@ -41,6 +41,10 @@
             <li><a class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
             <li><a class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
             </ul>
+            <li class="nav-item" id='logout'>
+            <a class="nav-link" href="/php/login/logout.php"></i>Log Out</a>
+            
+            </li> 
         </li>
             <!-- make a log out button -->
             <li class="nav-item" id='logout'>
@@ -49,6 +53,7 @@
         </ul>
         </nav>
 </div>
+
 
 <style>
  
@@ -94,9 +99,18 @@ body {
 </style>
 <?php 
 
+    function openAuthConnection() {
+        $serverName = 'sevenseas.database.windows.net';
+        $connectionOptions = array('Database'=>'SalesSystemDB', 'UID'=>'admin7', 'PWD'=>'TeamSeven7');
+        $connection = sqlsrv_connect($serverName, $connectionOptions);
+        if(!$connection)
+            die(print_r(sqlsrv_errors(), true));
+        return $connection;
+    }
+
     function getAuth() {
         try {
-            $connection = openConnection();
+            $connection = openAuthConnection();
             $sql = 'SELECT * FROM Sessions';
             $getUser = sqlsrv_query($connection, $sql);;
             if(!$getUser)

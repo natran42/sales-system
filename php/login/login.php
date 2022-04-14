@@ -16,6 +16,9 @@ if(array_key_exists('entry', $_POST)) {
                 setSession($_POST['username'], 'EMP');
                 //$_SESSION['EMP'] = getUserID($_POST['username']);
             header('location: php/cashRegister/cashregister.php');
+            session_regenerate_id(true);
+            session_write_close();
+            exit();
         }    
         // else
         //     echo "Invalid login credentials";
