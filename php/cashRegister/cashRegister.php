@@ -184,7 +184,7 @@
 ?>
 
 <html>
-    <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true">Purchase</a></button>
+    <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true">Purchase</a></button> 
 </html>
 
 <!-- style this page to make it look like a cash register -->
