@@ -13,6 +13,7 @@
     <title>Cash Register</title>
 
     <!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
+    <div id="itemSubmit">
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
         <div class="form-group">
@@ -39,9 +40,10 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Add To Cart</button>
+        <button type="submit" style="color:white;" class="btn btn-primary">Add To Cart</button>
 
     </form>
+</div>
 </html>
 
 <!-- have the submit color as #8ee8d8a0 -->
@@ -75,8 +77,7 @@
             $getTID = sqlsrv_query($connection, $selectQuery);
             if(!$getTID)
                 die(print_r(sqlsrv_errors(), true));
-            $getTransactions = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
-            $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+            $row = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
             return $row['TID']+1; //incrementing row by 1 -> that being our next transactionID
         }
         catch(Exception $e) {
@@ -91,11 +92,13 @@
     function printTable(){
         //Printing header row
         echo "<table border = '1' class='table' style='width:40%;'>
+        <tr><td></td><td></td><td></td><td><b>Transaction #</b></td><td><b>".getNextTransactionId()."</b></td><td></td></tr>
         <tr>
         <th>Item Name</th>
         <th>Size</th>
         <th>Qty</th>
-        <th>Price</th>
+        <th>Unit Price</th>
+        <th>Total Price</th>
         <th>Remove</th>
         </tr>";
         $total = 0;
@@ -109,7 +112,6 @@
             die(print_r(sqlsrv_errors(), true));
 
         while($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
-            $empty = false;
             $upc = $row['ItemID'];
             $query = "SELECT Name, Size, Price FROM Inventory WHERE UPC = $upc";
             $result2 = sqlsrv_query($connection, $query);
@@ -131,15 +133,16 @@
             <td>$itemSize</td>
             <td>" . $row['Quantity'] . "</td>
             <td>$".number_format($price, 2)."</td>
+            <td>$".number_format($price * $row['Quantity'], 2)."</td>
             <td><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
             </tr>";
 
             $total += $price * $row['Quantity'];
         }
         $tax = $total * .0825;
-        echo "<tr><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
-        echo "<tr><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
-        echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr></table>";
+        echo "<tr><td></td><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr></table>";
     }
 
     //retrieving form input from user
@@ -232,7 +235,7 @@
 
     
 
-    <button data-bs-target="#confirmCheckout" data-bs-toggle="modal" class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" >Purchase</a></button>
+    <button data-bs-target="#confirmCheckout" data-bs-toggle="modal" class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;">Purchase</a></button>
 </html>
 
 <script>
