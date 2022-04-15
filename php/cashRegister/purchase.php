@@ -31,7 +31,7 @@
 
 
     if (isset($_GET['flush'])) {
-        $transactionId = getNextTransactionId($connection); //manually put as 2 until we can fix the getNext function
+        $transactionId = getNextTransactionId($connection);
         // get the manager/employee id from session table
         $query = "SELECT EID FROM Sessions";
         $result = sqlsrv_query($connection, $query);
@@ -62,7 +62,7 @@
         $query = "SELECT * FROM Cart";
         $result = sqlsrv_query($connection, $query);
         if (!$result)
-            die("Error in transactionItem");
+            die("Error in transactionItem");   
 
         //cart items being put into transactionsItems table
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
@@ -70,13 +70,18 @@
             $result2 = sqlsrv_query($connection, $query2);
             if (!$result2)
                 die("Error putting into transactionItems");
+
+            // This code will update the inventory table with the SoldQty
+            $updateQuery = "UPDATE Inventory SET SoldQty = SoldQty + $row[Quantity] WHERE UPC = $row[ItemID]";
+            $updateItem = sqlsrv_query($connection, $updateQuery);
+            if(!$updateItem)
+                die(print_r(sqlsrv_errors(), true));         
         }
     }
 
     // if the delete button is clicked we will delete the whole cart
     
     if(isset($_GET['flush']))
-        
         $sqlquery = "DELETE FROM Cart";
     $result = sqlsrv_query($connection, $sqlquery);
     if($result)
