@@ -2,6 +2,11 @@
 
 <html>
     <head>
+    <script>
+    if(window.history.replaceState)
+        window.history.replaceState(null, null, window.location.href);
+    </script>
+
         <link rel="stylesheet" href="cashRegister.css">
     </head>
 
@@ -34,9 +39,10 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Add To Cart</button>
+        <button type="submit" style="color:white;" class="btn btn-primary">Add To Cart</button>
 
     </form>
+</div>
 </html>
 
 
@@ -60,8 +66,7 @@
             $getTID = sqlsrv_query($connection, $selectQuery);
             if(!$getTID)
                 die(print_r(sqlsrv_errors(), true));
-            $getTransactions = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
-            $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+            $row = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
             return $row['TID']+1; //incrementing row by 1 -> that being our next transactionID
         }
         catch(Exception $e) {
@@ -73,7 +78,7 @@
 
     
 
-    function printTable($connection, $itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
+    function printTable(){
         //Printing header row
         echo 
         "<table border = '1' class='table' style='width:40%;'>
@@ -118,7 +123,7 @@
             <td>$itemSize</td>
             <td>" . $row['Quantity'] . "</td>
             <td>$".number_format($price, 2)."</td>
-            <td id=purchase-button><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
+            <td><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
             </tr>";
 
             $total += $price * $row['Quantity'];
@@ -178,13 +183,17 @@
             else {
                 echo "Item is out of stock";
             }
-            printTable($itemName, $itemSize, $itemQuantity, number_format($row['Price'], 2), $total);
+        printTable();
 
         }
         catch(Exception $e) {
             echo 'Error';
         }
     }
+    else {
+        printTable();
+    }
+
     /* we could use action= to direct user to webpage confirming purchase after submitting */
 
 ?>
