@@ -88,7 +88,7 @@
 
     
 
-    function printTable($connection, $itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
+    function printTable(){
         //Printing header row
         echo "<table border = '1' class='table' style='width:40%;'>
         <tr>
@@ -98,6 +98,7 @@
         <th>Price</th>
         <th>Remove</th>
         </tr>";
+        $total = 0;
             
         //print all rows in cart table
         $connection = openConnection();
@@ -108,6 +109,7 @@
             die(print_r(sqlsrv_errors(), true));
 
         while($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
+            $empty = false;
             $upc = $row['ItemID'];
             $query = "SELECT Name, Size, Price FROM Inventory WHERE UPC = $upc";
             $result2 = sqlsrv_query($connection, $query);
@@ -188,13 +190,17 @@
             else {
                 echo "Item is out of stock";
             }
-            printTable($itemName, $itemSize, $itemQuantity, number_format($row['Price'], 2), $total);
+        printTable();
 
         }
         catch(Exception $e) {
             echo 'Error';
         }
     }
+    else {
+        printTable();
+    }
+
     /* we could use action= to direct user to webpage confirming purchase after submitting */
 
 ?>
