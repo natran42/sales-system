@@ -138,13 +138,77 @@ getInventory();
 
     }
 
-    
+    .table {
+      margin: auto;
+      width: 1000px;
+      border: 2px solid #ccc;
+      padding: 30px;
+      background: #fff;
+      border-radius: 15px;
+      color: rgb(68, 65, 65);
+    }
+    .text-center{
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .add-btn {
+      display: flex;
+      position: absolute;
+      height: 40px;
+      padding: 0;
+      background: #8e8d8a;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      overflow: hidden;
+      font-family: "Quicksand", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      right: 50%;
+    }
+
+    .add-btn:hover {
+      background: #008168;
+    }
+    .add-btn:active {
+  background: #006e58;
+}
+
+.button-text,
+.button-icon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  color: #fff;
+  height: 100%;
+}
+
+.button-icon {
+  font-size: 1.5em;
+  background: rgba(0, 0, 0, 0.08);
+}
+
   </style>
 </head>
 
 <body>
   <div class="container mt-5 mb-5">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventory">Add Inventory</button>
+    <div class="row">
+      <div class="col text-center">
+        <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventory">Add Inventory</button>-->
+        <button type="button" data-bs-toggle="modal" data-bs-target="#addInventory" class="add-btn">
+          <span class="button-text">Add Inventory</span>
+          <span class="button-icon">
+            <ion-icon name="add-outline"></ion-icon>
+          </span>
+
+        </button>
+      </div>
+    </div>
+
 
   </div>
   <!--MODAL ADD-->
@@ -217,10 +281,10 @@ getInventory();
       </div>
     </div>
   </div>
+
   
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
-
-
