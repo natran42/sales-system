@@ -23,26 +23,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item" id='cashregister'>
-            <a class="nav-link" href="/php/cashRegister/cashRegister.php"><i class="fa fa-fw fa-money"></i> Cash Register</a>
+            <a style = "color:white" class="nav-link" href="/php/cashRegister/cashRegister.php"><i class="fa fa-fw fa-money"></i> Cash Register</a>
             </li>
             <li class="nav-item" id='inventory'>
-            <a class="nav-link" href="/php/inventory/inventory.php"><i class="fa fa-fw fa-paperclip"></i>Inventory</a>
+            <a style = "color:white" class="nav-link" href="/php/inventory/inventory.php"><i class="fa fa-fw fa-paperclip"></i>Inventory</a>
             </li>
             <li class="nav-item" id='transactions'>
-            <a class="nav-link" href="/php/transactions/transactions.php"><i class="fa fa-fw fa-book"></i>Transactions</a>
+            <a style = "color:white" class="nav-link" href="/php/transactions/transactions.php"><i class="fa fa-fw fa-book"></i>Transactions</a>
             </li>
             <li class="nav-item" id='register'>
-            <a class="nav-link" href="/php/registration/registration.php"><i class="fa fa-fw fa-pencil"></i>Registration</a>
+            <a style = "color:white" class="nav-link" href="/php/registration/registration.php"><i class="fa fa-fw fa-pencil"></i>Registration</a>
             </li>
             <li class="nav-item dropdown" id='reports'>
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-file"></i>Reports</a>
+                <a style = "color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-file"></i>Reports</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/php/reporting/customersJoined.php">Customer Report</a></li>
-            <li><a class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
-            <li><a class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
+            <li><a style = "color:white" class="dropdown-item" href="/php/reporting/customersJoined.php">Customer Report</a></li>
+            <li><a style = "color:white" class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
+            <li><a style = "color:white" class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
             </ul>
             <li class="nav-item" id='logout'>
-            <a class="nav-link" href="/php/login/logout.php"><i class="fa fa-fw fa-sign-out"> </i>Log Out</a>
+            <a style = "color:white" class="nav-link" href="/php/login/logout.php"><i class="fa fa-fw fa-sign-out"> </i>Log Out</a>
             
             </li> 
         </li> 
@@ -67,9 +67,6 @@
 
 /* change the font color to white */
 
-
-
-
 .navbar-nav {
     margin: auto;
     color: white;
@@ -82,25 +79,24 @@ body {
 
 
 .nav-item:hover {
-   background-color: #0652c5;
+    background-color: #0652c5;
     background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
-    border-radius: 10px;
     /*make only an item bigger not the whole bar */
     color: white;
-    
 }
 
 .dropdown-menu
 {
     color: rgb(68, 65, 65);
-    background: linear-gradient(135deg, #d66d75 , #e29587);
+    background: linear-gradient(135deg,#4568dc , #b06ab3);
     border-radius: 10px;
     
 }
 .dropdown-item:hover
 {
     background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
-    border-radius: 10px;
+    background-color: #0652c5;
+    background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
     
 }
 
@@ -141,7 +137,7 @@ body {
         }
     }
 
-    session_start();
+  
 
     $accessLevel = getAuth();
 
