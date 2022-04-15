@@ -42,7 +42,7 @@
             <li><a style = "color:white" class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
             </ul>
             <li class="nav-item" id='logout'>
-            <a style = "color:white" class="nav-link" href="/php/login/logout.php"><i class="fa fa-fw fa-sign-out"> </i>Log Out</a>
+            <a style = "color:white"  class="nav-link" href="/"><i class="fa fa-fw fa-sign-out"> </i>Log Out</a>
             
             </li> 
         </li> 
@@ -136,8 +136,6 @@ body {
             echo 'Error';
         }
     }
-
-  
 
     $accessLevel = getAuth();
 
