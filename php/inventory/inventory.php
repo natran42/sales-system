@@ -142,7 +142,7 @@ function getInventory()
     // Prints out each item as a row
     while ($row = sqlsrv_fetch_array($getItems, SQLSRV_FETCH_ASSOC)) {
       $upc = $row['UPC'];
-      echo $row['StockQty'] < $row['MinQty'] ? '<tr class="table-danger">' : '<tr>';
+      echo $row['StockQty'] < $row['MinQty'] ? '<tr  class="table-danger">' : '<tr>';
       echo '<td>' . $itemCount++ . '</td>';
       echo '<td>' . $row['UPC'] . '</td>';
       echo '<td>' . $row['Name'] . '</td>';
@@ -208,7 +208,7 @@ if(!lowStockEmpty()) {
 
 <body>
   <div class="container mt-5 mb-5">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventory">Add Inventory</button>
+    <button type="button" class="btn btn-primary" id = "add" data-bs-toggle="modal" data-bs-target="#addInventory">Add Inventory</button>
 
   </div>
 
@@ -294,3 +294,78 @@ if(!lowStockEmpty()) {
 </html>
 
 
+<style>
+/* style the table to match the theme */
+
+.table{
+    margin: auto;
+    margin-top: 50px;
+    width: auto;
+    border: 2px solid #ccc;
+    padding: 30px; 
+    border-radius: 15px;
+    color: rgb(68, 65, 65);
+}
+
+/* style the table headings */
+.table th{
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+/*style the table data */
+.table td{
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+/* place the add invetory button in the center */
+.container{
+    text-align: center;
+}
+
+/*style the inventroy button*/
+#add{
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: #0652c5;
+    
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+
+} 
+#add:after { /*after hovering*/
+    content: ' » ';
+    opacity: 0;
+    right: -30px;
+    transition: 0.5s;
+    position: relative;
+}
+
+#add:hover {
+    padding-right: 20px;
+    background-color: #0652c5;
+    background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
+}
+
+#add:hover:after {
+    opacity: 1;
+    right: 0;
+}
+
+#add:active{ /* when clicked */
+    background-color: #808080;
+}
+
+
+
+
+</style>
