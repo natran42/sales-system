@@ -18,7 +18,7 @@
 <title>Customer Report</title>
     <form method='post'>
         <h3>Customers registered</h3>
-        <select id='filter' name='filter' onchange='toggleRange(this)'>
+        <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
             <option value='currWeek'>This week</option>
             <option value='currMonth'>This month</option>
             <option value='currYear'>This year</option>

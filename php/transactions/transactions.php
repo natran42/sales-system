@@ -128,7 +128,7 @@ if(!empty($_POST['submit'])){
     box-sizing: border-box;
 }
 body {
-    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+    /*background: linear-gradient(135deg, #ffafbd ,#ffc3a0);*/
     justify-content: center;
     height: 100vh;
     color: white;

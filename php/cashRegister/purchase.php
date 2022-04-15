@@ -84,8 +84,9 @@
     if(isset($_GET['flush']))
         $sqlquery = "DELETE FROM Cart";
     $result = sqlsrv_query($connection, $sqlquery);
-    if($result)
+    if($result){
         header('location:cashRegister.php');
+    }
     else
         die(print_r(sqlsrv_errors(), true));
 
