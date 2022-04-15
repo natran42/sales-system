@@ -15,7 +15,6 @@ h2 {
     text-align: center;
     margin-bottom: 35px;
 
-
 }
 
 h2::after{
@@ -97,4 +96,5 @@ button:hover:after {
 button:active{ /* when clicked */
     background-color: #808080;
 }
+
 

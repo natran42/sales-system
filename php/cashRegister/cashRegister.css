@@ -1,4 +1,55 @@
+*{
+    font-family: 'Poppins' , sans-serif;
+}
+
+#entryForm {
+    margin: auto;
+    margin-top: 70px;
+    margin-bottom: 70x;
+    width: 600px;
+    border: 2px solid #ccc;
+    padding: 30px; /* inside padding */
+    background: #fff;
+    border-radius: 15px; /* edges */
+    color:rgb(68, 65, 65)
+}
+
+#header{
+    text-align: center;
+    font-size: large;
+}
+
+input {
+    display: block;
+    border: 2px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
 .form-group {
-    display: inline-block;
-    margin-right: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+/* have the submit color as #8ee8d8a0 */
+.btn-primary {
+    background-color: #8e8d8a;
+    border-color: #8e8d8a;
+    color: black;
+}
+
+.table{
+    margin: auto;
+    width: 600px;
+    border: 2px solid #ccc;
+    padding: 30px; 
+    background: #fff;
+    border-radius: 15px;
+    color: rgb(68, 65, 65);
+}
+ 
+td{
+    border: none;
 }

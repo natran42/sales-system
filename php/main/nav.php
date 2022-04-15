@@ -46,6 +46,10 @@
             
             </li> 
         </li>
+            <!-- make a log out button -->
+            <li class="nav-item" id='logout'>
+                <a class="nav-link" href="/../index.php"><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
+            </li>
         </ul>
         </nav>
 </div>
@@ -56,15 +60,21 @@
 
 .navbar {
     background: linear-gradient(135deg, #d66d75 , #e29587);
-    width: 700px;
-    border-radius: 10px;
+    /*create a shadow around the navbar*/
+    box-shadow: 0px 0px 10px #000000;
+    margin-bottom: 10px;
+    padding: 0 15px;
+   
+
+}
+
+/* center the nav items in the center */
+.navbar-nav {
     margin: auto;
-    
-    
 }
 
 body {
-    background: linear-gradient(135deg, #ffafbd ,#ffc3a0); /*#91ac80    , (#a1c4fd , #c2e9fb) */
+    background: #91ac80/*linear-gradient(45deg, #ffafbd ,#ffc3a0)*/; /*#91ac80    , (#a1c4fd , #c2e9fb) */
 }
 
 .nav-item:hover {
@@ -77,11 +87,13 @@ body {
     color: rgb(68, 65, 65);
     background: linear-gradient(135deg, #d66d75 , #e29587);
     border-radius: 10px;
+    
 }
 .dropdown-item:hover
 {
     background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
     border-radius: 10px;
+    
 }
 
 </style>

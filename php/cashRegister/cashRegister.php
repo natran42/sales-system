@@ -8,15 +8,15 @@
     <title>Cash Register</title>
 
     <!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form id=entryForm action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
         <div class="form-group">
             <label for="itemName">Item Name</label>
-            <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter Item Name">
+            <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter Item Name" required>
         </div>
 
         <div class="form-group">
-                  <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
+            <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
             <label for="itemSize">Item Size</label>
             <select class="form-control" id="itemSize" name="itemSize">
                 <option>N/A</option>
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label for="itemQuantity">Item Quantity</label>
-            <input type="text" class="form-control" id="itemQuantity" name="itemQuantity" placeholder="Enter Item Quantity">
+            <input type="text" class="form-control" id="itemQuantity" name="itemQuantity" placeholder="Enter Item Quantity" required>
 
         </div>
 
@@ -39,16 +39,6 @@
     </form>
 </html>
 
-<!-- have the submit color as #8ee8d8a0 -->
-<style>
-
-    .btn-primary {
-        background-color: #8e8d8a;
-        border-color: #8e8d8a;
-        color: black;
-    }
-
-</style>
 
 <!-- This is the php code that will retrieve the data from inventory if there is a match, if not display that there is out of stock-->
 <?php
@@ -85,14 +75,18 @@
 
     function printTable($connection, $itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
         //Printing header row
-        echo "<table border = '1' class='table' style='width:40%;'>
-        <tr>
-        <th>Item Name</th>
-        <th>Size</th>
-        <th>Qty</th>
-        <th>Price</th>
-        <th>Remove</th>
-        </tr>";
+        echo 
+        "<table border = '1' class='table' style='width:40%;'>
+            <tr>
+                <th id=header colspan='5'>SHOPPING CART</th>
+            </tr>
+            <tr>
+                <th>Item Name</th>
+                <th>Size</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Remove</th>
+            </tr>";
             
         //print all rows in cart table
         $connection = openConnection();
@@ -124,15 +118,16 @@
             <td>$itemSize</td>
             <td>" . $row['Quantity'] . "</td>
             <td>$".number_format($price, 2)."</td>
-            <td><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
+            <td id=purchase-button><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
             </tr>";
 
             $total += $price * $row['Quantity'];
         }
         $tax = $total * .0825;
-        echo "<tr><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
+        echo "<tr id=row><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
         echo "<tr><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
-        echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr></table>";
+        echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr>";
+        echo "<tr><td colspan='5'><button data-bs-target='#confirmCheckout' data-bs-toggle='modal' class='btn btn-primary' type='button'><a class='text-light' style='color:white; text-decoration:none;'>Purchase</a></button></td></tr></table>";
     }
 
     //retrieving form input from user
@@ -196,19 +191,22 @@
 
 <html>
 
+
     <!-- Modal -->
     <div class="modal fade" id="confirmCheckout" tabindex="-1" aria-labelledby="confirmCheckoutLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="confirmCheckoutLabel">Modal title</h5>
+            <h5 class="modal-title" id="confirmCheckoutLabel">Check Out</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form>
+            <p>Enter phone number below to checkout</p>
+            <form id=modalForm method="post">
                 <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
             </form>
+            <p>Not a registered member yet?</p><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -217,11 +215,6 @@
         </div>
     </div>
     </div>
-
-
-    
-
-    <button data-bs-target="#confirmCheckout" data-bs-toggle="modal" class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" >Purchase</a></button>
 </html>
 
 <script>
@@ -238,21 +231,3 @@
     }
 
 </script>
-
-<!-- style this page to make it look like a cash register -->
-<style>
-    .form-group {
-        display: inline-block;
-        margin-right: 10px;
-    }
-    
-    .table{
-    margin: auto;
-    width: auto;
-    border: 2px solid #ccc;
-    padding: 30px; 
-    background: #fff;
-    border-radius: 15px;
-    color: rgb(68, 65, 65);
-}
-</style>
