@@ -57,12 +57,13 @@ $sold1 = $row['SoldQty'];
 <html lang="en">
 
 <head>
+    <script>
+    if(window.history.replaceState)
+        window.history.replaceState(null, null, window.location.href);
+    </script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Update Inventory</title>
     <style>
@@ -129,6 +130,7 @@ $sold1 = $row['SoldQty'];
                             <!--<input type="text" name="size" placeholder="Size" class="form-control" value="<?php echo $size1; ?>">-->
                             <select name="size" class="form-control">
                                 <option value="">--Please choose an option--</option>
+                                <option <?php if($size1 == 'N/A'){echo("selected");}?> value="N/A">N/A</option>
                                 <option <?php if($size1 == 'XS'){echo("selected");}?> value="XS">XS</option>
                                 <option <?php if($size1 == 'S'){echo("selected");}?> value="S">S</option>
                                 <option <?php if($size1 == 'M'){echo("selected");}?> value="M">M</option>

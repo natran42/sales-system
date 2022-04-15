@@ -15,9 +15,10 @@
 </script>
 
 <title>Top Sellers</title>
-<h3>Top 10 Sellers</h3>
 <form method='post'>
-    <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
+    
+<h3>Top 10 Sellers</h3>
+<select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
         <option value='currWeek'>This week</option>
         <option value='currMonth'>This month</option>
         <option value='currYear'>This year</option>
@@ -34,7 +35,7 @@
         <option value='gross'>Grossing</option>
     </select>
     <br><br>
-    <input type='submit' name='topSellers' id='topSellers' value='View Results'>
+    <input type='submit' name='topSellers' id='topSellers' class='queryButton' value='View Results'>
 </form>
 
 <?php

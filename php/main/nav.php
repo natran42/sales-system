@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item" id='cashregister'>
-            <a class="nav-link" href="/php/cashRegister/cashRegister.php"><i class="fa fa-fw fa-money"></i>Cash Register</a>
+            <a class="nav-link" href="/php/cashRegister/cashRegister.php"><i class="fa fa-fw fa-money"></i> Cash Register</a>
             </li>
             <li class="nav-item" id='inventory'>
             <a class="nav-link" href="/php/inventory/inventory.php"><i class="fa fa-fw fa-paperclip"></i>Inventory</a>
@@ -41,29 +41,53 @@
             <li><a class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
             <li><a class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
             </ul>
+            <li class="nav-item" id='logout'>
+            <a class="nav-link" href="/php/login/logout.php"><i class="fa fa-fw fa-sign-out"> </i>Log Out</a>
+            
+            </li> 
         </li>
+            <!-- make a log out button
+            <li class="nav-item" id='logout'>
+                <a class="nav-link" href="/../index.php"><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
+            </li> -->
         </ul>
         </nav>
 </div>
+
 
 <style>
  
 
 .navbar {
-    background: linear-gradient(135deg, #d66d75 , #e29587);
-    width: 650px;
-    border-radius: 10px;
+    background: linear-gradient(135deg,#4568dc , #b06ab3);
+    box-shadow: 0px 0px 10px #000000;
+    margin-bottom: 10px;
+    padding: 0 15px;
+}
+
+/* change the font color to white */
+
+
+
+
+.navbar-nav {
     margin: auto;
-    
+    color: white;
 }
 
 body {
-    background: linear-gradient(135deg, #ffafbd ,#ffc3a0); /*#91ac80    , (#a1c4fd , #c2e9fb) */
+    background: linear-gradient(135deg, #000428 ,#004e92); /*#91ac80    , (#a1c4fd , #c2e9fb) */
+    color: white;
 }
 
+
 .nav-item:hover {
-    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+   background-color: #0652c5;
+    background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
     border-radius: 10px;
+    /*make only an item bigger not the whole bar */
+    color: white;
+    
 }
 
 .dropdown-menu
@@ -71,19 +95,30 @@ body {
     color: rgb(68, 65, 65);
     background: linear-gradient(135deg, #d66d75 , #e29587);
     border-radius: 10px;
+    
 }
 .dropdown-item:hover
 {
     background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
     border-radius: 10px;
+    
 }
 
 </style>
 <?php 
 
+    function openAuthConnection() {
+        $serverName = 'sevenseas.database.windows.net';
+        $connectionOptions = array('Database'=>'SalesSystemDB', 'UID'=>'admin7', 'PWD'=>'TeamSeven7');
+        $connection = sqlsrv_connect($serverName, $connectionOptions);
+        if(!$connection)
+            die(print_r(sqlsrv_errors(), true));
+        return $connection;
+    }
+
     function getAuth() {
         try {
-            $connection = openConnection();
+            $connection = openAuthConnection();
             $sql = 'SELECT * FROM Sessions';
             $getUser = sqlsrv_query($connection, $sql);;
             if(!$getUser)

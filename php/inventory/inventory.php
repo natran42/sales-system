@@ -14,6 +14,72 @@ function openConnection()
   return $connection;
 }
 
+function lowStockEmpty() {
+    try {
+      $connection = openConnection();
+      $selectQuery = 'SELECT * FROM LowStock';
+      $getLowStock = sqlsrv_query($connection, $selectQuery);
+      if(!$getLowStock)
+          die(print_r(sqlsrv_errors(), true));
+
+      $row = sqlsrv_fetch_array($getLowStock, SQLSRV_FETCH_ASSOC);
+      return empty($row);
+    }
+    catch(Exception $e) {
+      echo 'Error';
+    }
+}
+
+function printLowStock() {
+  try {
+    $connection = openConnection();
+    $selectQuery = 'SELECT * FROM LowStock
+                    ORDER BY UPC ASC';
+    $getLowStock = sqlsrv_query($connection, $selectQuery);
+    if(!$getLowStock)
+        die(print_r(sqlsrv_errors(), true));
+
+    echo '<div class="modal fade" id="lowStock">
+    <div class="modal-dialog" style="max-width:40%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Low Stock</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">';
+
+    echo '<table border = \'1\' class=\'table table-hover\'>
+          <tr>
+          <th>UPC</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th># in Stock</th>
+          </tr>';
+
+
+    while($row = sqlsrv_fetch_array($getLowStock, SQLSRV_FETCH_ASSOC)) {
+      echo '<tr>';
+      echo '<td>'.$row['UPC'].'</td>';
+      echo '<td>'.$row['Name'].'</td>';
+      echo '<td>'.$row['Size'].'</td>';
+      echo '<td>'.$row['StockQty'].'</td>';
+      echo '</tr>';
+    }
+    echo '</table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+  </div>';
+  echo '<script>var lowStockModal = new bootstrap.Modal(document.getElementById("lowStock"));
+        lowStockModal.show();</script>';
+  }
+  catch(Exception $e) {
+    echo 'Error';
+  }
+}
 
 
 function insertInventory()
@@ -50,7 +116,7 @@ function getInventory()
 {
   try {
     $connection = openConnection();
-    $selectQuery = 'SELECT INV.UPC, INV.Name, CTG.CtgName, INV.Size, INV.Price, INV.StockQty
+    $selectQuery = 'SELECT INV.UPC, INV.Name, CTG.CtgName, INV.Size, INV.Price, INV.StockQty, INV.MinQty
                       FROM Inventory INV
                       INNER JOIN Categories CTG ON CTG.CtgID = INV.Category
                       WHERE IsActive=1
@@ -60,7 +126,7 @@ function getInventory()
       die(print_r(sqlsrv_errors(), true));
 
     // Prints out headers for table
-    echo "<table border = '1' class='table table-success table-striped table-hover'>
+    echo "<table border = '1' class='table table-light table-hover'>
       <tr>
       <th>#</th>
       <th>UPC</th>
@@ -76,7 +142,7 @@ function getInventory()
     // Prints out each item as a row
     while ($row = sqlsrv_fetch_array($getItems, SQLSRV_FETCH_ASSOC)) {
       $upc = $row['UPC'];
-      echo '<tr>';
+      echo $row['StockQty'] < $row['MinQty'] ? '<tr  class="table-danger">' : '<tr>';
       echo '<td>' . $itemCount++ . '</td>';
       echo '<td>' . $row['UPC'] . '</td>';
       echo '<td>' . $row['Name'] . '</td>';
@@ -90,19 +156,17 @@ function getInventory()
                 </td>';
       echo '</tr>';
     }
+    echo '</table>';
   } catch (Exception $e) {
     echo 'Error';
   }
 }
 
 
+if(!lowStockEmpty()) {
+  printLowStock();
+}
 
-insertInventory();
-getInventory();
-
-
-// Add something like JavaScript to make table refresh on deletion
-// Something like https://stackoverflow.com/questions/15938543/php-refresh-button-onclick but try to just refresh the table
 
 //if (isset($_GET['delete'])) {
 //  $upcToDelete = validate($_GET['delete']);
@@ -121,9 +185,6 @@ getInventory();
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
   <title>Inventory</title>
   <style>
@@ -211,8 +272,13 @@ getInventory();
 
 
   </div>
+
+  <?php 
+    insertInventory();
+    getInventory();
+  ?>
   <!--MODAL ADD-->
-  <div class="modal" id="addInventory">
+  <div class="modal fade" id="addInventory">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -264,7 +330,8 @@ getInventory();
               <!--<input type="text" name="size" placeholder="Size" class="form-control">-->
               <select name="size" class="form-control">
                 <option value="">--Please choose an option--</option>
-                <option value="XS">XXS</option>
+                <option value="N/A">N/A</option>
+                <option value="XS">XS</option>
                 <option value="S">S</option>
                 <option value="M">M</option>
                 <option value="L">L</option>

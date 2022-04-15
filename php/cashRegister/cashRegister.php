@@ -2,12 +2,18 @@
 
 <html>
     <head>
+    <script>
+    if(window.history.replaceState)
+        window.history.replaceState(null, null, window.location.href);
+    </script>
+
         <link rel="stylesheet" href="cashRegister.css">
     </head>
 
-    <title>Register</title>
+    <title>Cash Register</title>
 
     <!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
+    <div id="itemSubmit">
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
         <div class="form-group">
@@ -34,9 +40,10 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Add To Cart</button>
+        <button type="submit" style="color:white;" class="btn btn-primary">Add To Cart</button>
 
     </form>
+</div>
 </html>
 
 <!-- have the submit color as #8ee8d8a0 -->
@@ -68,34 +75,38 @@
             $connection = openConnection();
             $selectQuery = 'SELECT MAX(TransactionID) AS TID FROM Transactions'; //greatest number being the last transactionID
             $getTID = sqlsrv_query($connection, $selectQuery);
+            $getTransactions = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
             if(!$getTID)
                 die(print_r(sqlsrv_errors(), true));
-    
-            $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+            $row = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
             return $row['TID']+1; //incrementing row by 1 -> that being our next transactionID
         }
         catch(Exception $e) {
             echo 'Error';
 
         }
-
-
     }
+    
 
     
 
-    function printTable($itemName = null, $itemSize = null, $itemQuantity = null, $price = 0, &$total = 0, &$inStock = False){
+    function printTable(){
         //Printing header row
-        echo "<table border = '1' class='table'>
+        echo "<table border = '1' class='table' style='width:40%;'>
+        <tr><td></td><td></td><td></td><td><b>Transaction #</b></td><td><b>".getNextTransactionId()."</b></td><td></td></tr>
         <tr>
         <th>Item Name</th>
         <th>Size</th>
         <th>Qty</th>
-        <th>Price</th>
+        <th>Unit Price</th>
+        <th>Total Price</th>
         <th>Remove</th>
         </tr>";
+        $total = 0;
             
         //print all rows in cart table
+        $connection = openConnection();
+
         $query = "SELECT * FROM Cart";
         $result = sqlsrv_query($connection, $query);
         if(!$result)
@@ -122,26 +133,31 @@
             <td>$itemName</td>
             <td>$itemSize</td>
             <td>" . $row['Quantity'] . "</td>
-            <td>$price</td>
-            <td><a href='remove.php?deleteupc=$upc'>Remove</a></td>
+            <td>$".number_format($price, 2)."</td>
+            <td>$".number_format($price * $row['Quantity'], 2)."</td>
+            <td><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
             </tr>";
 
-            $total += $price;
+            $total += $price * $row['Quantity'];
         }
-
-        echo "<br>Total: $". number_format($total, 2);
+        $tax = $total * .0825;
+        echo "<tr><td></td><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr></table>";
     }
 
     //retrieving form input from user
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $itemName = $_POST["itemName"];
-        $itemSize = $_POST["itemSize"];
-        $itemQuantity = $_POST["itemQuantity"];
+        $itemName = trim($_POST["itemName"]);
+        $itemSize = trim($_POST["itemSize"]);
+        $itemQuantity = trim($_POST["itemQuantity"]);
         $total = 0;
 
         try {
             $connection = openConnection();
-            $selectQuery = "SELECT * FROM Inventory WHERE Name = '$itemName' AND Size = '$itemSize'";
+            $selectQuery = "SELECT * FROM Inventory
+                            WHERE Name = '$itemName' AND Size = '$itemSize' AND IsActive = 1
+                            ORDER BY UPC ASC";
             $getItem = sqlsrv_query($connection, $selectQuery);
             if(!$getItem)
                 echo "Item not found.";
@@ -151,40 +167,93 @@
             //updating inventory once item placed into shopping cart
             if ($row['StockQty'] >= $itemQuantity) {
                 // This is the code that will update the inventory table with the new quantity
-                $updateQuery = "UPDATE Inventory SET StockQty = StockQty - $itemQuantity WHERE Name = '$itemName' AND Size = '$itemSize'";
+                $updateQuery = "UPDATE Inventory SET StockQty = StockQty - $itemQuantity WHERE UPC = $ID";
                 $updateItem = sqlsrv_query($connection, $updateQuery);
                 if(!$updateItem)
                     die(print_r(sqlsrv_errors(), true));
-
-                // This code will update the inventory table with the SoldQty
-                $updateQuery = "UPDATE Inventory SET SoldQty = SoldQty + $itemQuantity WHERE Name = '$itemName' AND Size = '$itemSize'";
-                $updateItem = sqlsrv_query($connection, $updateQuery);
-                if(!$updateItem)
+                
+                // Checks to see if the item already exists in the cart
+                $cartQuery = "SELECT * FROM Cart WHERE ItemID = ".$ID;
+                $checkCart = sqlsrv_query($connection, $cartQuery);
+                if(!$checkCart)
                     die(print_r(sqlsrv_errors(), true));
-                    
-                //INSERT item into Cart table  (this is the code that will insert the item into the cart table) 
-                $insertQuery = "INSERT INTO Cart (ItemID, Quantity) VALUES ('$ID', '$itemQuantity')"; 
-                $insertItem = sqlsrv_query($connection, $insertQuery);  
+                // INSERT item into Cart table  (this is the code that will insert the item into the cart table) 
+                // INSERT item if it does not already exist in the cart, otherwise UPDATE the item with new quantity
+                $cartItem = sqlsrv_fetch_array($checkCart, SQLSRV_FETCH_ASSOC);
+                $cartOperation = empty($cartItem) ? "INSERT INTO Cart (ItemID, Quantity) VALUES ('$ID', '$itemQuantity')" : "UPDATE Cart
+                                                                                                                             SET Quantity = ".$cartItem['Quantity'] + $itemQuantity."
+                                                                                                                             WHERE ItemID = ".$cartItem['ItemID'];
+                $insertItem = sqlsrv_query($connection, $cartOperation);  
                 if(!$insertItem)
                     die(print_r(sqlsrv_errors(), true));
+
+                sqlsrv_free_stmt($updateItem);
+                sqlsrv_free_stmt($checkCart);
+                sqlsrv_free_stmt($insertItem);
             }
             else {
                 echo "Item is out of stock";
+                die(print_r(sqlsrv_errors(), true));
             }
-            printTable($connection, $itemName, $itemSize, $itemQuantity, number_format($row['Price'], 2), $total);
+        printTable();
 
         }
         catch(Exception $e) {
             echo 'Error';
         }
     }
+    else {
+        printTable();
+    }
+
     /* we could use action= to direct user to webpage confirming purchase after submitting */
 
 ?>
 
 <html>
-    <button class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="purchase.php?flush=true">Purchase</a></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmCheckout" tabindex="-1" aria-labelledby="confirmCheckoutLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmCheckoutLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+       required maxlength="12"><br>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Confirm Purchase</a></button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+    
+
+    <button data-bs-target="#confirmCheckout" data-bs-toggle="modal" class="btn btn-primary" type="button"><a class="text-light" style="color:white; text-decoration:none;">Purchase</a></button>
 </html>
+
+<script>
+
+    let itemInput = document.querySelector('input[type=tel]') ;
+    itemInput.addEventListener('keypress', phone);
+
+    let flag = false;
+    function phone(){
+        let p = this.value;
+        if((p.length + 1) % 4 == 0 && p.length < 9 && flag == true)
+            this.value = p + "-";
+        flag = true;
+    }
+
+</script>
 
 <!-- style this page to make it look like a cash register -->
 <style>

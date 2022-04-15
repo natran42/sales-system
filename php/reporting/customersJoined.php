@@ -31,7 +31,7 @@
             <input type='date' id='enddaterange' name='enddaterange'>
         </div>
         <br><br>
-        <input type='submit' name='customerQuery' id='customerQuery' value='View Results'>
+        <input type='submit' name='customerQuery' id='customerQuery' class='queryButton' value='View Results'>
     </form>
     <!--END-->
 
