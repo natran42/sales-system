@@ -141,8 +141,6 @@ body {
         }
     }
 
-    session_start();
-
     $accessLevel = getAuth();
 
     if($accessLevel !== 'MGR') {
