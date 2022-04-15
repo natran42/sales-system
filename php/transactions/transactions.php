@@ -167,12 +167,17 @@ input {
 }
 
 #submit{
-   height: 4%;
+   height: 8%;
    width: 100%;
    outline: none;
-   color: rgb(68, 65, 65);
+   color: white;
    border: none;
-   background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
+   background-color: #d4418e;
+   background-image: linear-gradient(315deg, #d4418e 0%, #0652c5 74%);
+}
+#submit:hover{
+    background-color: #0652c5;
+    background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
 }
 
 .table{
