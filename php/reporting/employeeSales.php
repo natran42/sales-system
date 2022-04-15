@@ -15,8 +15,6 @@
             document.getElementById('daterangepicker').style.display = 'none';
     }
 </script>
-
-<h3>Employee Sales</h3>
             <form method='post'>
                 <h3>Employee Sales</h3>
                 <select id='filter' name='filter' onchange='toggleRange(this)'>
@@ -32,7 +30,7 @@
                     <input type='date' id='enddaterange' name='enddaterange'>
                 </div>
                 <br><br>
-                <input type='submit' name='employeeSales' id='employeeSales' value='View Results'>
+                <input type='submit' name='employeeSales' id='employeeSales' class='queryButton' value='View Results'>
             </form>
 <?php
 

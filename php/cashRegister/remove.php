@@ -9,22 +9,19 @@
     //delete row from cart table    
     if(isset($_GET['deleteupc'])){
         $upc = $_GET['deleteupc'];
+        $selectCartQuery = "SELECT * FROM Cart WHERE ItemID = $upc";
+        $selectCart = sqlsrv_query($connection, $selectCartQuery);
+        $cartItem = sqlsrv_fetch_array($selectCart, SQLSRV_FETCH_ASSOC);
+        $cartQuantity = $cartItem['Quantity'];
         $sqlquery = "DELETE FROM Cart WHERE ItemID = $upc";
         $result = sqlsrv_query($connection, $sqlquery);
+        $updateQuery = "UPDATE Inventory SET StockQty = StockQty + $cartQuantity WHERE UPC = $upc";
+        $updateStock = sqlsrv_query($connection, $updateQuery);
         if($result)
            header('location:cashRegister.php');
         else
             die(print_r(sqlsrv_errors(), true));
+        sqlsrv_free_stmt($selectCart);
+        sqlsrv_free_stmt($result);
     }
-        
-/* REMEMBER TO UPDATE INVENTORY IF REMOVED. ADD QUANTITY BACK TO DB */
-
-    $sql = "DELETE FROM Inventory WHERE ItemName = '$delName' AND Size = '$delSize'";
-    $stmt = sqlsrv_query($connection, $sql);
-    if($stmt === false)
-        die(print_r(sqlsrv_errors(), true));
-    sqlsrv_free_stmt($stmt);
-    $sql = "UPDATE Inventory SET Quantity = Quantity + $delQuantity WHERE ItemName = '$delName' AND Size = '$delSize'";
-
-    
 ?>
