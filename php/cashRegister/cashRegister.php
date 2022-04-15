@@ -96,6 +96,7 @@
             
         //print all rows in cart table
         $connection = openConnection();
+        $total = 0;
 
         $query = "SELECT * FROM Cart";
         $result = sqlsrv_query($connection, $query);
