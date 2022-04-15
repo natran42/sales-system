@@ -167,7 +167,7 @@ input {
 }
 
 #submit{
-   height: 8%;
+   height: 4%;
    width: 100%;
    outline: none;
    color: rgb(68, 65, 65);
@@ -177,7 +177,7 @@ input {
 
 .table{
     margin: auto;
-    width: auto;
+    width: 40%;
     border: 2px solid #ccc;
     padding: 30px; 
     background: #fff;

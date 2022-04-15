@@ -2,6 +2,11 @@
 
 <html>
     <head>
+    <script>
+    if(window.history.replaceState)
+        window.history.replaceState(null, null, window.location.href);
+    </script>
+
         <link rel="stylesheet" href="cashRegister.css">
     </head>
 

@@ -44,23 +44,14 @@ input {
     border-radius: 5px;
 }
 
-#employeeSales{
-    height: 8%;
-    width: 100%;
-    outline: none;
-    color: rgb(68, 68, 65);
-    border: none;
-    background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
- }
-
- #customerQuery{
-    height: 8%;
+.queryButton {
+    height: 4%;
     width: 100%;
     outline: none;
     color: rgb(68, 65, 65);
     border: none;
     background: linear-gradient(135deg, #ffafbd ,#ffc3a0);
- }
+}
 
  .table{
     margin: auto;
