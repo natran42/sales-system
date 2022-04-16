@@ -66,6 +66,7 @@
         <div></div>
         <div></div>
         <div></div>
+    
     </div>
 </body>
 
@@ -88,7 +89,8 @@
 }
 
 body {
-    background: linear-gradient(135deg, #000428 ,#004e92); /*#91ac80    , (#a1c4fd , #c2e9fb) */
+    height: auto;
+    background: linear-gradient(135deg, #000428  ,#004e92 ); /*#91ac80    , (#a1c4fd , #c2e9fb) */
     color: white;
 }
 
@@ -115,7 +117,7 @@ body {
     
 }
 .box div{
-    position: absolute;
+    position: fixed;
     width: 60px;
     height: 60px;
     background-color: transparent;
@@ -183,6 +185,9 @@ body {
     animation: animate 5s linear infinite;
 }
 
+
+
+
 @keyframes animate {
     0%{
         transform: scale(0) translateY(0) rotate(0);
@@ -193,6 +198,10 @@ body {
         opacity: 0;
     }
 }
+
+
+
+
 
 
 
