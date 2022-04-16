@@ -3,10 +3,10 @@
 }
 
 #entryForm {
-    margin: auto;
+    margin:  auto;
     margin-top: 70px;
     margin-bottom: 70x;
-    width: 600px;
+    width: 570px;
     border: 2px solid #ccc;
     padding: 30px; /* inside padding */
     background: #fff;
@@ -48,6 +48,7 @@ input {
     background: #fff;
     border-radius: 15px;
     color: rgb(68, 65, 65);
+    border: 0;
 }
  
 td{

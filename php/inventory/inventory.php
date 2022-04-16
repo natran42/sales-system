@@ -288,7 +288,7 @@ if(!lowStockEmpty()) {
         <div class="modal-body">
           <form method="post">
             <div class="mb-3">
-              <label class="form-label required">Item Name</label>
+              <label class="form-label required"> Item Name</label>
               <input type="text" name="name" placeholder="Item Name" class="form-control">
             </div>
             <div class="mb-3">
@@ -355,3 +355,15 @@ if(!lowStockEmpty()) {
 </body>
 
 </html>
+
+
+<!-- style Inside the pop up low stock window, have the contents fit inside the window -->
+<style>
+ .modal-body{
+  /*max-height: calc(100vh - 210px);*/
+  overflow-y: auto;
+
+  
+ }
+</style>
+

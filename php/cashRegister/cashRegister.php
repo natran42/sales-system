@@ -183,7 +183,8 @@
                 sqlsrv_free_stmt($insertItem);
             }
             else {
-                echo "Item is out of stock";
+                echo "<script>alert('Item is out of stock.');</script>";
+                printTable();
                 die(print_r(sqlsrv_errors(), true));
             }
         printTable();
@@ -202,8 +203,6 @@
 ?>
 
 <html>
-
-
     <!-- Modal -->
     <div class="modal fade" id="confirmCheckout" tabindex="-1" aria-labelledby="confirmCheckoutLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -243,3 +242,4 @@
     }
 
 </script>
+
