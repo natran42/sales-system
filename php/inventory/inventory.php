@@ -229,7 +229,7 @@ if(!lowStockEmpty()) {
       font-size: 16px;
       font-weight: 500;
       cursor: pointer;
-      right: 50%;
+      right: 12%;
     }
 
     .add-btn:hover {
@@ -258,13 +258,24 @@ if(!lowStockEmpty()) {
     height: 70px;
 }
 
+.header{
+  margin: 0;
+  padding: 0;
+  left: 40%;
+  position: relative;
+}
+h1{
+  font-family: 'Poppins' , sans-serif;
+}
   </style>
 </head>
 
 <body>
   <div class="container mt-5 mb-5">
     <div class="row">
+      <div class="header"><h1>Inventory</h1></div>
       <div class="col text-center">
+      
         <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventory">Add Inventory</button>-->
         <button type="button" data-bs-toggle="modal" data-bs-target="#addInventory" class="add-btn">
           <span class="button-text">Add Inventory</span>
