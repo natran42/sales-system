@@ -74,7 +74,7 @@ function selectEmployeeTransactions($start, $end, $targetEID) {
                 echo "<br> <br>";
                 echo "<table border = '1' class='table table-hover'>
                 <tr>
-                <th id=header colspan='5'> $start ~ $end</th>
+                <th id=header colspan='5'>$start ~ $end</th>
                 </tr>
                 <tr>
                 <th>ID</th>
@@ -96,7 +96,7 @@ function selectEmployeeTransactions($start, $end, $targetEID) {
             echo "<br> <br>";
             echo "<table border = '1' class='table table-hover'>
             <tr>
-            <th id=header colspan='5'> $start ~ $end</th>
+            <th id=header colspan='5'>$start ~ $end</th>
             </tr>
             <tr>
             <th>ID</th>
@@ -105,7 +105,6 @@ function selectEmployeeTransactions($start, $end, $targetEID) {
             <th># Transactions</th>
             <th>Total</th>
             </tr>";
-    
     
             while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
                 echo '<tr>';
