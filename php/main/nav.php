@@ -78,9 +78,10 @@
     background: linear-gradient(135deg,#4568dc , #b06ab3);
     box-shadow: 0px 0px 10px #000000;
     margin-bottom: 10px;
-    padding: 0 15px;
+    /* padding: 0 15px; */
     height: 60px;
     font-size:large;
+    height: 60px;
 }
 
 /* change the font color to white */
@@ -88,6 +89,7 @@
 .navbar-nav {
     margin: auto;
     color: white;
+    height:auto;
 }
 
 body {
@@ -96,11 +98,13 @@ body {
     color: white;
 }
 
+.nav-item {
+    padding: 9px 9px;
+}
 
 .nav-item:hover {
     background-color: #0652c5;
     background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
-    /*make only an item bigger not the whole bar */
     color: white;
 }
 

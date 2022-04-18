@@ -54,8 +54,11 @@ function selectCustomer($start, $end) {
         $getCustomers = sqlsrv_query($connection, $selectQuery);
         if(!$getCustomers)
             die(print_r(sqlsrv_errors(), true));
-
+        echo "<br><br>";
         echo "<table border = '1' class='table table-hover'>
+        <tr>
+        <th id=header colspan='5'> $start ~ $end</th>
+        </tr>
         <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -116,7 +119,6 @@ function selectCustomer($start, $end) {
             echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
         }
         else {
-            echo '<h4>'.$startDate.' ~ '.$endDate.'</h4>';
             selectCustomer($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
         }
     }

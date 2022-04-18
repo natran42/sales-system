@@ -64,8 +64,11 @@ function selectTopSellers($start, $end, $order) {
         $getTopSellers = sqlsrv_query($connection, $selectQuery);
         if(!$getTopSellers)
             die(print_r(sqlsrv_errors(), true));
-
+        echo "<br> <br>";
         echo "<table border = '1' class='table table-hover'>
+        <tr>
+        <th id=header colspan='5'> $start ~ $end</th>
+        </tr>
         <tr>
         <th>#</th>
         <th>Item Name</th>
@@ -125,7 +128,7 @@ if(array_key_exists('topSellers', $_POST)) {
         echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
     }
     else {
-        echo '<h4>'.$startDate.' ~ '.$endDate.'</h4>';
+        
         selectTopSellers($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), $order);
     }
 }

@@ -42,22 +42,25 @@ function fetchTransactions($userTransaction) {
         $getTransactionItems = sqlsrv_query($connection, $selectSecondQuery);
         if(!$getTransactionItems)
             die(print-r(sqlsrv_errors(), true));
-                
-        echo "<h3></h3>
-        <table border = '1' class='table table-hover'>
-        <tr>
-        <th>Transaction ID</th>
-        <th>Ordered By</th>
-        <th>Type of Transaction</th>
-        <th>Transaction Date</th>
-        <th>Processed By</th>
-        <th>Subtotal</th>
-        <th>Tax</th>
-        <th>Total</th>
-        </tr>";   
-        
 
-        while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
+        $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+        if(empty($row)) {
+            echo "<script>alert('Transaction does not exist');</script>";
+        }
+        else {
+            echo "<h3></h3>
+            <table border = '1' class='table table-hover'>
+            <tr>
+            <th>Transaction ID</th>
+            <th>Ordered By</th>
+            <th>Type of Transaction</th>
+            <th>Transaction Date</th>
+            <th>Processed By</th>
+            <th>Subtotal</th>
+            <th>Tax</th>
+            <th>Total</th>
+            </tr>";   
+    
             echo '<tr>';
             echo '<td>'.$row['TransactionID'].'</td>';
             echo '<td>'.$row['OrderedBy'].'</td>';
@@ -68,34 +71,34 @@ function fetchTransactions($userTransaction) {
             echo '<td>$'.$row['Tax'].'</td>';
             echo '<td>$'.$row['Total'].'</td>';
             echo '</tr>';
+           
+            echo "<table border = '1' class='table table-hover'>
+            <tr>
+            <th>Item ID</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Item Total</th>
+            </tr>";   
+    
+            echo "<h3></h3>";
+            echo "<h3>Items Purchased:</h3>";
+    
+            while($row = sqlsrv_fetch_array($getTransactionItems, SQLSRV_FETCH_ASSOC)) {
+            
+                echo '<tr>';
+                echo '<td>'.$row['TransactionItemID'].'</td>';
+                echo '<td>'.$row['Name'].'</td>';
+                echo '<td>'.$row['Size'].'</td>';
+                echo '<td>'.$row['Quantity'].'</td>';
+                echo '<td>$'.$row['SumPrice'].'</td>';
+                echo '</tr>';
+            }
+    
+            sqlsrv_free_stmt($getTransactions);
+            sqlsrv_free_stmt($getTransactionItems);
+            sqlsrv_close($connection);
         }
-       
-        echo "<table border = '1' class='table table-hover'>
-        <tr>
-        <th>Item ID</th>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Quantity</th>
-        <th>Item Total</th>
-        </tr>";   
-
-        echo "<h3></h3>";
-        echo "<h3>Items Purchased:</h3>";
-
-        while($row = sqlsrv_fetch_array($getTransactionItems, SQLSRV_FETCH_ASSOC)) {
-        
-            echo '<tr>';
-            echo '<td>'.$row['TransactionItemID'].'</td>';
-            echo '<td>'.$row['Name'].'</td>';
-            echo '<td>'.$row['Size'].'</td>';
-            echo '<td>'.$row['Quantity'].'</td>';
-            echo '<td>$'.$row['SumPrice'].'</td>';
-            echo '</tr>';
-        }
-
-        sqlsrv_free_stmt($getTransactions);
-        sqlsrv_free_stmt($getTransactionItems);
-        sqlsrv_close($connection);
 
     }
     catch(Exception $e) {

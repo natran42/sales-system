@@ -17,7 +17,7 @@
 </script>
             <form method='post'>
                 <h3>Employee Sales</h3>
-                <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
+                <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
                     <option value='currWeek'>This week</option>
                     <option value='currMonth'>This month</option>
                     <option value='currYear'>This year</option>
@@ -47,7 +47,8 @@ function openConnection() {
 function selectEmployeeTransactions($start, $end) {
     try {
         $connection = openConnection();
-        $selectQuery = 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold FROM Employees EMP
+        $selectQuery = 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold, COUNT(TRA.TransactionID) AS TransactionsMade
+                        FROM Employees EMP
                         INNER JOIN Transactions TRA ON TRA.ProcessedBy = EMP.EID
                         INNER JOIN TransactionItems TRI ON TRI.TransactionID = TRA.TransactionID
                         INNER JOIN Inventory INV ON INV.UPC = TRI.TransactionItemID
@@ -56,12 +57,16 @@ function selectEmployeeTransactions($start, $end) {
         $getTransactions = sqlsrv_query($connection, $selectQuery);
         if(!$getTransactions)
             die(print_r(sqlsrv_errors(), true));
-        
+        echo "<br> <br>";
         echo "<table border = '1' class='table table-hover'>
+        <tr>
+        <th id=header colspan='5'> $start ~ $end</th>
+        </tr>
         <tr>
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th># Transactions</th>
         <th>Total</th>
         </tr>";
 
@@ -71,6 +76,7 @@ function selectEmployeeTransactions($start, $end) {
             echo '<td>'.$row['EID'].'</td>';
             echo '<td>'.$row['FirstName'].'</td>';
             echo '<td>'.$row['LastName'].'</td>';
+            echo '<td>'.$row['TransactionsMade'].'</td>';
             echo '<td>$'.number_format($row['TotalSold'], 2).'</td>';
             echo '</tr>';
         }
@@ -115,7 +121,7 @@ function selectEmployeeTransactions($start, $end) {
                     echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
                 }
                 else {
-                    echo '<h4>'.$startDate.' ~ '.$endDate.'</h4>';
+                   
                     selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
                 }
             }
