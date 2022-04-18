@@ -79,8 +79,8 @@
     box-shadow: 0px 0px 10px #000000;
     margin-bottom: 10px;
     padding: 0 15px;
-    height: 60px;
     font-size:large;
+    height: 60px;
 }
 
 /* change the font color to white */
@@ -88,6 +88,7 @@
 .navbar-nav {
     margin: auto;
     color: white;
+    height:auto;
 }
 
 body {
