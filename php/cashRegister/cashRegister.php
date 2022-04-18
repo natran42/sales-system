@@ -26,7 +26,7 @@
         <div class="form-group">
             <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
             <label for="itemSize">Item Size</label> 
-            <h2></h2>
+          
             <select class="form-control" id="itemSize" name="itemSize">
                 <option>N/A</option>
                 <option>XS</option>

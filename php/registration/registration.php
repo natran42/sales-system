@@ -18,12 +18,12 @@
 <body>
     <form method="post">
         <h2>MEMBER REGISTRATION</h2>
-        <label>Full Name*</label><br>
+        <label>Full Name</label> <br>
         <input type="text" oninvalid="this.setCustomValidity('Characters required for name')" name="first" pattern="[a-zA-Z]*" placeholder="First Name" class="inline" required>
         <input type="text" oninvalid="this.setCustomValidity('Characters required for name')" name="last" pattern="[a-zA-Z]*"  placeholder="Last Name" class="inline" id="right" required>
         <br><br>
 
-        <label>Phone Number*</label>
+        <label>Phone Number</label>
         <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
 
@@ -42,10 +42,10 @@
 
         </script>
 
-        <label>Email*</label>
+        <label>Email</label>
         <input type="email" step="0.01" name="email" placeholder="Email"><br>
 
-        <label>Address*</label>
+        <label>Address</label>
         <input type="text" name="address" placeholder="Street Name" required>
         <select class="form-control" id="drop-down" name="state" required>
             <option value="none" selected disabled>State</option>
