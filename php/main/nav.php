@@ -37,7 +37,7 @@
             <li class="nav-item dropdown" id='reports'>
                 <a style = "color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-file"></i>Reports</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a style = "color:white" class="dropdown-item" href="/php/reporting/customersJoined.php">Customer Report</a></li>
+            <li><a style = "color:white" class="dropdown-item" href="/php/reporting/customersJoined.php">Customers Registered</a></li>
             <li><a style = "color:white" class="dropdown-item" href="/php/reporting/employeeSales.php">Employee Sales</a></li>
             <li><a style = "color:white" class="dropdown-item" href="/php/reporting/topSeller.php">Top Sellers</a></li>
             </ul>

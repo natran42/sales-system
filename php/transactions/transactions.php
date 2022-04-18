@@ -14,6 +14,7 @@ return $connection;
 //->Input customer transaction id
 //->Pull up previous transaction info from transaction id
 
+
 function fetchTransactions($userTransaction) {
     try {
         $connection = openConnection();
@@ -78,8 +79,7 @@ function fetchTransactions($userTransaction) {
         <th>Item Total</th>
         </tr>";   
 
-        // using /
-        echo "/";
+        echo "<h3></h3>";
         echo "<h3>Items Purchased:</h3>";
 
         while($row = sqlsrv_fetch_array($getTransactionItems, SQLSRV_FETCH_ASSOC)) {
@@ -180,8 +180,7 @@ input {
 
 .table{
     margin: auto;
-    /* make the width the same as the form */
-    width: 750px;
+    width: 50%;
     border: 2px solid #ccc;
     padding: 30px; 
     background: #fff;

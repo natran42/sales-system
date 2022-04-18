@@ -4,9 +4,9 @@
 
 #entryForm {
     margin:  auto;
-    margin-top: 70px;
-    margin-bottom: 70x;
-    width: 570px;
+    /* margin-top: 70px;
+    margin-bottom: 70x; */
+    width: 500px;
     border: 2px solid #ccc;
     padding: 30px; /* inside padding */
     background: #fff;

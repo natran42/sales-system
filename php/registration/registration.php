@@ -54,7 +54,7 @@
         <input type="text" name="zip" placeholder="Zip Code / Postal" class="inline">
         <br>
 
-        <button type="submit"><span>Submit </span></button>
+        <button type="submit"><span>Submit</span></button>
     </form>
 
     <div id=space>
