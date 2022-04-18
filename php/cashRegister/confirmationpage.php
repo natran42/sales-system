@@ -30,11 +30,72 @@ $connection = openConnection();
 
 <html>
     <head>
-        <meta http-equiv = "refresh" content = "3; url = cashRegister.php" />
+        <title>Confirmation</title>
+        <rel="stylesheet" href="confirmation.css">
+        <!-- <meta http-equiv = "refresh" content = "3; url = cashRegister.php" /> -->
     </head>
 
     <body>
-        <h1>Thank you for your purchase!</h1>
-        <p>Your transaction ID is <?php echo getNextTransactionId($connection); ?></p>
+        <div class="main-text">
+            <h1>Thank you for your purchase!</h1>
+            <p>Your transaction ID is <?php echo getNextTransactionId($connection); ?></p>
+        </div>
     </body>
 </html>
+
+<style>
+*{
+    font-family: 'Poppins' , sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+.main-text{
+    text-align: center;
+    margin-top: 10%;
+    justify-content: center;
+    display: flex;  
+ 
+    align-items: center;  
+
+}*/
+
+body{
+    justify-content: center;
+    /* include backgroundLogin.jpeg as the background*/
+    background-image: url("PNG image.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #f2f2f2;
+    font-family: 'Poppins' , sans-serif;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    margin-bottom:5%;
+    align-items: center;
+}
+
+
+
+p{
+    font-size: 1.2em;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+}
+
+div{
+    margin-top: 20%;
+}
+
+</style>
