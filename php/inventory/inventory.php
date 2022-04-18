@@ -185,7 +185,7 @@ if(!lowStockEmpty()) {
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
   <title>Inventory</title>
   <style>
     .modal-header {
@@ -198,7 +198,7 @@ if(!lowStockEmpty()) {
       color: red;
 
     }
-
+   
     .table {
       margin: auto;
       width: 1000px;
@@ -362,8 +362,12 @@ if(!lowStockEmpty()) {
  .modal-body{
   /*max-height: calc(100vh - 210px);*/
   overflow-y: auto;
-
-  
  }
+ .modal-content {
+            color: #808080;
+  }
+
+  /*add a title inside the inventory table*/
+
 </style>
 

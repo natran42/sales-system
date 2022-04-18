@@ -79,6 +79,8 @@
     box-shadow: 0px 0px 10px #000000;
     margin-bottom: 10px;
     padding: 0 15px;
+    height: 60px;
+    font-size:large;
 }
 
 /* change the font color to white */

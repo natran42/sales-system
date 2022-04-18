@@ -71,7 +71,10 @@ $sold1 = $row['SoldQty'];
             background: #F7941E;
             color: #fff;
         }
-
+        /* change the text inside to black */
+        .modal-content {
+            color: #808080;
+        }
         .required:after {
             content: "*";
             color: red;
@@ -152,3 +155,4 @@ $sold1 = $row['SoldQty'];
 </body>
 
 </html>
+

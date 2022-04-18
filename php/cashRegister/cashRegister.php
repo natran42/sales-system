@@ -22,7 +22,8 @@
 
         <div class="form-group">
             <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
-            <label for="itemSize">Item Size</label>
+            <label for="itemSize">Item Size</label> 
+            <h2></h2>
             <select class="form-control" id="itemSize" name="itemSize">
                 <option>N/A</option>
                 <option>XS</option>
@@ -32,6 +33,7 @@
                 <option>XL</option>
                 <option>XXL</option>
             </select>
+
         </div>
         <div class="form-group">
             <label for="itemQuantity">Item Quantity</label>
@@ -217,7 +219,7 @@
                 <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
             </form>
-            <p>Not a registered member yet?</p><a href="../registration/registration.php">Click Here!</a>
+            <h6 class = "NotMember">Not a registered member yet? </h6><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
