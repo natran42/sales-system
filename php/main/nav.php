@@ -78,7 +78,7 @@
     background: linear-gradient(135deg,#4568dc , #b06ab3);
     box-shadow: 0px 0px 10px #000000;
     margin-bottom: 10px;
-    padding: 0 15px;
+    /* padding: 0 15px; */
     height: 60px;
     font-size:large;
 }
@@ -94,6 +94,10 @@ body {
     height: auto;
     background: linear-gradient(135deg, #000428  ,#004e92 ); /*#91ac80    , (#a1c4fd , #c2e9fb) */
     color: white;
+}
+
+.nav-item {
+    padding: 9px 9px;
 }
 
 .nav-item:hover {
