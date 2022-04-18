@@ -157,6 +157,7 @@ function getInventory()
       echo '</tr>';
     }
     echo '</table>';
+    echo "<div id=space></div>";
   } catch (Exception $e) {
     echo 'Error';
   }
@@ -250,6 +251,11 @@ if(!lowStockEmpty()) {
 .button-icon {
   font-size: 1.5em;
   background: rgba(0, 0, 0, 0.08);
+}
+
+#space{ 
+    width: 100px;
+    height: 70px;
 }
 
   </style>

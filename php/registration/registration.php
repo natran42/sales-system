@@ -18,12 +18,12 @@
 <body>
     <form method="post">
         <h2>MEMBER REGISTRATION</h2>
-        <label>Full Name</label><br>
-        <input type="text" name="first" placeholder="First Name" class="inline">
-        <input type="text" name="last" placeholder="Last Name" class="inline" id="right">
+        <label>Full Name*</label><br>
+        <input type="text" oninvalid="this.setCustomValidity('Characters required for name')" name="first" pattern="[a-zA-Z]*" placeholder="First Name" class="inline" required>
+        <input type="text" oninvalid="this.setCustomValidity('Characters required for name')" name="last" pattern="[a-zA-Z]*"  placeholder="Last Name" class="inline" id="right" required>
         <br><br>
 
-        <label>Phone Number</label>
+        <label>Phone Number*</label>
         <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
 
@@ -42,26 +42,78 @@
 
         </script>
 
-        <!-- <span id="helpBlock" class="help-block" >Format: 123-456-7890.</span><br><br> we can probably add this for if the user inputs wrong information to tell them how to format a correct input -->
-
-        <label>Email</label>
+        <label>Email*</label>
         <input type="email" step="0.01" name="email" placeholder="Email"><br>
 
-        <label>Address</label>
-        <input type="text" name="address" placeholder="Street Name">
-        <input type="text" name="city" placeholder="City" class="inline">
-        <input type="text" name="state" placeholder="State / Province" class="inline" id="right">
-        <input type="text" name="zip" placeholder="Zip Code / Postal" class="inline">
+        <label>Address*</label>
+        <input type="text" name="address" placeholder="Street Name" required>
+        <select class="form-control" id="drop-down" name="state" required>
+            <option value="none" selected disabled>State</option>
+            <option value="AL">AL</option>
+            <option value="AK">AK</option>
+            <option value="AR">AR</option>	
+            <option value="AZ">AZ</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="CT">CT</option>
+            <option value="DC">DC</option>
+            <option value="DE">DE</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="IA">IA</option>	
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="KS">KS</option>
+            <option value="KY">KY</option>
+            <option value="LA">LA</option>
+            <option value="MA">MA</option>
+            <option value="MD">MD</option>
+            <option value="ME">ME</option>
+            <option value="MI">MI</option>
+            <option value="MN">MN</option>
+            <option value="MO">MO</option>	
+            <option value="MS">MS</option>
+            <option value="MT">MT</option>
+            <option value="NC">NC</option>	
+            <option value="NE">NE</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>			
+            <option value="NV">NV</option>
+            <option value="NY">NY</option>
+            <option value="ND">ND</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+            <option value="PA">PA</option>
+            <option value="RI">RI</option>
+            <option value="SC">SC</option>
+            <option value="SD">SD</option>
+            <option value="TN">TN</option>
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+            <option value="VT">VT</option>
+            <option value="VA">VA</option>
+            <option value="WA">WA</option>
+            <option value="WI">WI</option>	
+            <option value="WV">WV</option>
+            <option value="WY">WY</option>
+        </select>		
+        <input type="text" name="city" placeholder="City" class="inline" required>
+        <input type="text" name="zip" placeholder="Zip Code / Postal" class="inline" required> 
+        <!-- <input type="text" name="state" placeholder="State / Province" class="inline" id="right" required> -->
+       
         <br>
-
-        <button type="submit"><span>Submit </span></button>
+        <button type="submit"><span>Submit</span></button>
     </form>
-
-    <div id=space>
-    </div>
-
 </body>
 </html>
+
+<!-- used to create space under form-->
+<div id=space> 
+</div>
 
 <?php
 
@@ -80,12 +132,12 @@ function openConnection() {
 <!--- this code will be used to add user to the customer table from user input-->
 <?php
 if(isset($_POST['first'])) {
-    $first = $_POST['first'];
-    $last = $_POST['last'];
+    $first = ucwords($_POST['first']);
+    $last = ucwords($_POST['last']);
     $number = $_POST['number'];
     $email = $_POST['email'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
+    $address = ucwords($_POST['address']);
+    $city = ucwords($_POST['city']);
     $state = $_POST['state'];
     $zip = $_POST['zip'];
 
@@ -101,3 +153,4 @@ if(isset($_POST['first'])) {
     // }
 }
 
+?>

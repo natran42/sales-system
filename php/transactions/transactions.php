@@ -105,6 +105,10 @@ function fetchTransactions($userTransaction) {
 //Should we use UUID or Phone #?
 ?>
 
+<header>
+    <link rel="stylesheet" href="transactions.css">
+</header>
+
 <title>Transactions</title>
 <form action = "transactions.php" method='post'>
     <h1>Customer Transactions</h1>
@@ -122,73 +126,3 @@ if(!empty($_POST['submit'])){
 ?>
 
 
-<style>
-*{
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-}
-body {
-    /*background: linear-gradient(135deg, #ffafbd ,#ffc3a0);*/
-    justify-content: center;
-    height: 100vh;
-    color: white;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 35px;
-
-}
-
-h3{
-    text-align: center;
-    margin-bottom: 35px;
-
-}
-form {
-    margin: auto;
-    margin-top: 70px;
-    width: 500px;
-    border: 2px solid #ccc;
-    padding: 30px; 
-    background: #fff;
-    border-radius: 15px;
-    color: rgb(68, 65, 65);
-   
-}
-
-input {
-    display: block;
-    border: 2px solid;
-    width: 100%;
-    padding: 10px;
-    margin: 10px auto;
-    border-radius: 5px;
-}
-
-#submit{
-   height: 8%;
-   width: 100%;
-   outline: none;
-   color: white;
-   border: none;
-   background-color: #d4418e;
-   background-image: linear-gradient(315deg, #d4418e 0%, #0652c5 74%);
-}
-#submit:hover{
-    background-color: #0652c5;
-    background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
-}
-
-.table{
-    margin: auto;
-    width: 50%;
-    border: 2px solid #ccc;
-    padding: 30px; 
-    background: #fff;
-    border-radius: 15px;
-    color: rgb(68, 65, 65);
-}
-
-
-</style>

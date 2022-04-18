@@ -14,7 +14,7 @@
 
     <!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
     <form id=entryForm action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-
+        <h2>ADD ITEM</h2>
         <div class="form-group">
             <label for="itemName">Item Name</label>
             <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter Item Name" required>
@@ -77,13 +77,11 @@
     }
     
 
-    
-
     function printTable(){
         //Printing header row
-        echo 
-        "<table border = '1' class='table' style='width:40%;'>
-            <tr>
+        echo "<br><br>
+        <table border = '1' class='table' style='width:40%;'>
+            <tr id=header>
                 <th id=header colspan='5'>SHOPPING CART</th>
             </tr>
             <tr>
@@ -124,7 +122,7 @@
             <td>$itemName</td>
             <td>$itemSize</td>
             <td>" . $row['Quantity'] . "</td>
-            <td>$".number_format($price, 2)."</td>
+            <td>$".number_format($price * $row['Quantity'], 2)."</td>
             <td><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
             </tr>";
 
@@ -135,6 +133,7 @@
         echo "<tr><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
         echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr>";
         echo "<tr><td colspan='5'><button data-bs-target='#confirmCheckout' data-bs-toggle='modal' class='btn btn-primary' type='button'><a class='text-light' style='color:white; text-decoration:none;'>Purchase</a></button></td></tr></table>";
+        echo "<div id=space></div>";
     }
 
     //retrieving form input from user
@@ -197,9 +196,7 @@
     else {
         printTable();
     }
-
     /* we could use action= to direct user to webpage confirming purchase after submitting */
-
 ?>
 
 <html>
