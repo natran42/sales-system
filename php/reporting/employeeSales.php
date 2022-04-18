@@ -17,6 +17,7 @@
 </script>
             <form method='post'>
                 <h3>Employee Sales</h3>
+                <label>Employee ID: (Leave blank to get all employees)</label><input type="number" name="empID"/>
                 <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
                     <option value='currWeek'>This week</option>
                     <option value='currMonth'>This month</option>
@@ -44,44 +45,79 @@ function openConnection() {
 }
 
 // Selects Employees and sums up the total amount of transactions they have processed
-function selectEmployeeTransactions($start, $end) {
+function selectEmployeeTransactions($start, $end, $targetEID) {
     try {
         $connection = openConnection();
-        $selectQuery = 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold, COUNT(TRA.TransactionID) AS TransactionsMade
+        $selectQuery = ($targetEID === '') ? 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold, COUNT(TRA.TransactionID) AS TransactionsMade
                         FROM Employees EMP
                         INNER JOIN Transactions TRA ON TRA.ProcessedBy = EMP.EID
                         INNER JOIN TransactionItems TRI ON TRI.TransactionID = TRA.TransactionID
                         INNER JOIN Inventory INV ON INV.UPC = TRI.TransactionItemID
                         WHERE TRA.TypeOfTransaction = \'Purchase\' AND TRA.TransactionDate >= \''.$start.'\' AND TRA.TransactionDate <= \''.$end.'\' 
+                        GROUP BY EMP.EID, EMP.FirstName, EMP.LastName' : 
+                        'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold, COUNT(TRA.TransactionID) AS TransactionsMade
+                        FROM Employees EMP
+                        INNER JOIN Transactions TRA ON TRA.ProcessedBy = EMP.EID
+                        INNER JOIN TransactionItems TRI ON TRI.TransactionID = TRA.TransactionID
+                        INNER JOIN Inventory INV ON INV.UPC = TRI.TransactionItemID
+                        WHERE EMP.EID = '.$targetEID.' AND TRA.TypeOfTransaction = \'Purchase\' AND TRA.TransactionDate >= \''.$start.'\' AND TRA.TransactionDate <= \''.$end.'\' 
                         GROUP BY EMP.EID, EMP.FirstName, EMP.LastName';
         $getTransactions = sqlsrv_query($connection, $selectQuery);
         if(!$getTransactions)
             die(print_r(sqlsrv_errors(), true));
-        echo "<br> <br>";
-        echo "<table border = '1' class='table table-hover'>
-        <tr>
-        <th id=header colspan='5'> $start ~ $end</th>
-        </tr>
-        <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th># Transactions</th>
-        <th>Total</th>
-        </tr>";
 
-
-        while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
-            echo '<tr>';
-            echo '<td>'.$row['EID'].'</td>';
-            echo '<td>'.$row['FirstName'].'</td>';
-            echo '<td>'.$row['LastName'].'</td>';
-            echo '<td>'.$row['TransactionsMade'].'</td>';
-            echo '<td>$'.number_format($row['TotalSold'], 2).'</td>';
-            echo '</tr>';
+        if($targetEID !== '') {
+            $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
+            if(empty($row))
+                echo "<script>alert('Employee does not exist');</script>";
+            else {
+                echo "<br> <br>";
+                echo "<table border = '1' class='table table-hover'>
+                <tr>
+                <th id=header colspan='5'> $start ~ $end</th>
+                </tr>
+                <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th># Transactions</th>
+                <th>Total</th>
+                </tr>";
+                echo '<tr>';
+                echo '<td>'.$row['EID'].'</td>';
+                echo '<td>'.$row['FirstName'].'</td>';
+                echo '<td>'.$row['LastName'].'</td>';
+                echo '<td>'.$row['TransactionsMade'].'</td>';
+                echo '<td>$'.number_format($row['TotalSold'], 2).'</td>';
+                echo '</tr>';
+            }
         }
-
-
+        else {
+            echo "<br> <br>";
+            echo "<table border = '1' class='table table-hover'>
+            <tr>
+            <th id=header colspan='5'> $start ~ $end</th>
+            </tr>
+            <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th># Transactions</th>
+            <th>Total</th>
+            </tr>";
+    
+    
+            while($row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC)) {
+                echo '<tr>';
+                echo '<td>'.$row['EID'].'</td>';
+                echo '<td>'.$row['FirstName'].'</td>';
+                echo '<td>'.$row['LastName'].'</td>';
+                echo '<td>'.$row['TransactionsMade'].'</td>';
+                echo '<td>$'.number_format($row['TotalSold'], 2).'</td>';
+                echo '</tr>';
+            }
+    
+        }
     }
     catch(Exception $e) {
         echo 'Error';
@@ -121,8 +157,7 @@ function selectEmployeeTransactions($start, $end) {
                     echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
                 }
                 else {
-                   
-                    selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
+                    isset($_POST['empID']) ? selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), $_POST['empID']) : selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), '');
                 }
             }
 
