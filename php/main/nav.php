@@ -96,7 +96,6 @@ body {
     color: white;
 }
 
-
 .nav-item:hover {
     background-color: #0652c5;
     background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
