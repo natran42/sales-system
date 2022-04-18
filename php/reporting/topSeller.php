@@ -18,7 +18,7 @@
 <form method='post'>
     
 <h3>Top 10 Sellers</h3>
-<select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
+<select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
         <option value='currWeek'>This week</option>
         <option value='currMonth'>This month</option>
         <option value='currYear'>This year</option>
@@ -26,14 +26,18 @@
     </select>
    
     <div id='daterangepicker' style='display:none'>
-        <p>Start date:</p>
-        <input type='date' id='startdaterange' name='startdaterange'>
-        <p>End date:</p>
-        <input type='date' id='enddaterange' name='enddaterange'>
+        <div class="input-group">
+        <span class="input-group-text">Start date:</span>
+        <input class="form-control" type='date' id='startdaterange' name='startdaterange'>
+        </div>
+        <div class="input-group">
+        <span class="input-group-text">End date:</span>
+        <input class="form-control" type='date' id='enddaterange' name='enddaterange'>
+        </div>
     </div>
     <br>
-    <select id='order' name='order' class="form-select" aria-label="Default select example">
-        <option value='qty'>Qty Sold</option>
+    <select id='order' name='order' class="form-select">
+        <option value='qty'>Quantity Sold</option>
         <option value='gross'>Grossing</option>
     </select>
 

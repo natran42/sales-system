@@ -18,17 +18,21 @@
 <title>Customers Registered</title>
     <form method='post'>
         <h3>Customers registered</h3>
-        <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
+        <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
             <option value='currWeek'>This week</option>
             <option value='currMonth'>This month</option>
             <option value='currYear'>This year</option>
             <option value='customRange'>Custom Range</option>
         </select>
         <div id='daterangepicker' style='display:none'>
-            <p>Start date:</p>
-            <input type='date' id='startdaterange' name='startdaterange'>
-            <p>End date:</p>
-            <input type='date' id='enddaterange' name='enddaterange'>
+                <div class="input-group">
+                <span class="input-group-text">Start date:</span>
+                <input class="form-control" type='date' id='startdaterange' name='startdaterange'>
+                </div>
+                <div class="input-group">
+                <span class="input-group-text">End date:</span>
+            <input class="form-control" type='date' id='enddaterange' name='enddaterange'>
+            </div>
         </div>
         <br><br>
         <input type='submit' name='customerQuery' id='customerQuery' class='queryButton' value='View Results'>
