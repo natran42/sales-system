@@ -12,6 +12,9 @@
 
     <title>Cash Register</title>
 
+    <div class='container'>
+        <div class='row'>
+            <div class='col-6'>
     <!--- Ask the user to input name and quaanitity of the item they want to buy, this input will then retrieve data from inventory-->
     <form id=entryForm action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <h2>ADD ITEM</h2>
@@ -22,7 +25,8 @@
 
         <div class="form-group">
             <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
-            <label for="itemSize">Item Size</label>
+            <label for="itemSize">Item Size</label> 
+            <h2></h2>
             <select class="form-control" id="itemSize" name="itemSize">
                 <option>N/A</option>
                 <option>XS</option>
@@ -32,6 +36,7 @@
                 <option>XL</option>
                 <option>XXL</option>
             </select>
+
         </div>
         <div class="form-group">
             <label for="itemQuantity">Item Quantity</label>
@@ -42,7 +47,7 @@
         <button type="submit" style="color:white;" class="btn btn-primary">Add To Cart</button>
 
     </form>
-</div>
+    </div>
 </html>
 
 
@@ -64,7 +69,6 @@
             $connection = openConnection();
             $selectQuery = 'SELECT MAX(TransactionID) AS TID FROM Transactions'; //greatest number being the last transactionID
             $getTID = sqlsrv_query($connection, $selectQuery);
-            $getTransactions = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
             if(!$getTID)
                 die(print_r(sqlsrv_errors(), true));
             $row = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
@@ -79,16 +83,18 @@
 
     function printTable(){
         //Printing header row
-        echo "<br><br>
-        <table border = '1' class='table' style='width:40%;'>
-            <tr id=header>
-                <th id=header colspan='5'>SHOPPING CART</th>
+        echo "<div class='col-6'>
+        <table border = '1' class='table' style='width:100%;'>
+            <tr>
+                <th id=header colspan='6'>SHOPPING CART</th>
             </tr>
+            <tr><td></td><td></td><td></td><td><b>Transaction #</b></td><td><b>".getNextTransactionId()."</b></td><td></td></tr>
             <tr>
                 <th>Item Name</th>
                 <th>Size</th>
                 <th>Qty</th>
-                <th>Price</th>
+                <th>Unit Price</th>
+                <th>Line Total</th>
                 <th>Remove</th>
             </tr>";
             
@@ -122,6 +128,7 @@
             <td>$itemName</td>
             <td>$itemSize</td>
             <td>" . $row['Quantity'] . "</td>
+            <td>$".number_format($price, 2)."</td>
             <td>$".number_format($price * $row['Quantity'], 2)."</td>
             <td><button class='btn btn-danger' type='button'><a class='text-light' style='color:white; text-decoration:none;' href='remove.php?deleteupc=$upc''>Remove</a></button></td>
             </tr>";
@@ -153,41 +160,44 @@
                 echo "Item not found.";
 
             $row = sqlsrv_fetch_array($getItem, SQLSRV_FETCH_ASSOC); //holds all instances where query conditions are met
-            $ID = $row['UPC'];
-            //updating inventory once item placed into shopping cart
-            if ($row['StockQty'] >= $itemQuantity) {
-                // This is the code that will update the inventory table with the new quantity
-                $updateQuery = "UPDATE Inventory SET StockQty = StockQty - $itemQuantity WHERE UPC = $ID";
-                $updateItem = sqlsrv_query($connection, $updateQuery);
-                if(!$updateItem)
+            if(!empty($row)) {
+                $ID = $row['UPC'];
+                //updating inventory once item placed into shopping cart
+                if ($row['StockQty'] >= $itemQuantity) {
+                    // This is the code that will update the inventory table with the new quantity
+                    $updateQuery = "UPDATE Inventory SET StockQty = StockQty - $itemQuantity WHERE UPC = $ID";
+                    $updateItem = sqlsrv_query($connection, $updateQuery);
+                    if(!$updateItem)
+                        die(print_r(sqlsrv_errors(), true));
+                    
+                    // Checks to see if the item already exists in the cart
+                    $cartQuery = "SELECT * FROM Cart WHERE ItemID = ".$ID;
+                    $checkCart = sqlsrv_query($connection, $cartQuery);
+                    if(!$checkCart)
+                        die(print_r(sqlsrv_errors(), true));
+                    // INSERT item into Cart table  (this is the code that will insert the item into the cart table) 
+                    // INSERT item if it does not already exist in the cart, otherwise UPDATE the item with new quantity
+                    $cartItem = sqlsrv_fetch_array($checkCart, SQLSRV_FETCH_ASSOC);
+                    $cartOperation = empty($cartItem) ? "INSERT INTO Cart (ItemID, Quantity) VALUES ('$ID', '$itemQuantity')" : "UPDATE Cart
+                                                                                                                                 SET Quantity = ".$cartItem['Quantity'] + $itemQuantity."
+                                                                                                                                 WHERE ItemID = ".$cartItem['ItemID'];
+                    $insertItem = sqlsrv_query($connection, $cartOperation);  
+                    if(!$insertItem)
+                        die(print_r(sqlsrv_errors(), true));
+    
+                    sqlsrv_free_stmt($updateItem);
+                    sqlsrv_free_stmt($checkCart);
+                    sqlsrv_free_stmt($insertItem);
+                }
+                else {
+                    echo "<script>alert('Item is out of stock.');</script>";
+                    printTable();
                     die(print_r(sqlsrv_errors(), true));
-                
-                // Checks to see if the item already exists in the cart
-                $cartQuery = "SELECT * FROM Cart WHERE ItemID = ".$ID;
-                $checkCart = sqlsrv_query($connection, $cartQuery);
-                if(!$checkCart)
-                    die(print_r(sqlsrv_errors(), true));
-                // INSERT item into Cart table  (this is the code that will insert the item into the cart table) 
-                // INSERT item if it does not already exist in the cart, otherwise UPDATE the item with new quantity
-                $cartItem = sqlsrv_fetch_array($checkCart, SQLSRV_FETCH_ASSOC);
-                $cartOperation = empty($cartItem) ? "INSERT INTO Cart (ItemID, Quantity) VALUES ('$ID', '$itemQuantity')" : "UPDATE Cart
-                                                                                                                             SET Quantity = ".$cartItem['Quantity'] + $itemQuantity."
-                                                                                                                             WHERE ItemID = ".$cartItem['ItemID'];
-                $insertItem = sqlsrv_query($connection, $cartOperation);  
-                if(!$insertItem)
-                    die(print_r(sqlsrv_errors(), true));
-
-                sqlsrv_free_stmt($updateItem);
-                sqlsrv_free_stmt($checkCart);
-                sqlsrv_free_stmt($insertItem);
+                }
             }
             else {
-                echo "<script>alert('Item is out of stock.');</script>";
-                printTable();
-                die(print_r(sqlsrv_errors(), true));
+                echo "<script>alert('Invalid item');</script>";
             }
-        printTable();
-
         }
         catch(Exception $e) {
             echo 'Error';
@@ -214,7 +224,7 @@
                 <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
             </form>
-            <p>Not a registered member yet?</p><a href="../registration/registration.php">Click Here!</a>
+            <h6 class = "NotMember">Not a registered member yet? </h6><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

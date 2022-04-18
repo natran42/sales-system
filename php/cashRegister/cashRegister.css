@@ -4,8 +4,9 @@
 
 #entryForm {
     margin:  auto;
-    margin-top: 70px;
-    width: 570px;
+    /* margin-top: 70px;
+    margin-bottom: 70x; */
+    width: 500px;
     border: 2px solid #ccc;
     padding: 40px; /* inside padding */
     background: #fff;
@@ -61,8 +62,8 @@ input {
 
 /* have the submit color as #8ee8d8a0 */
 .btn-primary {
-    background-color: #8e8d8a;
-    border-color: #8e8d8a;
+    background-color:#004e92;
+    border:none;
     color: black;
 }
 
@@ -80,3 +81,28 @@ input {
 td{
     border: none;
 }
+
+/*change the text color in the modal of when purchased is clicked*/
+
+.modal-content{
+    color: black;
+
+}
+.modal-header{
+    background-color: #3d85c6;;
+    color: white;
+
+}
+/*change the border-radius of the modal to 10px*/
+.modal-dialog{
+    border-radius: 50px;
+}
+
+
+
+
+
+
+
+
+
