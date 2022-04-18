@@ -17,7 +17,7 @@
 </script>
             <form method='post'>
                 <h3>Employee Sales</h3>
-                <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
+                <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
                     <option value='currWeek'>This week</option>
                     <option value='currMonth'>This month</option>
                     <option value='currYear'>This year</option>
@@ -47,7 +47,8 @@ function openConnection() {
 function selectEmployeeTransactions($start, $end) {
     try {
         $connection = openConnection();
-        $selectQuery = 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold FROM Employees EMP
+        $selectQuery = 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold, COUNT(TRA.TransactionID) AS TransactionsMade
+                        FROM Employees EMP
                         INNER JOIN Transactions TRA ON TRA.ProcessedBy = EMP.EID
                         INNER JOIN TransactionItems TRI ON TRI.TransactionID = TRA.TransactionID
                         INNER JOIN Inventory INV ON INV.UPC = TRI.TransactionItemID
@@ -62,6 +63,7 @@ function selectEmployeeTransactions($start, $end) {
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th># Transactions</th>
         <th>Total</th>
         </tr>";
 
@@ -71,6 +73,7 @@ function selectEmployeeTransactions($start, $end) {
             echo '<td>'.$row['EID'].'</td>';
             echo '<td>'.$row['FirstName'].'</td>';
             echo '<td>'.$row['LastName'].'</td>';
+            echo '<td>'.$row['TransactionsMade'].'</td>';
             echo '<td>$'.number_format($row['TotalSold'], 2).'</td>';
             echo '</tr>';
         }

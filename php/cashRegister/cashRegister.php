@@ -136,9 +136,9 @@
             $total += $price * $row['Quantity'];
         }
         $tax = $total * .0825;
-        echo "<tr id=row><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
-        echo "<tr><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
-        echo "<tr><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr>";
+        echo "<tr id=row><td></td><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
+        echo "<tr><td></td><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr>";
         echo "<tr><td colspan='5'><button data-bs-target='#confirmCheckout' data-bs-toggle='modal' class='btn btn-primary' type='button'><a class='text-light' style='color:white; text-decoration:none;'>Purchase</a></button></td></tr></table>";
         echo "<div id=space></div>";
     }
