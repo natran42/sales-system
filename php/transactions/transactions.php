@@ -130,7 +130,6 @@ if(!empty($_POST['submit'])){
 body {
     /*background: linear-gradient(135deg, #ffafbd ,#ffc3a0);*/
     justify-content: center;
-    height: 100vh;
     color: white;
 }
 
@@ -154,7 +153,6 @@ form {
     background: #fff;
     border-radius: 15px;
     color: rgb(68, 65, 65);
-   
 }
 
 input {
@@ -187,6 +185,7 @@ input {
     padding: 30px; 
     background: #fff;
     border-radius: 15px;
+    border: 0;
     color: rgb(68, 65, 65);
 }
 

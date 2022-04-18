@@ -115,7 +115,7 @@ function selectEmployeeTransactions($start, $end) {
                     echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
                 }
                 else {
-                    echo '<h3>'.$startDate.' ~ '.$endDate.'</h3>';
+                    echo '<h4>'.$startDate.' ~ '.$endDate.'</h4>';
                     selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
                 }
             }

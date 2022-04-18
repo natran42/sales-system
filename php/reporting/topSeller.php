@@ -24,17 +24,19 @@
         <option value='currYear'>This year</option>
         <option value='customRange'>Custom Range</option>
     </select>
+   
     <div id='daterangepicker' style='display:none'>
         <p>Start date:</p>
         <input type='date' id='startdaterange' name='startdaterange'>
         <p>End date:</p>
         <input type='date' id='enddaterange' name='enddaterange'>
     </div>
+    <br>
     <select id='order' name='order' class="form-select" aria-label="Default select example">
         <option value='qty'>Qty Sold</option>
         <option value='gross'>Grossing</option>
     </select>
-    <br><br>
+
     <input type='submit' name='topSellers' id='topSellers' class='queryButton' value='View Results'>
 </form>
 
@@ -123,7 +125,7 @@ if(array_key_exists('topSellers', $_POST)) {
         echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
     }
     else {
-        echo '<h3>'.$startDate.' ~ '.$endDate.'</h3>';
+        echo '<h4>'.$startDate.' ~ '.$endDate.'</h4>';
         selectTopSellers($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), $order);
     }
 }
