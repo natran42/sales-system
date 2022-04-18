@@ -24,24 +24,25 @@
         <option value='currYear'>This year</option>
         <option value='customRange'>Custom Range</option>
     </select>
-   
     <div id='daterangepicker' style='display:none'>
-        <div class="input-group">
-        <span class="input-group-text">Start date:</span>
-        <input class="form-control" type='date' id='startdaterange' name='startdaterange'>
-        </div>
-        <div class="input-group">
-        <span class="input-group-text">End date:</span>
-        <input class="form-control" type='date' id='enddaterange' name='enddaterange'>
-        </div>
-    </div>
+                    <br>
+                    <div class="input-group">
+                    <span style="width:25%" class="input-group-text">Start date:</span>
+                    <input class="form-control" type='date' id='startdaterange' name='startdaterange'>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                    <span style="width:25%" class="input-group-text">End date:</span>
+                    <input class="form-control" type='date' id='enddaterange' name='enddaterange'>
+                    </div>
+                </div>
     <br>
     <select id='order' name='order' class="form-select">
         <option value='qty'>Quantity Sold</option>
         <option value='gross'>Grossing</option>
     </select>
 
-    <input type='submit' name='topSellers' id='topSellers' class='queryButton' value='View Results'>
+    <input type='submit' name='topSellers' id='topSellers' class='queryButton input-extra' value='View Results'>
 </form>
 
 <?php
@@ -129,7 +130,7 @@ if(array_key_exists('topSellers', $_POST)) {
             break;
     }
     if($_POST['filter'] === 'customRange' && ($_POST['startdaterange'] === '' || $_POST['enddaterange'] === '')) {
-        echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
+        echo "<script>alert('Please enter both a start and end date.');</script>";
     }
     else {
         

@@ -41,7 +41,7 @@ form {
    
 }
 
-input {
+.input-extra {
     display: block;
     border: 2px solid;
     width: 100%;

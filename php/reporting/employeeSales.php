@@ -17,25 +17,27 @@
 </script>
             <form method='post'>
                 <h3>Employee Sales</h3>
-                <label>Employee ID: (Leave blank to get all employees)</label><input type="number" name="empID"/>
+                <label>Employee ID: (Leave blank to get all employees)</label><input class="input-extra" type="number" name="empID"/>
                 <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
                     <option value='currWeek'>This week</option>
                     <option value='currMonth'>This month</option>
                     <option value='currYear'>This year</option>
                     <option value='customRange'>Custom Range</option>
                 </select>
+                <br>
                 <div id='daterangepicker' style='display:none'>
                     <div class="input-group">
-                    <span class="input-group-text">Start date:</span>
+                    <span style="width:25%" class="input-group-text">Start date:</span>
                     <input class="form-control" type='date' id='startdaterange' name='startdaterange'>
                     </div>
+                    <br>
                     <div class="input-group">
-                    <span class="input-group-text">End date:</span>
+                    <span style="width:25%" class="input-group-text">End date:</span>
                     <input class="form-control" type='date' id='enddaterange' name='enddaterange'>
                     </div>
                 </div>
                 <br><br>
-                <input type='submit' name='employeeSales' id='employeeSales' class='queryButton' value='View Results'>
+                <input type='submit' name='employeeSales' id='employeeSales' class='queryButton input-extra' value='View Results'>
             </form>
 <?php
 
@@ -157,7 +159,7 @@ function selectEmployeeTransactions($start, $end, $targetEID) {
                         break;
                 }
                 if($_POST['filter'] === 'customRange' && ($_POST['startdaterange'] === '' || $_POST['enddaterange'] === '')) {
-                    echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
+                    echo "<script>alert('Please enter both a start and end date.');</script>";
                 }
                 else {
                     isset($_POST['empID']) ? selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), $_POST['empID']) : selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), '');
