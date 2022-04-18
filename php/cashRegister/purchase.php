@@ -38,10 +38,8 @@
         if (!$result)
             die("Error getting employee"); 
         $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        $eid = $row['EID']; //employee or selfcheckout id
+        $eid = isset($row['EID']) ? $row['EID'] : 100000; 
         // if you empty returned, set processby = null -> guest : EID
-        if($result == null)
-            die("No employee logged in");
 
         // grab UID for customer through phone number 
         $phoneNumber = $_GET['num'];

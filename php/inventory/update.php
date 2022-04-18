@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 
     $result = sqlsrv_query($connection, $tsql);
     if ($result) {
-        header('location:inventory.php');
+        //header('location:inventory.php');
     }
 }
 $upc = $_GET['updateupc'];
@@ -141,7 +141,7 @@ $sold1 = $row['SoldQty'];
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" name="submit">Update</button>
+                        <button type="submit" class="btn btn-primary" name="submit" onclick="window.location.replace('inventory.php');">Update</button>
                     </form>
                 </div>
 

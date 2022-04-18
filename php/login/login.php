@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-session_unset();
 clearSession();
 emptyCart();
 
@@ -17,12 +15,7 @@ if(array_key_exists('entry', $_POST)) {
                 setSession($_POST['username'], 'EMP');
                 //$_SESSION['EMP'] = getUserID($_POST['username']);
             header('location: php/cashRegister/cashregister.php');
-            session_regenerate_id(true);
-            session_write_close();
-            exit();
-        }    
-        // else
-        //     echo "Invalid login credentials";
+        }
     }
 }
 
@@ -159,7 +152,7 @@ function emptyCart(){
     <div class='row'>
         <div class='col-6'>
             <form method='post'>
-                <h1>Welcome !  </h1>
+                <h1>Welcome!</h1>
                 <h2> Please login or use self-checkout</h2>
                 <label>Username: </label><input type='text' name='username' /><br/>
                 <label>Password: </label><input type='password' name='pwd' /><br/>

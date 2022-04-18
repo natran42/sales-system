@@ -189,13 +189,13 @@
                 }
                 else {
                     echo "<script>alert('Item is out of stock.');</script>";
-                    printTable();
                     die(print_r(sqlsrv_errors(), true));
                 }
             }
             else {
                 echo "<script>alert('Invalid item');</script>";
             }
+            printTable();
         }
         catch(Exception $e) {
             echo 'Error';

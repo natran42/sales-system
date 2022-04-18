@@ -163,16 +163,9 @@ function getInventory()
   }
 }
 
-
 if(!lowStockEmpty()) {
   printLowStock();
 }
-
-
-//if (isset($_GET['delete'])) {
-//  $upcToDelete = validate($_GET['delete']);
-//  deleteItem($upcToDelete);
-//}
 
 ?>
 
@@ -183,6 +176,10 @@ if(!lowStockEmpty()) {
 <html lang="en">
 
 <head>
+    <script>
+    if(window.history.replaceState)
+        window.history.replaceState(null, null, window.location.href);
+    </script>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">

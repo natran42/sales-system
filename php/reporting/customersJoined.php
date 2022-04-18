@@ -18,20 +18,27 @@
 <title>Customers Registered</title>
     <form method='post'>
         <h3>Customers registered</h3>
-        <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">
+        <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
             <option value='currWeek'>This week</option>
             <option value='currMonth'>This month</option>
             <option value='currYear'>This year</option>
             <option value='customRange'>Custom Range</option>
         </select>
+        <br>
         <div id='daterangepicker' style='display:none'>
-            <p>Start date:</p>
-            <input type='date' id='startdaterange' name='startdaterange'>
-            <p>End date:</p>
-            <input type='date' id='enddaterange' name='enddaterange'>
+                    <div class="input-group">
+                    <span style="width:25%" class="input-group-text">Start date:</span>
+                    <input class="form-control" type='date' id='startdaterange' name='startdaterange'>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                    <span style="width:25%" class="input-group-text">End date:</span>
+                    <input class="form-control" type='date' id='enddaterange' name='enddaterange'>
+                    </div>
+                </div>
         </div>
         <br><br>
-        <input type='submit' name='customerQuery' id='customerQuery' class='queryButton' value='View Results'>
+        <input type='submit' name='customerQuery' id='customerQuery' class='queryButton input-extra' value='View Results'>
     </form>
     <!--END-->
 
@@ -116,7 +123,7 @@ function selectCustomer($start, $end) {
                 break;
         }
         if($_POST['filter'] === 'customRange' && ($_POST['startdaterange'] === '' || $_POST['enddaterange'] === '')) {
-            echo '<p style=\'color:red\'>Please enter both a start and end date.</p>';
+            echo "<script>alert('Please enter both a start and end date.');</script>";
         }
         else {
             selectCustomer($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1));
