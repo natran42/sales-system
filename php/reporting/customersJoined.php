@@ -15,7 +15,7 @@
     }
 </script>
 
-<title>Customer Report</title>
+<title>Customers Registered</title>
     <form method='post'>
         <h3>Customers registered</h3>
         <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select" aria-label="Default select example">

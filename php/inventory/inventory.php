@@ -48,7 +48,7 @@ function printLowStock() {
         </div>
         <div class="modal-body">';
 
-    echo '<table border = \'1\' class=\'table table-hover\'>
+    echo '<table border = \'1\' class=\'table table-hover\' style=\'width:100%;\'>
           <tr>
           <th>UPC</th>
           <th>Name</th>
