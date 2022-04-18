@@ -3,6 +3,7 @@
 session_start();
 session_unset();
 clearSession();
+emptyCart();
 
 if(array_key_exists('entry', $_POST)) {
     $hash = getUserCredentials($_POST['username']);
@@ -130,6 +131,25 @@ function clearSession() {
     catch(Exception $e) {
         echo 'Error';
     }
+}
+
+function emptyCart(){
+    try {
+        $connection = openConnection();
+        $sql = 'DELETE from Cart';
+        $emptyCart = sqlsrv_query($connection, $sql);
+        if(!$emptyCart)
+            die(print_r(sqlsrv_errors(), true));
+
+        sqlsrv_free_stmt($emptyCart);
+        sqlsrv_close($connection);
+
+        return true;
+    }
+    catch(Exception $e) {
+        echo 'Error';
+    }
+
 }
 
 
