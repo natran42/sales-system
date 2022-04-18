@@ -32,7 +32,7 @@ $connection = openConnection();
     <head>
         <title>Confirmation</title>
         <rel="stylesheet" href="confirmation.css">
-        <!-- <meta http-equiv = "refresh" content = "3; url = cashRegister.php" /> -->
+        <meta http-equiv = "refresh" content = "3; url = cashRegister.php" />
     </head>
 
     <body>
