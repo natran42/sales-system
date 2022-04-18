@@ -139,7 +139,7 @@
         echo "<tr id=row><td></td><td></td><td></td><td><b>Sub Total:</b></td><td>$". number_format($total, 2)."</td><td></td></tr>";
         echo "<tr><td></td><td></td><td></td><td><b>Tax:</b></td><td>$". number_format($tax, 2)."</td><td></td></tr>";
         echo "<tr><td></td><td></td><td></td><td><b>Total:</b></td><td>$". number_format($total+$tax, 2)."</td><td></td></tr>";
-        echo "<tr><td colspan='5'><button data-bs-target='#confirmCheckout' data-bs-toggle='modal' class='btn btn-primary' type='button'><a class='text-light' style='color:white; text-decoration:none;'>Purchase</a></button></td></tr></table>";
+        echo "<tr><td colspan='6'><button data-bs-target='#confirmCheckout' data-bs-toggle='modal' class='btn btn-primary' type='button'><a class='text-light' style='color:white; text-decoration:none;'>Purchase</a></button></td></tr></table>";
         echo "<div id=space></div>";
     }
 
@@ -227,8 +227,8 @@
             <h6 class = "NotMember">Not a registered member yet? </h6><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Confirm Purchase</a></button>
+            <button type="button" class="btn btn-secondary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
+            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
         </div>
         </div>
     </div>
