@@ -41,9 +41,7 @@
         <div class="form-group">
             <label for="itemQuantity">Item Quantity</label>
             <input type="text" class="form-control" id="itemQuantity" name="itemQuantity" placeholder="Enter Item Quantity" required>
-
         </div>
-
         <button type="submit" style="color:white;" class="btn btn-primary">Add To Cart</button>
 
     </form>
@@ -228,7 +226,8 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Confirm Purchase</a></button>
+            <button type="button" class="btn btn-primary" onclick="confirmation()" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Confirm Purchase</a></button>
+
         </div>
         </div>
     </div>
@@ -248,5 +247,6 @@
         flag = true;
     }
 
+    
 </script>
 

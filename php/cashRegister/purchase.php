@@ -85,7 +85,7 @@
         $sqlquery = "DELETE FROM Cart";
     $result = sqlsrv_query($connection, $sqlquery);
     if($result){
-        header('location:cashRegister.php');
+        header('location:confirmationpage.php');
     }
     else
         die(print_r(sqlsrv_errors(), true));
