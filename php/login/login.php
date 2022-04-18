@@ -165,8 +165,6 @@ function emptyCart(){
                 <label>Password: </label><input type='password' name='pwd' /><br/>
                 <input type='submit' name='entry' value='Login' />
             </form>
-        </div>
-        <div class='col-6'>
             <a href='php/cashRegister/cashregister.php' style="text-decoration: none";><button class = 'self'>Self-Checkout</button> </a>
         </div>
     </div>
