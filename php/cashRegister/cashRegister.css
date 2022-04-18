@@ -64,7 +64,7 @@ input {
 .btn-primary {
     background-color:#004e92;
     border:none;
-    color: black;
+    float: right;
 }
 
 .table{

@@ -57,7 +57,7 @@ input {
 }
 
 select#drop-down{ /* select is not part of the input CSS */
-    display: inline-block; 
+    display: block; 
     height: 48px;
     width: 49%;
     float: right;
@@ -70,6 +70,12 @@ label{
     font-size: 18px;
     padding: 10px;
 }
+label:after{
+    content: "*";
+    color: red;
+}
+
+
 
 #space{
     width: 100px;
