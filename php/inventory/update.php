@@ -32,6 +32,7 @@ if (isset($_POST['submit'])) {
     $result = sqlsrv_query($connection, $tsql);
     if ($result) {
         //header('location:inventory.php');
+        echo '<meta http-equiv = "refresh" content = "1; url = inventory.php" />';
     }
 }
 $upc = $_GET['updateupc'];
