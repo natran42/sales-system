@@ -120,8 +120,8 @@ function selectEmployees($selected) {
             echo '<td>'.$row['Email'].'</td>';
             echo '<td>'.$row['Username'].'</td>';
             echo '</tr>';
-        
         }
+        echo "</table>";
         
     }
     catch(Exception $e) {
