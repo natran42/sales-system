@@ -124,6 +124,7 @@ function getInventory()
     $getItems = sqlsrv_query($connection, $selectQuery);
     if (!$getItems)
       die(print_r(sqlsrv_errors(), true));
+    $accessLevel = getAuth();
 
     // Prints out headers for table
     echo "<table border = '1' class='table table-light table-hover'>
@@ -134,9 +135,10 @@ function getInventory()
       <th>Category</th>
       <th>Size</th>
       <th>Price</th>
-      <th>Quantity in Stock</th>
-      <th>Action</th>
-      </tr>";
+      <th>Quantity in Stock</th>";
+      if($accessLevel === 'MGR')
+        echo "<th>Action</th>";
+      echo "</tr>";
     $itemCount = 1;
 
     // Prints out each item as a row
@@ -150,10 +152,12 @@ function getInventory()
       echo '<td>' . $row['Size'] . '</td>';
       echo '<td>$' . number_format($row['Price'], 2) . '</td>';
       echo '<td>' . $row['StockQty'] . '</td>';
-      echo '<td>
-                <button class="btn btn-primary" type="button"><a href="update.php?updateupc=' . $upc . '" class="text-light" style="color:white; text-decoration:none;">Update</a></button>
-                <button class="btn btn-danger" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="delete.php?deleteupc=' . $upc . '">Delete</a></button>
-                </td>';
+      if($accessLevel === 'MGR') {
+        echo '<td>
+        <button class="btn btn-primary" type="button"><a href="update.php?updateupc=' . $upc . '" class="text-light" style="color:white; text-decoration:none;">Update</a></button>
+        <button class="btn btn-danger" type="button"><a class="text-light" style="color:white; text-decoration:none;" href="delete.php?deleteupc=' . $upc . '">Delete</a></button>
+        </td>';
+      }
       echo '</tr>';
     }
     echo '</table>';
@@ -277,16 +281,19 @@ h1{
   <div class="container mt-5 mb-5">
     <div class="row">
       <div class="header"><h1>Inventory</h1></div>
-      <div class="col text-center">
-      
-        <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventory">Add Inventory</button>-->
+      <?php
+      $accessLevel = getAuth();
+      if($accessLevel === 'MGR') {
+        echo '<div class="col text-center">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addInventory" class="add-btn">
           <span class="button-text">Add Inventory</span>
           <span class="button-icon">
             <ion-icon name="add-outline"></ion-icon>
           </span>
         </button>
-      </div>
+      </div>';
+      }
+      ?>
     </div>
 
 
