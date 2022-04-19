@@ -191,7 +191,7 @@ if(isset($_POST['addEmployee'])) {
             <div class="mb-3">
               <label class="form-label required">Phone Number</label>
               <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-               required maxlength="12">
+               required maxlength="12" class = "form-control">
 
                   <script>
 
