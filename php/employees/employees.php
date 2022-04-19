@@ -26,12 +26,11 @@
 
     <input type='submit' name='submit' value='View Results'>
     <button type="button" data-bs-toggle="modal" data-bs-target="#addEmployee" class="add-btn">
-    <span class="button-text">Add Employee</span>
+          <span class="button-text">Add Employee</span>
           <span class="button-icon">
             <ion-icon name="add-outline"></ion-icon>
           </span>
-
-        </button>
+    </button>
 </form>
 
 <?php
