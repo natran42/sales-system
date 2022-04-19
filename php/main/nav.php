@@ -34,6 +34,9 @@
             <li class="nav-item" id='register'>
             <a style = "color:white" class="nav-link" href="/php/registration/registration.php"><i class="fa fa-fw fa-pencil"></i>Registration</a>
             </li>
+            <li class="nav-item" id='employees'>
+            <a style = "color:white" class="nav-link" href="/php/employees/employees.php"><i class="fa fa-fw fa-user-o"></i>Employees</a>
+            </li>
             <li class="nav-item dropdown" id='reports'>
                 <a style = "color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-file"></i>Reports</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -254,6 +257,7 @@ body {
 
     if($accessLevel !== 'MGR') {
         echo '<script>hide(\'reports\');</script>';
+        echo '<script>hide(\'employees\');</script>';
     }
     if($accessLevel !== 'MGR' && $accessLevel !== 'EMP') {
         echo '<script>hide(\'inventory\');</script>';
