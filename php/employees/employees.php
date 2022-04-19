@@ -24,7 +24,7 @@
         <option value='3'>Custodians</option>
     </select>
 
-    <input type='submit' name='submit' value='View Results'>
+    <input type='submit' name='viewEmployees' value='View Results'>
     <button type="button" data-bs-toggle="modal" data-bs-target="#addEmployee" class="add-btn">
     <span class="button-text">Add Employee</span>
           <span class="button-icon">
@@ -81,28 +81,31 @@ function selectEmployees($selected) {
                 break;
         }
         if ($selected == '7'){
-            $selectQuery = "SELECT EID, FirstName, LastName, PhoneNumber, Email, IsActive, Username FROM Employees";
+            $selectQuery = "SELECT EMP.EID, SAP.PositionTitle, EMP.FirstName + ' ' + EMP.LastName AS Name, EMP.PhoneNumber, EMP.Email, EMP.Username FROM Employees EMP
+                            LEFT JOIN SalesPositions SAP ON SAP.PositionID = EMP.Position
+                            ORDER BY Position DESC";
         }
         else{
-            $selectQuery = "SELECT EID, FirstName, LastName, PhoneNumber, Email, IsActive, Username FROM Employees WHERE Position = $selected";
+            $selectQuery = "SELECT EMP.EID, EMP.FirstName + ' ' + EMP.LastName AS Name, EMP.PhoneNumber, EMP.Email, EMP.Username FROM Employees EMP
+                            WHERE Position = $selected";
         }
-        
+      
         $getEmployees = sqlsrv_query($connection, $selectQuery);
         if(!$getEmployees)
             die(print_r(sqlsrv_errors(), true));
         echo "<br> <br>";
         echo "<table border = '1' class='table table-hover'>
-        <tr>
-        <th id=header colspan='5'> $val</th>
-        </tr>
+        <tr>";
+        echo $selected == '7' ? "<th id=header colspan='7'>$val</th>" : "<th id=header colspan='6'>$val</th>";
+        echo "</tr>
         <tr>
         <th>#</th>
-        <th>EID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>EID</th>";
+        if($selected == '7')
+          echo "<th>Position</th>";
+        echo "<th>Name</th>
         <th>Phone Number</th>
         <th>Email</th>
-        <th>Is Active</th>
         <th>Username</th>
         </tr>";
         $count = 1;
@@ -111,11 +114,11 @@ function selectEmployees($selected) {
             echo '<tr>';
             echo '<td>'.$count++.'</td>';
             echo '<td>'.$row['EID'].'</td>';
-            echo '<td>'.$row['FirstName'].'</td>';
-            echo '<td>'.$row['LastName'].'</td>';
+            if($selected == '7')
+              echo '<td>'.$row['PositionTitle'].'</td>';
+            echo '<td>'.$row['Name'].'</td>';
             echo '<td>'.$row['PhoneNumber'].'</td>';
             echo '<td>'.$row['Email'].'</td>';
-            echo '<td>'.$row['IsActive'].'</td>';
             echo '<td>'.$row['Username'].'</td>';
             echo '</tr>';
         
@@ -130,7 +133,6 @@ function selectEmployees($selected) {
 function addNewEmployee(){
     try {
         $conn = OpenConnection();
-    
           $firstName = $_POST['first'];
           $lastName = $_POST['last'];
           $number = $_POST['number'];
@@ -138,9 +140,9 @@ function addNewEmployee(){
           $position = $_POST['position'];
           $startDate = $_POST['startDate'];
           $username = $_POST['username'];
-          $password = $_POST['password'];
           $tsql = 'INSERT dbo.Employees (FirstName,LastName,PhoneNumber,Email,Position,Start_Dt,End_Dt,IsActive,Username, Password) VALUES(?,?,?,?,?,?,?,?,?,?)';
-          $params1 = array($firstName, $lastName, $number, $email, $position, $startDate, NULL, 1, $username, $password);
+          $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT, ['cost'=>10]);
+          $params1 = array($firstName, $lastName, $number, $email, $position, $startDate, NULL, 1, $username, $hashedPassword);
           $result = sqlsrv_query($conn, $tsql, $params1);
           if ($result) {
             echo "Data inserted";
@@ -152,17 +154,16 @@ function addNewEmployee(){
     }
 
 
-if(isset($_POST['submit'])){
-if(!empty($_POST['employee'])) {
-    $selected = $_POST['employee'];
-    selectEmployees($selected);
-
-    } else {
-        addNewEmployee();
-        echo 'Please select the value.';
+if(isset($_POST['viewEmployees'])){
+    if(isset($_POST['employee'])) {
+      $selected = $_POST['employee'];
+      selectEmployees($selected);
     }
-    }
+}
 
+if(isset($_POST['addEmployee'])) {
+  addNewEmployee();
+}
 
 
 
@@ -181,7 +182,7 @@ if(!empty($_POST['employee'])) {
         <div class="modal-body">
           <form method="post">
             <div class="mb-3">
-              <label class="form-label required"> First Name</label>
+              <label class="form-label required">First Name</label>
               <input type="text" name="first" placeholder="First Name" class="form-control">
             </div>
             <div class="mb-3">
@@ -190,7 +191,23 @@ if(!empty($_POST['employee'])) {
             </div>
             <div class="mb-3">
               <label class="form-label required">Phone Number</label>
-              <input type="text" name="number" placeholder="Format: 555-555-5555" class="form-control">
+              <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+               required maxlength="12">
+
+                  <script>
+
+                    let itemInput = document.querySelector('input[type=tel]') ;
+                    itemInput.addEventListener('keypress', phone);
+
+                    let flag = false;
+                    function phone(){
+                        let p = this.value;
+                        if((p.length + 1) % 4 == 0 && p.length < 9 && flag == true)
+                            this.value = p + "-";
+                        flag = true;
+                    }
+
+                  </script>
             </div>
             <div class="mb-3">
               <label class="form-label required">Email</label>
@@ -198,7 +215,7 @@ if(!empty($_POST['employee'])) {
             </div>
             <div class="mb-3">
               <label class="form-label required">Position</label>
-              <select name="Position" class="form-control">
+              <select name="position" class="form-control">
                 <option value="">--Select an option--</option>
                 <option value="1">Cashier</option>
                 <option value="2">Stocker</option>
@@ -219,9 +236,9 @@ if(!empty($_POST['employee'])) {
             </div>
             <div class="mb-3">
               <label class="form-label required">Password</label>
-              <input type="text" name="password" placeholder="Password" class="form-control">
+              <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" name="employeeAdd">Submit</button>
           </form>
         </div>
 
