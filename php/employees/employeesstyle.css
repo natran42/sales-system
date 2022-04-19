@@ -39,16 +39,16 @@ form {
    
 }
 
-input[type=submit]{
+input[type=submit] {
     display: block;
     border: 2px solid;
     width: 100%;
     padding: 10px;
     margin: 10px auto;
     border-radius: 5px;
-    color: white;
     background-color: #d4418e;
     background-image: linear-gradient(315deg, #d4418e 0%, #0652c5 74%);
+    color:white;
 }
 
 
@@ -69,26 +69,29 @@ input[type=submit]{
     padding: 10px;
     margin: 10px auto;
     border-radius: 5px;
-    color: white;
     background-color: #d4418e;
     background-image: linear-gradient(315deg, #d4418e 0%, #0652c5 74%);
+    color:white;
   }
-
-.add-btn:hover {
-        background-color: #0652c5;
-        background-image: linear-gradient(315deg, #0652c5 0%, #d4418e 74%);
-}
-
+ 
 #header{
     text-align: center;
     font-size: larger;
 }
-
-.modal-body{
-    display: flex;
-    padding-top: 0%;
-}
+/*make sure all of the */
 
 .button-icon{
     vertical-align: middle;
 }
+
+/*style the modal where its always the same*/
+.modal-body{
+    display: flex;
+}
+
+.table table-hover{
+    background-color: #fff;
+    color: rgb(68, 65, 65);
+    border: 0;
+}
+

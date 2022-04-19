@@ -92,7 +92,7 @@ function selectEmployees($selected) {
         echo "<br> <br>";
         echo "<table border = '1' class='table table-hover'>
         <tr>
-        <th id=header colspan='5'> $val</th>
+        <th id=header colspan='8'> $val</th>
         </tr>
         <tr>
         <th>#</th>
