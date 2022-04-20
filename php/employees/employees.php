@@ -131,6 +131,8 @@ function selectEmployees($selected) {
 
 function addNewEmployee(){
     try {
+        if(!isset($_POST['position']))
+          return;
         $conn = OpenConnection();
           $firstName = $_POST['first'];
           $lastName = $_POST['last'];
