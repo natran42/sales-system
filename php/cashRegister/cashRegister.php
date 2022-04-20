@@ -209,27 +209,24 @@
 <html>
     <!-- Modal -->
     <div class="modal fade" id="confirmCheckout" tabindex="-1" aria-labelledby="confirmCheckoutLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmCheckoutLabel"><b>Check Out</b></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <p>Enter phone number below to checkout:</p>
-                    <form id=modalForm method="post">
-                        <input id="phoneNumber" type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-            required maxlength="12"><br>
-                    </form>
-                    <h6 class = "NotMember">Not a registered member yet? </h6><a href="../registration/registration.php">Click Here!</a>
-                </div>
-
-                <div class="modal-footer">
-                    <button id="guest" type="button" class="btn btn-secondary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
-                    <button id="memberCheckout" type="button" class="btn btn-primary" disabled><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
-                </div>
-            </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmCheckoutLabel">Check Out</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Enter phone number below to checkout</p>
+            <form id=modalForm method="post">
+                <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+       required maxlength="12"><br>
+            </form>
+            <h6 class = "NotMember">Not a registered member yet?</h6><a href="../registration/registration.php">Click Here!</a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
+            <button type="button" class="btn btn-primary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
+        </div>
         </div>
     </div>
 </html>
@@ -239,7 +236,7 @@
     itemInput.addEventListener('keypress', phone);
 
     let flag = false;
-    function phone(){
+    function phone() {
         let p = this.value;
         if((p.length + 1) % 4 == 0 && p.length < 9 && flag == true)
             this.value = p + "-";
