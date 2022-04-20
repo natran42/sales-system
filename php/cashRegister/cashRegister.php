@@ -204,7 +204,6 @@
     else {
         printTable();
     }
-    /* we could use action= to direct user to webpage confirming purchase after submitting */
 ?>
 
 <html>
@@ -234,6 +233,7 @@
         </div>
     </div>
 </html>
+
 <script>
     let itemInput = document.querySelector('input[type=tel]') ;
     itemInput.addEventListener('keypress', phone);
@@ -249,12 +249,12 @@
     const input = document.querySelector('#phoneNumber');
                 const button = document.querySelector('#memberCheckout');
 
-                input.addEventListener('keyup', () => {
-                    const enteredLength = input.value.length;
-                    if (enteredLength >= 12) 
-                        button.disabled = false;
-                    else
-                        button.disabled = true;
-                });
-</script>
+    input.addEventListener('keyup', () => {
+        const enteredLength = input.value.length;
+        if (enteredLength >= 12) 
+            button.disabled = false;
+        else
+            button.disabled = true;
+    });
 
+</script>
