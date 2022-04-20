@@ -163,7 +163,6 @@ if(isset($_POST['viewEmployees'])){
 }
 
 if(isset($_POST['addEmployee'])) {
-  echo "<script>console.log('Inserting')</script>";
   addNewEmployee();
 }
 
@@ -240,7 +239,7 @@ if(isset($_POST['addEmployee'])) {
               <label class="form-label required">Password</label>
               <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary" name="employeeAdd">Submit</button>
+            <button type="submit" class="btn btn-primary" name="addEmployee">Submit</button>
           </form>
         </div>
 
