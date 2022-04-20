@@ -217,7 +217,7 @@ if(isset($_POST['addEmployee'])) {
             <div class="mb-3">
               <label class="form-label required">Position</label>
               <select name="position" class="form-control">
-                <option value="">--Select an option--</option>
+                <option value="" selected disabled>--Select an option--</option>
                 <option value="1">Cashier</option>
                 <option value="2">Stocker</option>
                 <option value="3">Custodian</option>

@@ -98,7 +98,10 @@ input[type=submit]:hover {
     display: flex;
 }
 
-
+.modal-header{
+    background-color: #3d85c6;;
+    color: white;
+}
 
 .table table-hover{
     background-color: #fff;
