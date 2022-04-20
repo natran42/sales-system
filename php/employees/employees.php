@@ -163,6 +163,7 @@ if(isset($_POST['viewEmployees'])){
 }
 
 if(isset($_POST['addEmployee'])) {
+  echo "<script>console.log('Inserting')</script>";
   addNewEmployee();
 }
 
