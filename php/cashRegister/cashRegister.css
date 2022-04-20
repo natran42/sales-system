@@ -9,6 +9,7 @@
     width: 500px;
     border: 2px solid #ccc;
     padding: 40px; /* inside padding */
+    padding-bottom: 60px;
     background: #fff;
     border-radius: 15px; /* edges */
     color:rgb(68, 65, 65)
@@ -67,6 +68,17 @@ input {
     float: right;
 }
 
+.btn-secondary{
+    color:white; 
+    background-color: #6B6B6B; 
+    text-decoration:none;
+}
+
+.btn-secondary:hover{
+    border-color: #999999;
+    background-color: #999999;
+}
+
 .table{
     margin: auto;
     width: 600px;
@@ -83,7 +95,6 @@ td{
 }
 
 /*change the text color in the modal of when purchased is clicked*/
-
 .modal-content{
     color: black;
 

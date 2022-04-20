@@ -82,11 +82,11 @@
     function printTable(){
         //Printing header row
         echo "<div class='col-6'>
-        <table border = '1' class='table' style='width:100%;'>
+        <table border='1' class='table' style='width:100%;'>
             <tr>
                 <th id=header colspan='6'>SHOPPING CART</th>
             </tr>
-            <tr><td></td><td></td><td></td><td><b>Transaction #</b></td><td><b>".getNextTransactionId()."</b></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td><b>Transaction #</b><b>".getNextTransactionId()."</b></td><td></td><td></td></tr>
             <tr>
                 <th>Item Name</th>
                 <th>Size</th>
@@ -210,31 +210,31 @@
 <html>
     <!-- Modal -->
     <div class="modal fade" id="confirmCheckout" tabindex="-1" aria-labelledby="confirmCheckoutLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="confirmCheckoutLabel">Check Out</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmCheckoutLabel"><b>Check Out</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>Enter phone number below to checkout:</p>
+                    <form id=modalForm method="post">
+                        <input id="phoneNumber" type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            required maxlength="12"><br>
+                    </form>
+                    <h6 class = "NotMember">Not a registered member yet? </h6><a href="../registration/registration.php">Click Here!</a>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="guest" type="button" class="btn btn-secondary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
+                    <button id="memberCheckout" type="button" class="btn btn-primary" disabled><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <p>Enter phone number below to checkout</p>
-            <form id=modalForm method="post">
-                <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-       required maxlength="12"><br>
-            </form>
-            <h6 class = "NotMember">Not a registered member yet? </h6><a href="../registration/registration.php">Click Here!</a>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
-            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
-        </div>
-        </div>
-    </div>
     </div>
 </html>
-
 <script>
-
     let itemInput = document.querySelector('input[type=tel]') ;
     itemInput.addEventListener('keypress', phone);
 
@@ -246,6 +246,15 @@
         flag = true;
     }
 
-    
+    const input = document.querySelector('#phoneNumber');
+                const button = document.querySelector('#memberCheckout');
+
+                input.addEventListener('keyup', () => {
+                    const enteredLength = input.value.length;
+                    if (enteredLength >= 12) 
+                        button.disabled = false;
+                    else
+                        button.disabled = true;
+                });
 </script>
 
