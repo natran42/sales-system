@@ -224,8 +224,8 @@
             <h6 class = "NotMember">Not a registered member yet?</h6><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="confirmation();"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
-            <button type="button" class="btn btn-primary" onclick="confirmation();"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
+            <button type="button" class="btn btn-secondary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
+            <button type="button" class="btn btn-primary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
         </div>
         </div>
     </div>
