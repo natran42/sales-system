@@ -222,14 +222,14 @@
         <div class="modal-body">
             <p>Enter phone number below to checkout</p>
             <form id=modalForm method="post">
-                <input id="phoneNo" type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                <input id="phoneNo" type="tel" name="number" onkeypress="return checkIsNum(event);" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
             </form>
             <h6 class = "NotMember">Not a registered member yet?</h6><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="confirmation();"><a href="purchase.php?flush=true" style="color:white; text-decoration:none;">Checkout as Guest</a></button>
-            <button type="button" class="btn btn-primary" onclick="confirmation();" style='color:white; text-decoration:none;'>Checkout</button>
+            <button type="button" id="memberCheckout" class="btn btn-primary" onclick="confirmation();" disabled=true style='color:white; text-decoration:none;'>Checkout</button>
         </div>
         </div>
     </div>
@@ -247,8 +247,15 @@
         flag = true;
     }
 
-    const input = document.querySelector('#phoneNumber');
-                const button = document.querySelector('#memberCheckout');
+    function checkIsNum(e) {
+        var ASCIICode = (e.which) ? e.which : e.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
+    const input = document.getElementById('phoneNo');
+    const button = document.getElementById('memberCheckout');
 
     input.addEventListener('keyup', () => {
         const enteredLength = input.value.length;
