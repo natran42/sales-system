@@ -41,7 +41,7 @@
         $eid = isset($row['EID']) ? $row['EID'] : 100000; 
         // if you empty returned, set processby = null -> guest : EID
 
-        // grab UID for customer through phone number 
+        // grab UUID for customer through phone number 
         $phoneNumber = $_GET['num'];
         $query = "SELECT UUID FROM Customers WHERE PhoneNumber = '$phoneNumber'";
         $result = sqlsrv_query($connection, $query);
