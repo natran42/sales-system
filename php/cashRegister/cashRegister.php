@@ -5,6 +5,10 @@
     <script>
     if(window.history.replaceState)
         window.history.replaceState(null, null, window.location.href);
+    
+    function confirmation() {
+        window.location.href = "purchase.php?flush=true&num=" + document.getElementById('phoneNo').value;
+    }
     </script>
 
         <link rel="stylesheet" href="cashRegister.css">
@@ -218,14 +222,14 @@
         <div class="modal-body">
             <p>Enter phone number below to checkout</p>
             <form id=modalForm method="post">
-                <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                <input id="phoneNo" type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
             </form>
             <h6 class = "NotMember">Not a registered member yet?</h6><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
-            <button type="button" class="btn btn-primary"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
+            <button type="button" class="btn btn-secondary" onclick="confirmation();"><a href="purchase.php?flush=true" style="color:white; text-decoration:none;">Checkout as Guest</a></button>
+            <button type="button" class="btn btn-primary" onclick="confirmation();" style='color:white; text-decoration:none;'>Checkout</button>
         </div>
         </div>
     </div>

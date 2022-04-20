@@ -38,7 +38,6 @@
             die("Error in transactionItem");
         $checkCart = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
         if(empty($checkCart)) {
-            echo "<script>alert('Cannot process empty cart');</script>";
             $pushTransaction = FALSE;
             header('location:cashRegister.php');
         }
@@ -54,13 +53,18 @@
             // if you empty returned, set processby = null -> guest : EID
     
             // grab UUID for customer through phone number 
-            $phoneNumber = $_GET['num'];
-            $query = "SELECT UUID FROM Customers WHERE PhoneNumber = '$phoneNumber'";
-            $result = sqlsrv_query($connection, $query);
-            if (!$result)
-                die("Error getting customer");
-            $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-            $cid = isset($row['UUID']) ? $row['UUID'] : 100000; 
+            if(isset($_GET['num'])) {
+                $phoneNumber = $_GET['num'];
+                $query = "SELECT UUID FROM Customers WHERE PhoneNumber = '$phoneNumber'";
+                $result = sqlsrv_query($connection, $query);
+                if (!$result)
+                    die("Error getting customer");
+                $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+                $cid = isset($row['UUID']) ? $row['UUID'] : 100000; 
+            }
+            else {
+                $cid = 100000;
+            }
                 
             // insert into transactions table
             $query = "INSERT INTO Transactions VALUES ($cid, 'Purchase', GETDATE(), $eid, $transactionId)";
@@ -92,14 +96,14 @@
 
     // if the delete button is clicked we will delete the whole cart
     if($pushTransaction) {
-        if(isset($_GET['flush']))
-        $sqlquery = "DELETE FROM Cart";
-    $result = sqlsrv_query($connection, $sqlquery);
-    if($result){
-        header('location:confirmationpage.php');
+        if(isset($_GET['flush'])){
+            $sqlquery = "DELETE FROM Cart";
+            $result = sqlsrv_query($connection, $sqlquery);
+            if($result){
+                header('location:confirmationpage.php');
+            }
+            else
+                die(print_r(sqlsrv_errors(), true));
+        }
     }
-    else
-        die(print_r(sqlsrv_errors(), true));
-    }
-
 ?>
