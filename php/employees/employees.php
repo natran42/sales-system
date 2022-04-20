@@ -146,7 +146,7 @@ function addNewEmployee(){
           $params1 = array($firstName, $lastName, $number, $email, $position, $startDate, NULL, 1, $username, $hashedPassword);
           $result = sqlsrv_query($conn, $tsql, $params1);
           if ($result) {
-            echo "Data inserted";
+            echo "<script>console.log('Data inserted')</script>";
           } else {
             die(print_r(sqlsrv_errors(), true));
           }
