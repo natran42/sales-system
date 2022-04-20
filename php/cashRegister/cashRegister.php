@@ -222,11 +222,11 @@
                 <input type="tel" name="number" placeholder="Format: 555-555-5555" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
        required maxlength="12"><br>
             </form>
-            <h6 class = "NotMember">Not a registered member yet? </h6><a href="../registration/registration.php">Click Here!</a>
+            <h6 class = "NotMember">Not a registered member yet?</h6><a href="../registration/registration.php">Click Here!</a>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
-            <button type="button" class="btn btn-primary" ><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
+            <button type="button" class="btn btn-secondary" onclick="confirmation();"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout as Guest</a></button>
+            <button type="button" class="btn btn-primary" onclick="confirmation();"><a href="purchase.php?flush=true&num=phone" style='color:white; text-decoration:none;'>Checkout</a></button>
         </div>
         </div>
     </div>
@@ -239,7 +239,7 @@
     itemInput.addEventListener('keypress', phone);
 
     let flag = false;
-    function phone(){
+    function phone() {
         let p = this.value;
         if((p.length + 1) % 4 == 0 && p.length < 9 && flag == true)
             this.value = p + "-";

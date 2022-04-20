@@ -9,7 +9,7 @@ function openConnection() {
     return $connection;
 }
 
-function getNextTransactionId($connection) {
+function getTransactionId($connection) {
     try {
         $selectQuery = 'SELECT MAX(TransactionID) AS TID FROM Transactions'; //greatest number being the last transactionID
         $getTID = sqlsrv_query($connection, $selectQuery);
@@ -17,7 +17,7 @@ function getNextTransactionId($connection) {
         if(!$getTID)
             die(print_r(sqlsrv_errors(), true));
         $row = sqlsrv_fetch_array($getTID, SQLSRV_FETCH_ASSOC);
-        return $row['TID']+1; //incrementing row by 1 -> that being our next transactionID
+        return $row['TID']; //incrementing row by 1 -> that being our next transactionID
     }
     catch(Exception $e) {
         echo 'Error';
@@ -38,7 +38,7 @@ $connection = openConnection();
     <body>
         <div class="main-text">
             <h1>Thank you for your purchase!</h1>
-            <p>Your transaction ID is <?php echo getNextTransactionId($connection); ?></p>
+            <p>Your transaction ID is <?php echo getTransactionId($connection); ?></p>
         </div>
     </body>
 </html>
