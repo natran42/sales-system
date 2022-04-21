@@ -216,7 +216,6 @@
                 }
                 else {
                     echo "<script>alert('Item is out of stock.');</script>";
-                    die(print_r(sqlsrv_errors(), true));
                 }
             }
             else {
