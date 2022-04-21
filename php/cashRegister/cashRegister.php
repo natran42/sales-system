@@ -24,8 +24,30 @@
         <h2>ADD ITEM</h2>
         <div class="form-group">
             <label for="itemName">Item Name</label>
-            <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter Item Name" required>
+           <!-- <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter Item Name" required> -->
+            <?php
+            try {
+                $connection = openConnection();
+                // DISTINCT Select names from inventory
+                $selectQuery = 'SELECT DISTINCT Name FROM Inventory';
+                $getItemNames = sqlsrv_query($connection, $selectQuery);
+                if(!$getItemNames)
+                    die(print_r(sqlsrv_errors(), true));
+                echo "<select class='form-control' id='itemName' name='itemName'>";
+                echo "<option>N/A</option>";
+                while($row = sqlsrv_fetch_array($getItemNames, SQLSRV_FETCH_ASSOC)) {
+                    echo "<option>".$row['Name']."</option>";
+                }
+                echo "</select>";
+            }
+            catch(Exception $e) {
+                echo 'Error';
+    
+            }
+            ?>
+
         </div>
+
 
         <div class="form-group">
             <!-- this code will give a drop down menu of all the sizes of the item the user wants to buy -->
@@ -81,7 +103,8 @@
 
         }
     }
-    
+
+
 
     function printTable(){
         //Printing header row
