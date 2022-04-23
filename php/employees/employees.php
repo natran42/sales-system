@@ -131,9 +131,9 @@ function selectEmployees($selected) {
 
 function addNewEmployee(){
     try {
-        if(!isset($_POST['position']))
-          return;
-        $conn = OpenConnection();
+        // if(!isset($_POST['position']))
+        //   return;
+        $conn = openConnection();
           $firstName = $_POST['first'];
           $lastName = $_POST['last'];
           $number = $_POST['number'];
@@ -146,7 +146,7 @@ function addNewEmployee(){
           $params1 = array($firstName, $lastName, $number, $email, $position, $startDate, NULL, 1, $username, $hashedPassword);
           $result = sqlsrv_query($conn, $tsql, $params1);
           if ($result) {
-            echo "Data inserted";
+            echo "<script>console.log('Data inserted')</script>";
           } else {
             die(print_r(sqlsrv_errors(), true));
           }
@@ -239,7 +239,7 @@ if(isset($_POST['addEmployee'])) {
               <label class="form-label required">Password</label>
               <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary" name="employeeAdd">Submit</button>
+            <button type="submit" class="btn btn-primary" name="addEmployee">Submit</button>
           </form>
         </div>
 
