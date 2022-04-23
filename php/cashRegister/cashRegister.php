@@ -29,12 +29,13 @@
             try {
                 $connection = openConnection();
                 // DISTINCT Select names from inventory
-                $selectQuery = 'SELECT DISTINCT Name FROM Inventory';
+                $selectQuery = 'SELECT DISTINCT Name FROM Inventory
+                                WHERE IsActive = 1';
                 $getItemNames = sqlsrv_query($connection, $selectQuery);
                 if(!$getItemNames)
                     die(print_r(sqlsrv_errors(), true));
                 echo "<select class='form-control' id='itemName' name='itemName'>";
-                echo "<option>N/A</option>";
+                echo "<option selected disabled>--Select an option--</option>";
                 while($row = sqlsrv_fetch_array($getItemNames, SQLSRV_FETCH_ASSOC)) {
                     echo "<option>".$row['Name']."</option>";
                 }
