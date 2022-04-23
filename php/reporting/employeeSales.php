@@ -17,7 +17,7 @@
 </script>
             <form method='post'>
                 <h3>Employee Sales</h3>
-                <label>Employee ID: (Leave blank to get all employees)</label><input class="input-extra" type="number" name="empID"/>
+                <label>Employee Name: (Leave blank to get all employees)</label><input class="input-extra" type="text" name="empName"/>
                 <select id='filter' name='filter' onchange='toggleRange(this)' class="form-select">
                     <option value='currWeek'>This week</option>
                     <option value='currMonth'>This month</option>
@@ -51,10 +51,10 @@ function openConnection() {
 }
 
 // Selects Employees and sums up the total amount of transactions they have processed
-function selectEmployeeTransactions($start, $end, $targetEID) {
+function selectEmployeeTransactions($start, $end, $targetEmp) {
     try {
         $connection = openConnection();
-        $selectQuery = ($targetEID === '') ? 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold, COUNT(TRA.TransactionID) AS TransactionsMade
+        $selectQuery = ($targetEmp === '') ? 'SELECT EMP.EID, EMP.FirstName, EMP.LastName, SUM(INV.Price * TRI.Quantity) AS TotalSold, COUNT(TRA.TransactionID) AS TransactionsMade
                         FROM Employees EMP
                         INNER JOIN Transactions TRA ON TRA.ProcessedBy = EMP.EID
                         INNER JOIN TransactionItems TRI ON TRI.TransactionID = TRA.TransactionID
@@ -66,16 +66,19 @@ function selectEmployeeTransactions($start, $end, $targetEID) {
                         INNER JOIN Transactions TRA ON TRA.ProcessedBy = EMP.EID
                         INNER JOIN TransactionItems TRI ON TRI.TransactionID = TRA.TransactionID
                         INNER JOIN Inventory INV ON INV.UPC = TRI.TransactionItemID
-                        WHERE EMP.EID = '.$targetEID.' AND TRA.TypeOfTransaction = \'Purchase\' AND TRA.TransactionDate >= \''.$start.'\' AND TRA.TransactionDate <= \''.$end.'\' 
+                        WHERE (EMP.FirstName LIKE \''.$targetEmp.'\' OR EMP.LastName LIKE \''.$targetEmp.'\' OR EMP.FirstName + \' \' + EMP.LastName LIKE \''.$targetEmp.'\') AND TRA.TypeOfTransaction = \'Purchase\' AND TRA.TransactionDate >= \''.$start.'\' AND TRA.TransactionDate <= \''.$end.'\' 
                         GROUP BY EMP.EID, EMP.FirstName, EMP.LastName';
         $getTransactions = sqlsrv_query($connection, $selectQuery);
-        if(!$getTransactions)
+        if(!$getTransactions) {
+            print($selectQuery);
             die(print_r(sqlsrv_errors(), true));
+        }
 
-        if($targetEID !== '') {
+
+        if($targetEmp !== '') {
             $row = sqlsrv_fetch_array($getTransactions, SQLSRV_FETCH_ASSOC);
             if(empty($row))
-                echo "<script>alert('Employee does not exist');</script>";
+                echo "<script>alert('No entries returned');</script>";
             else {
                 echo "<br> <br>";
                 echo "<table border = '1' class='table table-hover'>
@@ -162,7 +165,7 @@ function selectEmployeeTransactions($start, $end, $targetEID) {
                     echo "<script>alert('Please enter both a start and end date.');</script>";
                 }
                 else {
-                    isset($_POST['empID']) ? selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), $_POST['empID']) : selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), '');
+                    isset($_POST['empName']) ? selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), $_POST['empName']) : selectEmployeeTransactions($startDate, date('Y-m-d', strtotime($endDate)+60*60*24*1), '');
                 }
             }
 

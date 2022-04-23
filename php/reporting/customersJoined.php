@@ -57,14 +57,21 @@ function openConnection() {
 function selectCustomer($start, $end) {
     try {
         $connection = openConnection();
-        $selectQuery = 'SELECT * FROM Customers WHERE Start_DtTm >= \''.$start.'\' AND Start_DtTm <= \''.$end.'\'';
+        $selectQuery = 'SELECT CUS.FirstName, CUS.LastName, CUS.PhoneNumber, CUS.Email, CUS.Start_DtTm, SUM(TRI.Quantity * INV.Price * 1.0825) AS TotalSpent
+                        FROM Customers CUS
+                        INNER JOIN Transactions TRA ON CUS.UUID = TRA.OrderedBy
+                        INNER JOIN TransactionItems TRI ON TRA.TransactionID = TRI.TransactionID
+                        INNER JOIN Inventory INV ON TRI.TransactionItemID = INV.UPC
+                        WHERE Start_DtTm >= \''.$start.'\' AND Start_DtTm <= \''.$end.'\'
+                        GROUP BY CUS.FirstName, CUS.LastName, CUS.PhoneNumber, CUS.Email, CUS.Start_DtTm
+                        ORDER BY CUS.Start_DtTm ASC';
         $getCustomers = sqlsrv_query($connection, $selectQuery);
         if(!$getCustomers)
             die(print_r(sqlsrv_errors(), true));
         echo "<br><br>";
         echo "<table border = '1' class='table table-hover'>
         <tr>
-        <th id=header colspan='5'> $start ~ $end</th>
+        <th id=header colspan='6'> $start ~ $end</th>
         </tr>
         <tr>
         <th>First Name</th>
@@ -72,6 +79,7 @@ function selectCustomer($start, $end) {
         <th>Phone Number</th>
         <th>Email</th>
         <th>Join Date</th>
+        <th>$ Spent</th>
         </tr>";      
 
         while($row = sqlsrv_fetch_array($getCustomers, SQLSRV_FETCH_ASSOC)) {
@@ -81,6 +89,7 @@ function selectCustomer($start, $end) {
             echo '<td>'.$row['PhoneNumber'].'</td>';
             echo '<td>'.$row['Email'].'</td>';
             echo '<td>'.$row['Start_DtTm']->format('Y-m-d').'</td>';
+            echo '<td>$'.number_format($row['TotalSpent'], 2).'</td>';
             echo '</tr>';
         }
 
