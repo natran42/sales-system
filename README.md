@@ -5,9 +5,11 @@ Point of Sale Project
 Website Link: https://sevensales.azurewebsites.net/
 
 Login Information:
+
 Admin:
 Username:ntran
 Password:teamseven
+
 Employee:
 Username: michj
 Password: justdoit 
