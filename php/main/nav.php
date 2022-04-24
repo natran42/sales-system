@@ -46,13 +46,8 @@
             </ul>
             <li class="nav-item" id='logout'>
             <a style = "color:white"  class="nav-link" href="/"><i class="fa fa-fw fa-sign-out"> </i>Log Out</a>
-            
             </li> 
-        </li> 
-            <!-- make a log out button
-            <li class="nav-item" id='logout'>
-                <a class="nav-link" href="/../index.php"><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
-            </li> -->
+        </li>
         </ul>
         </nav>
 </div>

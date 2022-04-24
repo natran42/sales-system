@@ -21,7 +21,7 @@ body {
     /*background: linear-gradient(135deg, #ffafbd ,#ffc3a0);*/
     justify-content: center;
     /* include backgroundLogin.jpeg as the background*/
-    background-image: url("PNG image.jpeg");
+    background-image: url("backgroundLogin.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
