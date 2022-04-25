@@ -4,6 +4,8 @@ Point of Sale Project
 
 Website Link: https://sevensales.azurewebsites.net/
 
+DB SQL Dump File: Team7SQLDumpFinal.sql
+
 Login Information:
 
 Admin:
