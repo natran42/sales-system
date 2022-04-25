@@ -15,7 +15,7 @@
 body{
     justify-content: center;
     /* include backgroundLogin.jpeg as the background*/
-    background-image: url("PNG image.jpeg");
+    background-image: url("confirmation_background.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
