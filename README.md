@@ -20,7 +20,7 @@ Customers who use self-checkout have access to the cash register and registratio
 
 # Main 
 # (nav.php)
-"Main" contains the code for the navigation bar that can be viewed from all pages to redirect you from one page to another
+"Main" contains the code for the navigation bar that can be viewed from all pages to redirect you from one page to another. It also includes the use of user authentification where it differentiates between a manager's, an emmployee's, and a customer's(self-checkout) view.
 
 # Login 
 # (login.php/css/jpeg)
@@ -36,7 +36,7 @@ The inventory stores all the stock and information of a given item. This include
 
 # Transactions 
 # (transactions.php/css)
-The transactions page is a page accessed only by users with high authority, meaning customers are not able to view this page. Customer transactions can be viewed by entering a transaction number which will then display that given transaction and the details begind it i.e. if it was a self-checkout transaction, or a registered member who made a purchase. It will also display all items that were purchase in a transaction. An alert is given when an invalid transaction is entered.
+The transactions page is a page accessed only by users with high authority, meaning customers are not able to view this page. Customer transactions can be viewed by entering a transaction number which will then display that given transaction and the details begind it i.e. if it was a self-checkout transaction, or a registered member who made a purchase. It will also display all items that were purchased in a transaction. An alert is given when an invalid transaction is entered.
 
 # Registration 
 # (registration.php/css)
@@ -48,7 +48,7 @@ The employee page can be viewed only by a manager with accessed authority. Here,
 
 # Reports 
 # (customerJoined.php, employeeSales.php, topSeller.php, reportingstyle.css)
-There are three reports that can be viewed: customer registered, employee sales, and top sellers. All categories all you to view the statistics of each in a given time interval i.e. this week, this month, this year or given a custom range.
+There are three reports that can be viewed: customer registered, employee sales, and top sellers. All categories allow you to view the statistics of each in a given time interval i.e. this week, this month, this year or given a custom range.
 
 # Credits
 Nathan Tran, Ngan Hoang, Christina Rodriguez, Gamaliel Medrano, Yanely Ayala
